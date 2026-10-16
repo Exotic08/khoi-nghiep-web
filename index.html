@@ -1,0 +1,2286 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ============================================================
+       SEO
+       ============================================================ -->
+  <title>Nho Rừng Đình Lập | Siro, giấm và nho ngâm từ nho rừng</title>
+  <meta name="description" content="Nho Rừng Đình Lập (Lạng Sơn): siro nho, giấm nho tự nhiên, nho ngâm mật ong, nước nho ngâm đường phèn và bánh trung thu - từ nho rừng thu hái thủ công." />
+  <meta name="author" content="Nho Rừng Đình Lập" />
+  <meta name="theme-color" content="#4A1942" />
+  <link rel="canonical" href="https://example.com/" />
+
+  <!-- ============================================================
+       Open Graph (Facebook/Zalo) - dùng ảnh bìa
+       TODO (quan trọng):
+         1. Thay URL thật (thiếu tên miền).
+         2. og:image và og:url PHẢI là URL TUYỆT ĐỐI (https://tenmien/...),
+            nếu để đường dẫn tương đối thì Facebook/Zalo sẽ không hiển thị
+            ảnh xem trước khi chia sẻ.
+         3. Nên tạo thêm ảnh 1200x630px riêng cho OG nếu muốn hiển thị đẹp.
+       ============================================================ -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="vi_VN" />
+  <meta property="og:site_name" content="Nho Rừng Đình Lập" />
+  <meta property="og:title" content="Nho Rừng Đình Lập | Siro, giấm và nho ngâm từ nho rừng" />
+  <meta property="og:description" content="Nho Rừng Đình Lập (Lạng Sơn): siro nho, giấm nho tự nhiên, nho ngâm mật ong, nước nho ngâm đường phèn và bánh trung thu - từ nho rừng thu hái thủ công." />
+  <meta property="og:url" content="https://example.com/" />
+  <meta property="og:image" content="assets/images/cover-hero.jpg" />
+  <meta property="og:image:width" content="1440" />
+  <meta property="og:image:height" content="855" />
+  <meta property="og:image:alt" content="Nho rừng mọc hoang dã giữa rừng tại Đình Lập, Lạng Sơn" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Nho Rừng Đình Lập | Sản phẩm từ nho rừng" />
+  <meta name="twitter:description" content="Siro, giấm, nho ngâm mật ong, nước nho ngâm đường phèn và bánh trung thu - từ nho rừng thu hái thủ công tại Lạng Sơn." />
+  <meta name="twitter:image" content="assets/images/cover-hero.jpg" />
+
+<!-- Favicon dùng logo tròn -->
+<link rel="icon" type="image/png" sizes="64x64" href="assets/images/logo-64.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo-32.png" />
+<link rel="apple-touch-icon" href="assets/images/logo-180.png" />
+
+<!-- GHI CHÚ ẢNH:
+     cover-hero.jpg   : bản gốc đã nâng nét, dùng làm ảnh dự phòng
+     cover-hero-*.webp: bản WebP nhẹ hơn khoảng 32%, trình duyệt sẽ chọn bản này
+     logo-32/64/180.png: logo thu nhỏ, trang đang dùng bản 180px cho đầu trang và chân trang
+     File cover.jpg và logo.png gốc vẫn được giữ nguyên.
+     Nếu bạn đổi ảnh bìa: thay cả 3 chỗ là <link preload>, khối <picture> trong hero, và og:image. -->
+
+<!-- Preload ảnh bìa (ảnh LCP) để tải song song với CSS/JS.
+     Dùng imagesrcset khớp với <picture> bên dưới, nếu không trình duyệt sẽ tải 2 lần. -->
+<link rel="preload" as="image" type="image/webp"
+      imagesrcset="assets/images/cover-hero-640.webp 640w, assets/images/cover-hero-960.webp 960w, assets/images/cover-hero-1440.webp 1440w"
+      imagesizes="100vw" fetchpriority="high" />
+<!-- Preload file CSS gốc để tránh nhấp nháy khi dựng trang -->
+<link rel="preload" as="style" href="assets/css/style.css" />
+
+  <!-- ============================================================
+       Google Fonts: Playfair Display (tiêu đề) + Be Vietnam Pro (nội dung)
+       ============================================================ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+    rel="stylesheet" />
+
+  <!-- ============================================================
+       Tailwind CSS qua CDN
+       BẢNG MÀU: thay đổi toàn bộ bảng màu tại khối theme bên dưới.
+       ============================================================ -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    /* LƯU Ý: luôn dùng theme.extend (không phải theme) để GIỮ NGUYÊN toàn bộ
+       thang giá trị mặc định của Tailwind (spacing, padding, maxWidth...).
+       Nếu gán thẳng theme.spacing / theme.colors thì các class gốc như
+       px-4, gap-12, mb-5 sẽ biến mất khỏi CSS. */
+    tailwind.config = {
+      theme: {
+        extend: {
+          // ===== BẢNG MÀU THƯƠNG HIỆU =====
+          // Đổi mã màu ở đây để áp dụng cho toàn trang.
+          // Màu chính nằm ở bậc "DEFAULT" (ví dụ: bg-grape, text-gold).
+          colors: {
+            grape: {
+              DEFAULT: "#4A1942",
+              50: "#F7EEF5",
+              100: "#EEDCEC",
+              200: "#DDB9D8",
+              300: "#C996C3",
+              400: "#A9639F",
+              500: "#8C4480",
+              600: "#6B3061",
+              700: "#4A1942",
+              800: "#3B1434",
+              900: "#2C0F27"
+            },
+            forest: {
+              DEFAULT: "#2F4A3A",
+              50: "#F2F5F1",
+              100: "#E2EAE0",
+              200: "#C3D4C0",
+              300: "#9DB89A",
+              400: "#759675",
+              500: "#577A58",
+              600: "#456245",
+              700: "#2F4A3A",
+              800: "#253A2E",
+              900: "#1B2A22"
+            },
+            cream: {
+              DEFAULT: "#F7F1E6",
+              50: "#FDFBF6",
+              100: "#F7F1E6",
+              200: "#EFE5D3",
+              300: "#E3D5BB",
+              400: "#D4C09C"
+            },
+            gold: {
+              DEFAULT: "#B8925A",
+              50: "#FAF4E9",
+              100: "#F2E4CB",
+              200: "#E5CDA3",
+              300: "#D8B37C",
+              400: "#C8A06B",
+              500: "#B8925A",
+              600: "#9C7946",
+              700: "#7E6037",
+              800: "#5F4829",
+              900: "#412F1B"
+            },
+            ink: {
+              DEFAULT: "#1F1A17",
+              50: "#F5F4F3",
+              100: "#E7E4E1",
+              200: "#CFC9C3",
+              300: "#ADA49B",
+              400: "#847A70",
+              500: "#665D55",
+              600: "#4E4640",
+              700: "#3C3630",
+              800: "#2B2622",
+              900: "#1F1A17"
+            }
+          },
+          // Tiêu đề: Playfair Display | Nội dung: Be Vietnam Pro
+          fontFamily: {
+            display: ["Playfair Display", "ui-serif", "Georgia", "serif"],
+            body: ["Be Vietnam Pro", "ui-sans-serif", "system-ui", "sans-serif"]
+          },
+          // Góc bo nhẹ cho card / khung
+          borderRadius: {
+            "4xl": "2rem"
+          },
+          // Khoảng cách dọc lớn cho section (cộng thêm vào thang mặc định)
+          spacing: {
+            18: "4.5rem",
+            22: "5.5rem",
+            30: "7.5rem"
+          },
+          keyframes: {
+            floatY: {
+              "0%, 100%": { transform: "translateY(0)" },
+              "50%": { transform: "translateY(-14px)" }
+            }
+          },
+          animation: {
+            floatY: "floatY 6s ease-in-out infinite"
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Style gốc: animation, smooth scroll, reduced-motion, placeholder -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <!-- Đánh dấu đã bật JavaScript TRƯỚC khi vẽ trang, để hiệu ứng fade-in
+       chỉ ẩn nội dung khi script chắc chắn chạy được. Nếu JS bị tắt,
+       nội dung vẫn hiển thị bình thường. -->
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+
+<body class="font-body bg-cream text-ink antialiased">
+
+  <!-- Nhảy tới nội dung chính (accessibility) -->
+  <a href="#hero" class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-[100] focus:bg-cream focus:px-4 focus:py-2 focus:rounded-lg focus:text-grape">
+    Bỏ qua, tới nội dung chính
+  </a>
+
+  <!-- ============================================================
+       HỌA TIẾT NỀN DÙNG CHUNG (SVG inline lá + dây nho)
+       Giữ SVG ở kích thước 0 thay vì display:none để <use> hoạt động
+       ổn định trên mọi trình duyệt.
+       ============================================================ -->
+  <svg aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="ico-leaf" viewBox="0 0 64 64">
+      <path fill="currentColor" d="M52 6C30 8 14 18 10 34c-2 8 1 16 7 21 5 4 12 5 18 3 13-4 20-19 17-52Zm-20 44c-4-9-4-20 2-31 3-5 8-9 13-11-2 13-8 24-15 42Z"/>
+    </symbol>
+    <symbol id="ico-grape" viewBox="0 0 64 64">
+      <circle fill="currentColor" cx="32" cy="18" r="8"/>
+      <circle fill="currentColor" cx="21" cy="30" r="8"/>
+      <circle fill="currentColor" cx="43" cy="30" r="8"/>
+      <circle fill="currentColor" cx="32" cy="32" r="8"/>
+      <circle fill="currentColor" cx="26" cy="44" r="8"/>
+      <circle fill="currentColor" cx="38" cy="44" r="8"/>
+      <circle fill="currentColor" cx="32" cy="56" r="7"/>
+      <path fill="currentColor" d="M31 10c1-5 5-8 10-9-1 5-4 8-8 9h-2Z"/>
+    </symbol>
+    <symbol id="ico-vine" viewBox="0 0 200 120">
+      <path fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+            d="M4 96c26 0 34-34 62-34s34 26 58 26c22 0 30-20 46-20 10 0 18 8 26 18"/>
+      <ellipse fill="currentColor" cx="66" cy="62" rx="12" ry="6" transform="rotate(-28 66 62)"/>
+      <ellipse fill="currentColor" cx="112" cy="92" rx="12" ry="6" transform="rotate(20 112 92)"/>
+      <ellipse fill="currentColor" cx="150" cy="72" rx="10" ry="5" transform="rotate(-18 150 72)"/>
+    </symbol>
+  </svg>
+
+  <!-- ============================================================
+       1) HEADER CỐ ĐỊNH
+       ============================================================ -->
+  <header id="site-header" class="fixed inset-x-0 top-0 z-50 border-b border-transparent">
+    <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
+
+      <!-- Logo + tên thương hiệu -->
+      <a href="#hero" class="group flex shrink-0 items-center gap-3">
+        <img
+          src="assets/images/logo-180.png"
+          alt="Logo Nho Rừng Đình Lập - sản phẩm từ nho rừng"
+          width="48" height="48"
+          class="h-11 w-11 rounded-full border border-gold/60 bg-cream object-cover shadow-sm transition-transform duration-300 group-hover:scale-105 sm:h-12 sm:w-12" />
+        <span class="flex flex-col leading-tight">
+          <span class="js-brand-name font-display text-base font-semibold tracking-wide sm:text-lg">
+            Nho Rừng Đình Lập
+          </span>
+          <span class="js-brand-tag hidden text-[10px] uppercase tracking-[0.2em] sm:block">
+            An toàn từ thiên nhiên
+          </span>
+        </span>
+      </a>
+
+      <!-- Menu desktop -->
+      <nav aria-label="Menu chính" class="hidden md:block">
+        <ul id="desktop-menu" class="flex items-center gap-6 lg:gap-8">
+          <li><a href="#cau-chuyen" class="js-nav-link nav-link text-sm font-medium transition-colors">Câu chuyện</a></li>
+          <li><a href="#san-pham" class="js-nav-link nav-link text-sm font-medium transition-colors">Sản phẩm</a></li>
+          <li><a href="#hoi-dap" class="js-nav-link nav-link text-sm font-medium transition-colors">Hỏi đáp</a></li>
+          <li><a href="#lien-he" class="js-nav-link nav-link text-sm font-medium transition-colors">Liên hệ</a></li>
+        </ul>
+      </nav>
+
+      <!-- Nút đặt hàng + hamburger -->
+      <div class="flex items-center gap-2">
+        <a href="#order-modal"
+           data-order-trigger
+           class="btn-primary btn-shine hidden rounded-full bg-grape px-5 py-2.5 text-sm font-semibold text-cream shadow-sm hover:bg-grape-800 sm:inline-block">
+          Đặt hàng
+        </a>
+
+        <!-- Nút hamburger (chỉ hiện trên mobile) -->
+        <button id="menu-toggle" type="button"
+                aria-label="Mở menu" aria-expanded="false" aria-controls="mobile-menu"
+                class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-gold/50 bg-cream/90 text-grape md:hidden">
+          <!-- 3 thanh .bar: phải là con trực tiếp (nth-child 1/2/3) để CSS đổi thành chữ X -->
+          <span class="flex w-5 flex-col items-center gap-[5px]">
+            <span class="bar block h-[2px] w-5 rounded bg-current"></span>
+            <span class="bar block h-[2px] w-5 rounded bg-current"></span>
+            <span class="bar block h-[2px] w-5 rounded bg-current"></span>
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Menu mobile (trượt xuống) -->
+    <nav id="mobile-menu" aria-label="Menu di động" class="md:hidden">
+      <ul class="space-y-1 border-t border-gold/25 bg-cream/[0.97] px-4 py-4 backdrop-blur sm:px-6">
+        <li><a href="#cau-chuyen" class="block rounded-xl px-4 py-3 text-sm font-medium text-ink/85 transition-colors hover:bg-grape-50 hover:text-grape">Câu chuyện</a></li>
+        <li><a href="#san-pham" class="block rounded-xl px-4 py-3 text-sm font-medium text-ink/85 transition-colors hover:bg-grape-50 hover:text-grape">Sản phẩm</a></li>
+        <li><a href="#hoi-dap" class="block rounded-xl px-4 py-3 text-sm font-medium text-ink/85 transition-colors hover:bg-grape-50 hover:text-grape">Hỏi đáp</a></li>
+        <li><a href="#lien-he" class="block rounded-xl px-4 py-3 text-sm font-medium text-ink/85 transition-colors hover:bg-grape-50 hover:text-grape">Liên hệ</a></li>
+        <!-- Nút đặt hàng mobile -->
+        <li class="pt-2">
+            <a href="#order-modal"
+               data-order-trigger
+               class="btn-primary btn-shine block rounded-full bg-grape px-5 py-3 text-center text-sm font-semibold text-cream hover:bg-grape-800">
+              Đặt hàng ngay
+            </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Thanh tiến trình đọc trang (JS cập nhật scaleX theo vị trí cuộn) -->
+    <div class="scroll-progress" aria-hidden="true">
+      <div id="scroll-progress-bar" class="scroll-progress__bar"></div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============================================================
+         2) HERO - ảnh bìa toàn màn hình
+         ============================================================ -->
+    <section id="hero" class="relative flex min-h-screen items-center overflow-hidden">
+      <!-- Ảnh bìa (KHÔNG lazy vì đây là ảnh LCP nằm trên màn hình đầu).
+           - <picture>: trình duyệt chọn bản WebP + đúng kích thước màn hình
+           - --lqip: ảnh xíu 20px làm nền trong lúc ảnh lớn tải (blur-up),
+             chèn inline để không tốn thêm 1 request mạng.
+           Bọc trong .hero-media để chạy hiệu ứng parallax nhẹ khi cuộn. -->
+      <div class="hero-lqip" style="--lqip:url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAMABQDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDPFwGuT5swWMJgLnnJqYgokbBid+SOO1Ylx/rz74rQiY7RznHFc7jZGikXFlOBljRUJ7UVlYrmZ//Z)"></div>
+      <div class="hero-media">
+        <picture>
+          <source type="image/webp"
+                  srcset="assets/images/cover-hero-640.webp 640w,
+                          assets/images/cover-hero-960.webp 960w,
+                          assets/images/cover-hero-1440.webp 1440w"
+                  sizes="100vw" />
+          <img src="assets/images/cover-hero.jpg"
+               alt="Người thu hái nho rừng giữa vườn nho tại nguồn"
+               class="hero-image"
+               width="1440" height="855"
+               fetchpriority="high"
+               decoding="async"
+               data-fade />
+        </picture>
+      </div>
+
+      <!-- Lớp phủ màu thương hiệu (tím -> xanh lá), nhạt để ảnh vẫn rõ -->
+      <div class="hero-overlay"></div>
+      <!-- Scrim riêng cho vùng chữ để chữ luôn dễ đọc -->
+      <div class="hero-scrim"></div>
+<!-- Vignette nhẹ 4 góc -->
+      <div class="hero-vignette"></div>
+
+      <!-- Lớp lá nổi ở trước mặt: vừa trôi nhẹ (CSS), vừa trôi nhanh hơn
+           phần ảnh khi cuộn (JS). Tách riêng .hero-media để 2 lớp lệch tốc độ,
+           tạo cảm giác chiều sâu. -->
+      <div class="hero-fg" aria-hidden="true">
+        <svg class="float-leaf float-leaf-1"><use href="#ico-leaf"></use></svg>
+        <svg class="float-leaf float-leaf-2"><use href="#ico-leaf"></use></svg>
+        <svg class="float-leaf float-leaf-3"><use href="#ico-grape"></use></svg>
+      </div>
+
+      <!-- Họa tiết lá trang trí -->
+      <svg class="decor-leaf decor-leaf--light animate-pulse-soft hidden h-56 w-56 -left-10 top-24 lg:block" aria-hidden="true"><use href="#ico-leaf"></use></svg>
+      <svg class="decor-leaf decor-leaf--light hidden h-40 w-40 right-8 bottom-32 animate-wiggle lg:block" aria-hidden="true"><use href="#ico-grape"></use></svg>
+      <svg class="decor-leaf decor-leaf--light hidden h-24 w-48 left-1/3 bottom-20 animate-spin-slow xl:block" aria-hidden="true"><use href="#ico-vine"></use></svg>
+
+      <!-- Nội dung hero -->
+      <div class="hero-content relative z-10 mx-auto w-full max-w-7xl px-4 py-24 sm:py-28 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <h1 class="hero-title text-balance font-display text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-semibold leading-[1.14] animate-fade-up">
+            Nạp năng lượng xanh cùng Nho rừng Đình Lập.
+          </h1>
+
+          <!-- 2 nút CTA -->
+          <div class="mt-8 flex flex-col gap-2.5 sm:mt-9 sm:flex-row sm:gap-4 sm:items-center sm:gap-4">
+            <a href="#san-pham"
+                class="btn-primary btn-shine group inline-flex items-center justify-center gap-2 rounded-full bg-gold px-6 py-3 text-sm font-semibold text-ink shadow-lg hover:bg-gold-400 sm:px-7 sm:py-3.5 animate-fade-right"
+               style="animation-delay: 0.2s;">
+              Khám phá sản phẩm
+              <svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+               <a href="#lien-he"
+                  class="btn-primary btn-shine inline-flex items-center justify-center gap-2 rounded-full border border-cream/70 px-7 py-3.5 text-sm font-semibold text-cream hover:bg-cream hover:text-grape animate-fade-left"
+                style="animation-delay: 0.25s;">
+               <svg class="h-4 w-4" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+               Liên hệ
+             </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lớp chuyển mềm xuống section kế tiếp -->
+      <div class="hero-fade-bottom pointer-events-none absolute inset-x-0 bottom-0"></div>
+      <div class="vine-marquee pointer-events-none absolute inset-x-0 bottom-0 h-3"></div>
+    </section>
+
+    <!-- ============================================================
+         2b) DẢI CHỮ CHẠY NGANG
+         Nội dung lặp 2 lần trong .marquee-track để chạy liền mạch.
+         ============================================================ -->
+    <div class="marquee-band" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Nạp năng lượng xanh cùng Nho rừng Đình Lập.
+          <span class="marquee-dot">✦</span></span>
+        <span>Nạp năng lượng xanh cùng Nho rừng Đình Lập.
+          <span class="marquee-dot">✦</span></span>
+      </div>
+    </div>
+
+<!-- ============================================================
+         3) CÂU CHUYỆN THƯƠNG HIỆU - ảnh đứng yên bên trái, chữ sáng dần bên phải
+         ============================================================ -->
+    <section id="cau-chuyen" class="relative overflow-hidden bg-cream py-12 sm:py-24 lg:py-30">
+      <div class="bg-vine-pattern absolute inset-0 opacity-60" aria-hidden="true"></div>
+      <svg class="decor-leaf hidden h-64 w-64 -right-16 -top-10 lg:block" aria-hidden="true"><use href="#ico-vine"></use></svg>
+
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+        <!-- Tiêu đề -->
+        <div class="max-w-2xl">
+          <p class="eyebrow reveal animate-fade-right text-gold-600">Câu chuyện của chúng tôi</p>
+          <h2 class="font-display reveal animate-fade-up mt-4 text-3xl font-semibold leading-tight text-grape sm:text-4xl lg:text-[2.75rem]" style="animation-delay: 0.1s;">
+            Từ khu rừng<br class="hidden sm:block" /> đến bàn tay bạn
+          </h2>
+          <div class="title-underline reveal animate-fade-up" style="animation-delay: 0.2s; width: 24px;"></div>
+        </div>
+
+        <div class="mt-10 grid gap-8 sm:mt-14 sm:gap-10 lg:grid-cols-2 lg:gap-16">
+
+          <!-- Cột trái: Ảnh đứng yên khi cuộn (B3) -->
+          <div class="lg:sticky lg:top-28 lg:self-start">
+            <div class="relative animate-fade-left" style="animation-delay: 0.2s;">
+              <div class="relative aspect-[16/11] overflow-hidden radius-organic-a sm:aspect-[4/5] border border-gold/45 shadow-[0_30px_60px_-35px_rgba(74,25,66,0.5)]">
+                <img src="assets/images/story-harvest.jpg"
+                     alt="Người dân thu hái nho rừng tại vùng núi Đình Lập, Lạng Sơn"
+                     loading="lazy"
+                     class="h-full w-full object-cover transition-transform duration-700 hover:scale-105" />
+              </div>
+
+              <!-- Badge nổi -->
+              <div class="absolute -bottom-4 -right-1 z-20 flex items-center gap-2.5 rounded-2xl border border-gold/50 bg-cream px-4 py-3 shadow-lg sm:-bottom-5 sm:-right-2 sm:gap-3 sm:px-5 sm:py-4 animate-bounce-in" style="animation-delay: 0.3s;">
+                <svg class="h-8 w-8 shrink-0 text-grape" aria-hidden="true"><use href="#ico-grape"></use></svg>
+                <div class="leading-tight">
+                  <p class="font-display text-sm font-semibold text-grape">Nho rừng hoang dã</p>
+                  <p class="text-[11px] text-forest/70">Đình Lập - Lạng Sơn</p>
+                </div>
+              </div>
+
+              <svg class="decor-leaf absolute -left-8 -top-8 h-20 w-20" aria-hidden="true"><use href="#ico-leaf"></use></svg>
+            </div>
+          </div>
+
+          <!-- Cột phải: 3 khối chữ, khối đang ở giữa màn hình sẽ sáng lên -->
+          <div class="space-y-8 sm:space-y-10 lg:space-y-14">
+            <!-- Khối 1 -->
+            <div class="story-block is-active animate-fade-up" style="animation-delay: 0.1s;">
+              <p class="eyebrow text-gold-600">Khởi đầu</p>
+              <h3 class="font-display mt-3 text-2xl font-semibold text-grape">Sinh trưởng giữa rừng Đình Lập</h3>
+              <p class="mt-4 text-base leading-relaxed text-ink/75">
+                Sinh trưởng tự nhiên giữa những vách đá và sương mờ của vùng đất
+                <strong class="font-semibold text-grape">Đình Lập, Lạng Sơn</strong>, nho rừng không
+                cần bàn tay con người chăm bón. Cứ thế, chúng lớn lên bằng tinh túy đất trời, mang
+                trong mình <strong class="font-semibold text-grape">vị chua thanh hoang dã và hậu vị
+                ngọt sâu</strong> khác biệt.
+              </p>
+            </div>
+
+            <!-- Khối 2 -->
+            <div class="story-block animate-fade-up" style="animation-delay: 0.25s;">
+              <p class="eyebrow text-gold-600">Cách chúng tôi làm</p>
+              <h3 class="font-display mt-3 text-2xl font-semibold text-grape">Thu hái tay, chế biến lên men tự nhiên</h3>
+              <p class="mt-4 text-base leading-relaxed text-ink/75">
+                Chúng tôi thu hái thủ công từng quả chín mọng và chế biến theo phương pháp lên men
+                tự nhiên, kết hợp hài hòa giữa nét truyền thống và xu hướng healthy hiện đại:
+              </p>
+              <ul class="mt-4 space-y-2.5 text-sm leading-relaxed text-ink/75">
+                <li class="flex items-start gap-2.5">
+                  <svg class="mt-1 h-4 w-4 shrink-0 text-gold-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                  <span><strong class="font-semibold text-grape">Siro &amp; nước nho ngâm đường phèn:</strong> thức uống giải nhiệt, thanh mát cơ thể.</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <svg class="mt-1 h-4 w-4 shrink-0 text-gold-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                  <span><strong class="font-semibold text-grape">Nho rừng ngâm mật ong:</strong> bài thuốc lành, giữ ấm và bảo vệ hệ hô hấp.</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <svg class="mt-1 h-4 w-4 shrink-0 text-gold-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                  <span><strong class="font-semibold text-grape">Dấm nho rừng:</strong> vị chua thanh dịu, nâng tầm cho mọi món ăn ngon.</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Khối 3 -->
+            <div class="story-block animate-fade-up" style="animation-delay: 0.4s;">
+              <p class="eyebrow text-gold-600">Cam kết</p>
+              <h3 class="font-display mt-3 text-2xl font-semibold text-grape">Sạch từ gốc, Chất từ tâm</h3>
+              <ul class="mt-4 space-y-2.5 text-sm leading-relaxed text-ink/75">
+                <li class="flex items-start gap-2.5">
+                  <svg class="mt-1 h-4 w-4 shrink-0 text-gold-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                  <span><strong class="font-semibold text-grape">100% tự nhiên:</strong> nho rừng Đình Lập chuẩn gốc. Tuyệt đối không chất bảo quản, không phẩm màu.</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <svg class="mt-1 h-4 w-4 shrink-0 text-gold-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                  <span><strong class="font-semibold text-grape">Trọn vẹn dưỡng chất:</strong> giữ nguyên hàm lượng vitamin và chất chống oxy hóa tự nhiên.</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <svg class="mt-1 h-4 w-4 shrink-0 text-gold-600" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                  <span><strong class="font-semibold text-grape">Vì cộng đồng:</strong> đồng hành và tạo sinh kế bền vững cho người dân bản địa vùng cao.</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Thông tin nhỏ: cam kết -->
+            <ul class="reveal grid gap-3 border-t border-gold/30 pt-6 sm:grid-cols-2 sm:gap-4 sm:pt-8 stagger-children" style="--stagger: 50ms;">
+              <li class="flex items-start gap-3 rounded-2xl border border-gold/40 bg-cream-50 p-4 animate-fade-right">
+                <svg class="mt-0.5 h-5 w-5 shrink-0 text-grape animate-pulse-soft" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                <span class="text-sm leading-snug text-ink/80">
+                  <strong class="block text-grape">Nguồn gốc rõ ràng</strong>
+                  Nho rừng tại Đình Lập, Lạng Sơn
+                </span>
+              </li>
+              <li class="flex items-start gap-3 rounded-2xl border border-gold/40 bg-cream-50 p-4 animate-fade-right" style="animation-delay: 0.1s;">
+                <svg class="mt-0.5 h-5 w-5 shrink-0 text-grape animate-pulse-soft" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                <span class="text-sm leading-snug text-ink/80">
+                  <strong class="block text-grape">Chỉ hái khi chín mọng</strong>
+                  Tuyển tay từng quả chín đúng độ
+                </span>
+              </li>
+            </ul>
+
+            <a href="#san-pham"
+               class="reveal group inline-flex items-center gap-2 border-b border-gold pb-1 font-body text-sm font-semibold text-grape transition-colors hover:text-gold-600">
+              Xem sản phẩm từ nho rừng
+              <svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         5) SẢN PHẨM - lưới 3 cột desktop / 2 tablet / 1 mobile
+         ============================================================ -->
+    <section id="san-pham" class="relative overflow-hidden bg-cream py-12 sm:py-24 lg:py-30">
+      <div class="bg-vine-pattern absolute inset-0 opacity-50" aria-hidden="true"></div>
+      <svg class="decor-leaf hidden h-52 w-52 right-[6%] -top-6 lg:block" aria-hidden="true"><use href="#ico-grape"></use></svg>
+
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="eyebrow reveal animate-fade-down text-gold-600">Sản phẩm nổi bật</p>
+          <h2 class="font-display reveal animate-fade-up mt-4 text-3xl font-semibold leading-tight text-grape sm:text-4xl lg:text-5xl" style="animation-delay: 0.1s;">
+            Sản phẩm từ nho rừng
+          </h2>
+          <div class="title-underline reveal animate-fade-up" style="animation-delay: 0.2s; width: 24px;"></div>
+          <p class="reveal animate-fade-up mt-6 text-base leading-relaxed text-ink/70" style="animation-delay: 0.3s;">
+            Siro, giấm, nho ngâm và bánh trung thu nhân siro — tất cả đều từ quả nho rừng thu hái thủ công.
+          </p>
+        </div>
+
+        <!-- Bộ lọc danh mục sản phẩm (Tabs + Sliding Pill) -->
+        <div class="reveal mt-8 flex justify-center sm:mt-10" style="animation-delay: 0.35s;">
+          <div class="filter-tabs-wrapper" role="tablist" aria-label="Bộ lọc sản phẩm">
+            <span class="filter-tab-pill" aria-hidden="true"></span>
+            <button type="button" class="filter-tab-btn is-active" data-category="all" role="tab" aria-selected="true">Tất cả sản phẩm</button>
+            <button type="button" class="filter-tab-btn" data-category="siro" role="tab" aria-selected="false">Siro &amp; Nước uống</button>
+            <button type="button" class="filter-tab-btn" data-category="giam-mat" role="tab" aria-selected="false">Giấm &amp; Mật ong</button>
+            <button type="button" class="filter-tab-btn" data-category="banh" role="tab" aria-selected="false">Bánh trung thu</button>
+          </div>
+        </div>
+
+        <!-- Lưới sản phẩm -->
+        <!-- TODO: Thay ảnh placeholder bằng ảnh thật, cập nhật tên / giá / mô tả -->
+        <div class="stagger-children mt-8 grid gap-5 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-8" style="--stagger: 60ms;">
+
+           <article class="product-card reveal animate-fade-up card-lift card-tilt flex flex-col overflow-visible radius-organic-a" data-category="siro" style="animation-delay: 0.05s;">
+            <!-- Khung viền trang trí dây leo & chùm nho (Variant A) -->
+            <div class="card-vine-frame" aria-hidden="true">
+              <!-- Dây leo & chùm nho lớn góc trên phải (Variant A) -->
+              <svg class="vine-corner-topright" viewBox="0 0 138 138" fill="none">
+                <defs>
+                  <radialGradient id="berry-grad-va1" cx="35%" cy="30%" r="70%">
+                    <stop offset="0%" stop-color="#462544"/>
+                    <stop offset="35%" stop-color="#2D1F2F"/>
+                    <stop offset="75%" stop-color="#1E1A22"/>
+                    <stop offset="100%" stop-color="#141018"/>
+                  </radialGradient>
+                  <linearGradient id="leaf-grad-va1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#7A9A4C"/>
+                    <stop offset="50%" stop-color="#5F7F3A"/>
+                    <stop offset="100%" stop-color="#415C2B"/>
+                  </linearGradient>
+                </defs>
+                <!-- Thân dây leo chính chạy men theo góc bo trên-phải -->
+                <path d="M22,15 C54,14 82,14 100,18 C116,22 126,34 128,52 C129,72 127,95 125,116" stroke="#4E6B32" stroke-width="2.6" stroke-linecap="round"/>
+                <!-- Nhánh phụ rủ cuống nho -->
+                <path d="M102,20 C102,26 100,32 98,38" stroke="#545C33" stroke-width="2.2" stroke-linecap="round"/>
+                <!-- Tua cuốn xoắn mảnh -->
+                <path d="M78,14 C75,5 86,2 89,7 C92,12 87,15 84,13" stroke="#4E6B32" stroke-width="1.3" stroke-linecap="round"/>
+                <path d="M128,68 C136,73 138,83 133,87 C128,90 124,85 127,81" stroke="#4E6B32" stroke-width="1.3" stroke-linecap="round"/>
+                <!-- Lá nho 1: mép trên bên trái -->
+                <g class="vine-leaf-sway" style="transform-origin: 50px 14px;">
+                  <path d="M50,14 C44,7 34,7 31,13 C28,19 32,25 38,25 C33,29 35,36 41,36 C47,36 50,30 52,24 C55,29 62,28 64,23 C66,17 60,11 54,12 Z" fill="url(#leaf-grad-va1)" stroke="#415C2B" stroke-width="0.7"/>
+                  <path d="M50,15 Q43,21 38,25 M50,15 Q46,26 43,33 M50,15 Q55,21 59,23" stroke="#364D23" stroke-width="0.7" fill="none"/>
+                </g>
+                <!-- Lá nho 2: lá lớn vươn ở góc bo -->
+                <g class="vine-leaf-sway-alt" style="transform-origin: 96px 17px;">
+                  <path d="M96,17 C92,9 81,10 77,17 C73,23 78,31 84,30 C79,35 83,43 89,42 C96,41 98,34 100,28 C105,34 113,32 114,25 C115,18 108,12 101,14 Z" fill="url(#leaf-grad-va1)" stroke="#415C2B" stroke-width="0.8"/>
+                  <path d="M96,18 Q89,24 84,30 M96,18 Q92,30 90,40 M96,18 Q103,24 109,25" stroke="#364D23" stroke-width="0.8" fill="none"/>
+                </g>
+                <!-- Lá nho 3: mép phải -->
+                <g class="vine-leaf-sway" style="transform-origin: 126px 48px;">
+                  <path d="M126,48 C129,42 136,44 136,50 C136,56 130,59 125,58 C128,63 124,69 119,68 C114,66 114,60 117,55 C112,52 114,46 119,46 C123,46 125,50 126,48 Z" fill="url(#leaf-grad-va1)" stroke="#415C2B" stroke-width="0.6"/>
+                  <path d="M126,48 Q129,54 130,58 M126,48 Q123,59 120,66" stroke="#364D23" stroke-width="0.6" fill="none"/>
+                </g>
+                <!-- Chùm nho đen lớn 15 quả -->
+                <g class="grape-cluster-swing" style="transform-origin: 98px 38px;">
+                  <path d="M98,38 L97,46" stroke="#545C33" stroke-width="2" stroke-linecap="round"/>
+                  <!-- Lớp sau -->
+                  <circle cx="91" cy="49" r="5.2" fill="#1A151E"/>
+                  <circle cx="104" cy="50" r="5.4" fill="#1A151E"/>
+                  <circle cx="100" cy="60" r="5.4" fill="#1A151E"/>
+                  <!-- Hàng 1 (trên) -->
+                  <circle cx="87" cy="50" r="5.4" fill="url(#berry-grad-va1)"/>
+                  <ellipse cx="85.5" cy="48.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 85.5 48.5)"/>
+                  <circle cx="96" cy="48" r="5.6" fill="url(#berry-grad-va1)"/>
+                  <ellipse cx="94.5" cy="46.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 94.5 46.5)"/>
+                  <circle cx="106" cy="49" r="5.5" fill="url(#berry-grad-va1)"/>
+                  <ellipse cx="104.5" cy="47.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 104.5 47.5)"/>
+                  <circle cx="115" cy="53" r="5.0" fill="url(#berry-grad-va1)"/>
+                  <ellipse cx="113.5" cy="51.5" rx="1.5" ry="0.9" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 113.5 51.5)"/>
+                  <!-- Hàng 2 (giữa) -->
+                  <circle cx="84" cy="59" r="5.4" fill="url(#berry-grad-va1)"/>
+                  <ellipse cx="82.5" cy="57.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 82.5 57.5)"/>
+                  <circle cx="93" cy="58" r="5.8" fill="url(#berry-grad-va1)"/>
+                  <ellipse cx="91.5" cy="56.5" rx="1.7" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 91.5 56.5)"/>
+                  <circle cx="103" cy="58" r="5.8" fill="url(#berry-grad-va1)"/>
+                  <ellipse cx="101.5" cy="56.5" rx="1.7" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 101.5 56.5)"/>
+                  <circle cx="112" cy="61" r="5.2" fill="url(#berry-grad-va1)"/>
+                  <ellipse cx="110.5" cy="59.5" rx="1.5" ry="0.9" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 110.5 59.5)"/>
+                  <!-- Hàng 3 -->
+                  <circle cx="89" cy="68" r="5.6" fill="url(#berry-grad-va1)"/>
+                  <ellipse cx="87.5" cy="66.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 87.5 66.5)"/>
+                  <circle cx="99" cy="67" r="5.8" fill="url(#berry-grad-va1)"/>
+                  <ellipse cx="97.5" cy="65.5" rx="1.7" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 97.5 65.5)"/>
+                  <circle cx="108" cy="69" r="5.4" fill="url(#berry-grad-va1)"/>
+                  <ellipse cx="106.5" cy="67.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 106.5 67.5)"/>
+                  <!-- Hàng 4 -->
+                  <circle cx="94" cy="77" r="5.4" fill="url(#berry-grad-va1)"/>
+                  <ellipse cx="92.5" cy="75.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 92.5 75.5)"/>
+                  <circle cx="104" cy="78" r="5.2" fill="url(#berry-grad-va1)"/>
+                  <ellipse cx="102.5" cy="76.5" rx="1.5" ry="0.9" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 102.5 76.5)"/>
+                  <!-- Hàng 5 (chóp đáy) -->
+                  <circle cx="99" cy="87" r="4.2" fill="url(#berry-grad-va1)"/>
+                  <ellipse cx="97.8" cy="85.8" rx="1.2" ry="0.8" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 97.8 85.8)"/>
+                </g>
+              </svg>
+
+              <!-- Dây leo & chùm nho nhỏ góc dưới trái (Variant A) -->
+              <svg class="vine-corner-bottomleft" viewBox="0 0 108 108" fill="none">
+                <defs>
+                  <radialGradient id="berry-grad-va2" cx="35%" cy="30%" r="70%">
+                    <stop offset="0%" stop-color="#462544"/>
+                    <stop offset="35%" stop-color="#2D1F2F"/>
+                    <stop offset="75%" stop-color="#1E1A22"/>
+                    <stop offset="100%" stop-color="#141018"/>
+                  </radialGradient>
+                  <linearGradient id="leaf-grad-va2" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#7A9A4C"/>
+                    <stop offset="50%" stop-color="#5F7F3A"/>
+                    <stop offset="100%" stop-color="#415C2B"/>
+                  </linearGradient>
+                </defs>
+                <path d="M12,42 C12,62 15,78 26,89 C36,96 52,98 74,96" stroke="#4E6B32" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="M12,42 C7,35 14,29 17,34 C20,38 15,42 12,41" stroke="#4E6B32" stroke-width="1.2" stroke-linecap="round"/>
+                <g class="vine-leaf-sway" style="transform-origin: 16px 68px;">
+                  <path d="M16,68 C11,62 3,64 2,70 C1,76 7,81 12,79 C9,84 13,90 19,88 C24,86 25,80 23,75 C27,78 33,75 33,69 C33,64 26,62 21,65 Z" fill="url(#leaf-grad-va2)" stroke="#415C2B" stroke-width="0.6"/>
+                </g>
+                <g class="vine-leaf-sway-alt" style="transform-origin: 46px 96px;">
+                  <path d="M46,96 C44,90 38,88 34,92 C30,96 32,102 36,104 C34,107 38,111 43,109 C48,107 48,102 46,98 Z" fill="url(#leaf-grad-va2)" stroke="#415C2B" stroke-width="0.5"/>
+                </g>
+                <g class="grape-cluster-swing" style="transform-origin: 24px 68px;">
+                  <path d="M24,68 L24,74" stroke="#545C33" stroke-width="1.8" stroke-linecap="round"/>
+                  <circle cx="18" cy="76" r="4.2" fill="url(#berry-grad-va2)"/>
+                  <ellipse cx="16.8" cy="74.8" rx="1.2" ry="0.8" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 16.8 74.8)"/>
+                  <circle cx="25" cy="75" r="4.4" fill="url(#berry-grad-va2)"/>
+                  <ellipse cx="23.8" cy="73.8" rx="1.3" ry="0.8" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 23.8 73.8)"/>
+                  <circle cx="32" cy="77" r="4.0" fill="url(#berry-grad-va2)"/>
+                  <ellipse cx="30.8" cy="75.8" rx="1.2" ry="0.7" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 30.8 75.8)"/>
+                  <circle cx="21" cy="83" r="4.4" fill="url(#berry-grad-va2)"/>
+                  <ellipse cx="19.8" cy="81.8" rx="1.3" ry="0.8" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 19.8 81.8)"/>
+                  <circle cx="28" cy="83" r="4.4" fill="url(#berry-grad-va2)"/>
+                  <ellipse cx="26.8" cy="81.8" rx="1.3" ry="0.8" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 26.8 81.8)"/>
+                  <circle cx="23" cy="91" r="4.2" fill="url(#berry-grad-va2)"/>
+                  <ellipse cx="21.8" cy="89.8" rx="1.2" ry="0.8" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 21.8 89.8)"/>
+                  <circle cx="29" cy="91" r="4.0" fill="url(#berry-grad-va2)"/>
+                  <ellipse cx="27.8" cy="89.8" rx="1.2" ry="0.7" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 27.8 89.8)"/>
+                  <circle cx="26" cy="98" r="3.4" fill="url(#berry-grad-va2)"/>
+                  <ellipse cx="25" cy="97" rx="1.0" ry="0.6" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 25 97)"/>
+                </g>
+              </svg>
+            </div>
+            <div class="card-media relative aspect-[16/10] overflow-hidden border-b border-gold/30 sm:aspect-[4/3] bg-grape-50">
+              <img src="assets/images/product-siro.jpg"
+                   alt="Siro nho rừng Đình Lập chai 300ml"
+                   loading="lazy"
+                   class="h-full w-full object-cover transition-transform duration-500 hover:scale-105" />
+              <!-- Nút "Xem nhanh" mở cửa sổ chi tiết (C4); bấm ảnh để phóng to (C5) -->
+              <button type="button" data-quickview
+                      class="quickview-open absolute inset-x-4 bottom-4 z-20 inline-flex items-center justify-center gap-1.5 rounded-full border border-gold/50 bg-cream/95 px-4 py-2.5 text-xs font-semibold text-grape shadow-sm hover:bg-cream">
+                <svg class="h-3.5 w-3.5" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="2.5"/></svg>
+                Xem nhanh
+              </button>
+            </div>
+            <div class="flex flex-1 flex-col p-5 sm:p-6">
+              <h3 class="font-display text-xl font-semibold leading-tight text-grape">Siro nho rừng</h3>
+              <p class="mt-1.5 text-xs italic leading-snug text-gold-600">Số lượng giới hạn – Vị ngon nguyên bản</p>
+              <p class="mt-3 flex-1 text-sm leading-relaxed text-ink/70">Chống lão hoá, làm đẹp da nhờ chất chống oxy hoá tự nhiên. Hỗ trợ tim mạch, kích thích tiêu hoá, thanh nhiệt.</p>
+              <div class="mt-4 flex items-end justify-between gap-3 border-t border-gold/25 pt-4 sm:mt-5 sm:pt-5">
+                <div>
+                  <p class="text-[11px] uppercase tracking-[0.15em] text-forest/60">Giá</p>
+                  <p data-price class="font-display text-xl font-semibold text-grape">69.000đ</p>
+                  <p class="mt-0.5 text-[11px] leading-snug text-forest/60">1 lọ · 300ml</p>
+                </div>
+               <a href="#order-modal"
+                  data-order-trigger data-order-index="0"
+                  class="btn-primary btn-shine group shrink-0 rounded-full bg-grape px-5 py-2.5 text-sm font-semibold text-cream hover:bg-grape-800">
+                 Đặt mua
+                 <svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+              </div>
+            </div>
+          </article>
+
+           <article class="product-card reveal reveal-delay-1 animate-fade-up card-lift card-tilt flex flex-col overflow-visible radius-organic-b" data-category="giam-mat" style="animation-delay: 0.1s;">
+            <!-- Khung viền trang trí dây leo & chùm nho (Variant B) -->
+            <div class="card-vine-frame" aria-hidden="true">
+              <!-- Dây leo & chùm nho lớn góc trên phải (Variant B) -->
+              <svg class="vine-corner-topright" viewBox="0 0 138 138" fill="none">
+                <defs>
+                  <radialGradient id="berry-grad-vb1" cx="35%" cy="30%" r="70%">
+                    <stop offset="0%" stop-color="#462544"/>
+                    <stop offset="35%" stop-color="#2D1F2F"/>
+                    <stop offset="75%" stop-color="#1E1A22"/>
+                    <stop offset="100%" stop-color="#141018"/>
+                  </radialGradient>
+                  <linearGradient id="leaf-grad-vb1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#7A9A4C"/>
+                    <stop offset="50%" stop-color="#5F7F3A"/>
+                    <stop offset="100%" stop-color="#415C2B"/>
+                  </linearGradient>
+                </defs>
+                <!-- Thân dây uốn sâu hơn với đường cong kép thanh nhã -->
+                <path d="M18,17 C48,15 78,13 98,17 C116,21 127,34 129,54 C131,74 128,96 126,118" stroke="#4E6B32" stroke-width="2.6" stroke-linecap="round"/>
+                <path d="M104,22 C108,30 106,38 103,44" stroke="#545C33" stroke-width="2.2" stroke-linecap="round"/>
+                <!-- 2 nhánh tua cuốn uốn dài ra ngoài mép -->
+                <path d="M82,13 C80,4 92,1 95,7 C98,12 92,16 88,14" stroke="#4E6B32" stroke-width="1.3" stroke-linecap="round"/>
+                <path d="M129,62 C137,67 139,78 133,82 C127,85 123,80 127,76" stroke="#4E6B32" stroke-width="1.3" stroke-linecap="round"/>
+                <!-- Lá 1 mép trên -->
+                <g class="vine-leaf-sway" style="transform-origin: 58px 15px;">
+                  <path d="M58,15 C52,9 43,8 39,14 C35,20 40,26 46,26 C41,31 43,38 49,37 C56,36 58,30 60,25 C63,30 70,29 72,24 C73,18 67,12 61,13 Z" fill="url(#leaf-grad-vb1)" stroke="#415C2B" stroke-width="0.7"/>
+                  <path d="M58,15 Q51,22 46,26 M58,15 Q54,27 51,34 M58,15 Q63,22 67,24" stroke="#364D23" stroke-width="0.7" fill="none"/>
+                </g>
+                <!-- Lá 2 góc bo: xòe 5 thùy rộng rủ xuống -->
+                <g class="vine-leaf-sway-alt" style="transform-origin: 104px 19px;">
+                  <path d="M104,19 C100,10 88,11 84,18 C80,24 85,32 91,31 C86,37 91,45 97,44 C104,43 106,36 108,29 C114,35 122,33 123,26 C124,19 116,13 109,15 Z" fill="url(#leaf-grad-vb1)" stroke="#415C2B" stroke-width="0.8"/>
+                  <path d="M104,19 Q96,25 91,31 M104,19 Q100,31 98,42 M104,19 Q111,25 117,26" stroke="#364D23" stroke-width="0.8" fill="none"/>
+                </g>
+                <!-- Lá 3 bên sườn -->
+                <g class="vine-leaf-sway" style="transform-origin: 128px 56px;">
+                  <path d="M128,56 C131,50 138,52 138,58 C138,64 132,67 127,66 C130,71 126,77 121,76 C116,74 116,68 119,63 C114,60 116,54 121,54 C125,54 127,58 128,56 Z" fill="url(#leaf-grad-vb1)" stroke="#415C2B" stroke-width="0.6"/>
+                </g>
+                <!-- Chùm nho lớn nghiêng nhẹ 5 độ sang phải tạo nét duyên dáng -->
+                <g class="grape-cluster-swing" style="transform-origin: 103px 44px; transform: rotate(5deg);">
+                  <path d="M103,44 L102,52" stroke="#545C33" stroke-width="2" stroke-linecap="round"/>
+                  <circle cx="95" cy="54" r="5.2" fill="#1A151E"/>
+                  <circle cx="108" cy="56" r="5.4" fill="#1A151E"/>
+                  <circle cx="104" cy="66" r="5.4" fill="#1A151E"/>
+                  <!-- Hàng 1 -->
+                  <circle cx="91" cy="55" r="5.4" fill="url(#berry-grad-vb1)"/>
+                  <ellipse cx="89.5" cy="53.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 89.5 53.5)"/>
+                  <circle cx="100" cy="54" r="5.6" fill="url(#berry-grad-vb1)"/>
+                  <ellipse cx="98.5" cy="52.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 98.5 52.5)"/>
+                  <circle cx="110" cy="56" r="5.5" fill="url(#berry-grad-vb1)"/>
+                  <ellipse cx="108.5" cy="54.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 108.5 54.5)"/>
+                  <circle cx="119" cy="60" r="5.0" fill="url(#berry-grad-vb1)"/>
+                  <ellipse cx="117.5" cy="58.5" rx="1.5" ry="0.9" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 117.5 58.5)"/>
+                  <!-- Hàng 2 -->
+                  <circle cx="89" cy="64" r="5.4" fill="url(#berry-grad-vb1)"/>
+                  <ellipse cx="87.5" cy="62.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 87.5 62.5)"/>
+                  <circle cx="98" cy="64" r="5.8" fill="url(#berry-grad-vb1)"/>
+                  <ellipse cx="96.5" cy="62.5" rx="1.7" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 96.5 62.5)"/>
+                  <circle cx="108" cy="65" r="5.8" fill="url(#berry-grad-vb1)"/>
+                  <ellipse cx="106.5" cy="63.5" rx="1.7" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 106.5 63.5)"/>
+                  <circle cx="117" cy="68" r="5.2" fill="url(#berry-grad-vb1)"/>
+                  <ellipse cx="115.5" cy="66.5" rx="1.5" ry="0.9" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 115.5 66.5)"/>
+                  <!-- Hàng 3 -->
+                  <circle cx="94" cy="74" r="5.6" fill="url(#berry-grad-vb1)"/>
+                  <ellipse cx="92.5" cy="72.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 92.5 72.5)"/>
+                  <circle cx="104" cy="74" r="5.8" fill="url(#berry-grad-vb1)"/>
+                  <ellipse cx="102.5" cy="72.5" rx="1.7" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 102.5 72.5)"/>
+                  <circle cx="113" cy="76" r="5.4" fill="url(#berry-grad-vb1)"/>
+                  <ellipse cx="111.5" cy="74.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 111.5 74.5)"/>
+                  <!-- Hàng 4 -->
+                  <circle cx="100" cy="83" r="5.4" fill="url(#berry-grad-vb1)"/>
+                  <ellipse cx="98.5" cy="81.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 98.5 81.5)"/>
+                  <circle cx="109" cy="84" r="5.2" fill="url(#berry-grad-vb1)"/>
+                  <ellipse cx="107.5" cy="82.5" rx="1.5" ry="0.9" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 107.5 82.5)"/>
+                  <!-- Hàng 5 -->
+                  <circle cx="105" cy="93" r="4.2" fill="url(#berry-grad-vb1)"/>
+                  <ellipse cx="103.8" cy="91.8" rx="1.2" ry="0.8" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 103.8 91.8)"/>
+                </g>
+              </svg>
+
+              <!-- Dây leo & chùm nho nhỏ góc dưới trái (Variant B) -->
+              <svg class="vine-corner-bottomleft" viewBox="0 0 108 108" fill="none">
+                <defs>
+                  <radialGradient id="berry-grad-vb2" cx="35%" cy="30%" r="70%">
+                    <stop offset="0%" stop-color="#462544"/>
+                    <stop offset="35%" stop-color="#2D1F2F"/>
+                    <stop offset="75%" stop-color="#1E1A22"/>
+                    <stop offset="100%" stop-color="#141018"/>
+                  </radialGradient>
+                  <linearGradient id="leaf-grad-vb2" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#7A9A4C"/>
+                    <stop offset="50%" stop-color="#5F7F3A"/>
+                    <stop offset="100%" stop-color="#415C2B"/>
+                  </linearGradient>
+                </defs>
+                <path d="M10,48 C10,66 14,80 24,90 C34,97 52,99 76,97" stroke="#4E6B32" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="M10,48 C6,41 12,36 15,40 C18,44 13,48 10,47" stroke="#4E6B32" stroke-width="1.2" stroke-linecap="round"/>
+                <g class="vine-leaf-sway" style="transform-origin: 15px 72px;">
+                  <path d="M15,72 C10,66 2,68 1,74 C0,80 6,85 11,83 C8,88 12,94 18,92 C23,90 24,84 22,79 C26,82 32,79 32,73 C32,68 25,66 20,69 Z" fill="url(#leaf-grad-vb2)" stroke="#415C2B" stroke-width="0.6"/>
+                </g>
+                <g class="vine-leaf-sway-alt" style="transform-origin: 48px 97px;">
+                  <path d="M48,97 C46,91 40,89 36,93 C32,97 34,103 38,105 C36,108 40,112 45,110 C50,108 50,103 48,99 Z" fill="url(#leaf-grad-vb2)" stroke="#415C2B" stroke-width="0.5"/>
+                </g>
+                <g class="grape-cluster-swing" style="transform-origin: 23px 72px;">
+                  <path d="M23,72 L23,77" stroke="#545C33" stroke-width="1.8" stroke-linecap="round"/>
+                  <circle cx="17" cy="79" r="4.2" fill="url(#berry-grad-vb2)"/>
+                  <ellipse cx="15.8" cy="77.8" rx="1.2" ry="0.8" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 15.8 77.8)"/>
+                  <circle cx="24" cy="78" r="4.4" fill="url(#berry-grad-vb2)"/>
+                  <ellipse cx="22.8" cy="76.8" rx="1.3" ry="0.8" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 22.8 76.8)"/>
+                  <circle cx="31" cy="80" r="4.0" fill="url(#berry-grad-vb2)"/>
+                  <ellipse cx="29.8" cy="78.8" rx="1.2" ry="0.7" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 29.8 78.8)"/>
+                  <circle cx="20" cy="86" r="4.4" fill="url(#berry-grad-vb2)"/>
+                  <ellipse cx="18.8" cy="84.8" rx="1.3" ry="0.8" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 18.8 84.8)"/>
+                  <circle cx="27" cy="86" r="4.4" fill="url(#berry-grad-vb2)"/>
+                  <ellipse cx="25.8" cy="84.8" rx="1.3" ry="0.8" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 25.8 84.8)"/>
+                  <circle cx="22" cy="94" r="4.2" fill="url(#berry-grad-vb2)"/>
+                  <ellipse cx="20.8" cy="92.8" rx="1.2" ry="0.8" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 20.8 92.8)"/>
+                  <circle cx="28" cy="94" r="4.0" fill="url(#berry-grad-vb2)"/>
+                  <ellipse cx="26.8" cy="92.8" rx="1.2" ry="0.7" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 26.8 92.8)"/>
+                  <circle cx="25" cy="101" r="3.4" fill="url(#berry-grad-vb2)"/>
+                  <ellipse cx="24" cy="100" rx="1.0" ry="0.6" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 24 100)"/>
+                </g>
+              </svg>
+            </div>
+            <div class="card-media relative aspect-[16/10] overflow-hidden border-b border-gold/30 sm:aspect-[4/3] bg-grape-50">
+              <img src="assets/images/product-giam.jpg"
+                   alt="Giấm nho tự nhiên Đình Lập chai 300ml"
+                   loading="lazy"
+                   class="h-full w-full object-cover transition-transform duration-500 hover:scale-105" />
+              <!-- Nút "Xem nhanh" mở cửa sổ chi tiết (C4); bấm ảnh để phóng to (C5) -->
+              <button type="button" data-quickview
+                      class="quickview-open absolute inset-x-4 bottom-4 z-20 inline-flex items-center justify-center gap-1.5 rounded-full border border-gold/50 bg-cream/95 px-4 py-2.5 text-xs font-semibold text-grape shadow-sm hover:bg-cream">
+                <svg class="h-3.5 w-3.5" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="2.5"/></svg>
+                Xem nhanh
+              </button>
+            </div>
+            <div class="flex flex-1 flex-col p-5 sm:p-6">
+              <h3 class="font-display text-xl font-semibold leading-tight text-grape">Giấm nho tự nhiên</h3>
+              <p class="mt-1.5 text-xs italic leading-snug text-gold-600">Bí quyết nâng tầm món ngon thượng hạng</p>
+              <p class="mt-3 flex-1 text-sm leading-relaxed text-ink/70">Hỗ trợ tiêu hoá, giảm đầy hơi, hổ trợ đường huyết, giảm cholesterol. Dùng làm nước sốt salad, gia vị tẩm ướp.</p>
+              <div class="mt-4 flex items-end justify-between gap-3 border-t border-gold/25 pt-4 sm:mt-5 sm:pt-5">
+                <div>
+                  <p class="text-[11px] uppercase tracking-[0.15em] text-forest/60">Giá</p>
+                  <p data-price class="font-display text-xl font-semibold text-grape">50.000đ</p>
+                  <p class="mt-0.5 text-[11px] leading-snug text-forest/60">1 lọ · 300ml</p>
+                </div>
+               <a href="#order-modal"
+                  data-order-trigger data-order-index="1"
+                  class="btn-primary btn-shine group shrink-0 rounded-full bg-grape px-5 py-2.5 text-sm font-semibold text-cream hover:bg-grape-800">
+                 Đặt mua
+                 <svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+              </div>
+            </div>
+          </article>
+
+           <article class="product-card reveal reveal-delay-2 animate-fade-up card-lift card-tilt flex flex-col overflow-visible radius-organic-c" data-category="giam-mat" style="animation-delay: 0.15s;">
+            <!-- Khung viền trang trí dây leo & chùm nho (Variant C) -->
+            <div class="card-vine-frame" aria-hidden="true">
+              <!-- Dây leo & chùm nho lớn góc trên phải (Variant C) -->
+              <svg class="vine-corner-topright" viewBox="0 0 138 138" fill="none">
+                <defs>
+                  <radialGradient id="berry-grad-vc1" cx="35%" cy="30%" r="70%">
+                    <stop offset="0%" stop-color="#462544"/>
+                    <stop offset="35%" stop-color="#2D1F2F"/>
+                    <stop offset="75%" stop-color="#1E1A22"/>
+                    <stop offset="100%" stop-color="#141018"/>
+                  </radialGradient>
+                  <linearGradient id="leaf-grad-vc1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#7A9A4C"/>
+                    <stop offset="50%" stop-color="#5F7F3A"/>
+                    <stop offset="100%" stop-color="#415C2B"/>
+                  </linearGradient>
+                </defs>
+                <!-- Dây leo lượn sóng nhẹ nhàng kèm tua cuốn kép, cổ điểu -->
+                <path d="M26,14 C56,13 86,15 104,20 C120,25 128,37 130,56 C131,76 130,100 127,120" stroke="#4E6B32" stroke-width="2.6" stroke-linecap="round"/>
+                <path d="M102,23 C100,31 99,37 97,42" stroke="#545C33" stroke-width="2.2" stroke-linecap="round"/>
+                <!-- Tua cuốn kép uốn lượn -->
+                <path d="M74,13 C71,4 82,1 86,6 C89,11 84,15 80,12" stroke="#4E6B32" stroke-width="1.3" stroke-linecap="round"/>
+                <path d="M130,72 C138,77 139,88 133,92 C127,95 123,90 127,85" stroke="#4E6B32" stroke-width="1.3" stroke-linecap="round"/>
+                <!-- Lá 1 -->
+                <g class="vine-leaf-sway" style="transform-origin: 52px 14px;">
+                  <path d="M52,14 C46,8 36,8 33,14 C30,20 34,26 40,26 C35,30 37,37 43,37 C49,37 52,31 54,25 C57,30 64,29 66,24 C68,18 62,12 56,13 Z" fill="url(#leaf-grad-vc1)" stroke="#415C2B" stroke-width="0.7"/>
+                  <path d="M52,15 Q45,22 40,26 M52,15 Q48,27 45,34 M52,15 Q57,22 61,24" stroke="#364D23" stroke-width="0.7" fill="none"/>
+                </g>
+                <!-- Lá 2 ở góc bo: 5 thùy thon dài -->
+                <g class="vine-leaf-sway-alt" style="transform-origin: 98px 18px;">
+                  <path d="M98,18 C94,10 83,11 79,18 C75,24 80,32 86,31 C81,36 85,44 91,43 C98,42 100,35 102,29 C107,35 115,33 116,26 C117,19 110,13 103,15 Z" fill="url(#leaf-grad-vc1)" stroke="#415C2B" stroke-width="0.8"/>
+                  <path d="M98,18 Q91,25 86,31 M98,18 Q94,31 92,41 M98,18 Q105,25 111,26" stroke="#364D23" stroke-width="0.8" fill="none"/>
+                </g>
+                <!-- Lá 3 bên phải -->
+                <g class="vine-leaf-sway" style="transform-origin: 128px 50px;">
+                  <path d="M128,50 C131,44 138,46 138,52 C138,58 132,61 127,60 C130,65 126,71 121,70 C116,68 116,62 119,57 C114,54 116,48 121,48 C125,48 127,52 128,50 Z" fill="url(#leaf-grad-vc1)" stroke="#415C2B" stroke-width="0.6"/>
+                </g>
+                <!-- Chùm nho lớn 16 quả dáng kim tự tháp thon dài -->
+                <g class="grape-cluster-swing" style="transform-origin: 97px 42px;">
+                  <path d="M97,42 L96,50" stroke="#545C33" stroke-width="2" stroke-linecap="round"/>
+                  <circle cx="90" cy="53" r="5.2" fill="#1A151E"/>
+                  <circle cx="103" cy="54" r="5.4" fill="#1A151E"/>
+                  <circle cx="99" cy="64" r="5.4" fill="#1A151E"/>
+                  <!-- Hàng 1 -->
+                  <circle cx="86" cy="54" r="5.4" fill="url(#berry-grad-vc1)"/>
+                  <ellipse cx="84.5" cy="52.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 84.5 52.5)"/>
+                  <circle cx="95" cy="52" r="5.6" fill="url(#berry-grad-vc1)"/>
+                  <ellipse cx="93.5" cy="50.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 93.5 50.5)"/>
+                  <circle cx="105" cy="53" r="5.5" fill="url(#berry-grad-vc1)"/>
+                  <ellipse cx="103.5" cy="51.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 103.5 51.5)"/>
+                  <circle cx="114" cy="57" r="5.0" fill="url(#berry-grad-vc1)"/>
+                  <ellipse cx="112.5" cy="55.5" rx="1.5" ry="0.9" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 112.5 55.5)"/>
+                  <!-- Hàng 2 -->
+                  <circle cx="84" cy="63" r="5.4" fill="url(#berry-grad-vc1)"/>
+                  <ellipse cx="82.5" cy="61.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 82.5 61.5)"/>
+                  <circle cx="93" cy="62" r="5.8" fill="url(#berry-grad-vc1)"/>
+                  <ellipse cx="91.5" cy="60.5" rx="1.7" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 91.5 60.5)"/>
+                  <circle cx="103" cy="62" r="5.8" fill="url(#berry-grad-vc1)"/>
+                  <ellipse cx="101.5" cy="60.5" rx="1.7" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 101.5 60.5)"/>
+                  <circle cx="112" cy="65" r="5.2" fill="url(#berry-grad-vc1)"/>
+                  <ellipse cx="110.5" cy="63.5" rx="1.5" ry="0.9" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 110.5 63.5)"/>
+                  <!-- Hàng 3 -->
+                  <circle cx="89" cy="72" r="5.6" fill="url(#berry-grad-vc1)"/>
+                  <ellipse cx="87.5" cy="70.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 87.5 70.5)"/>
+                  <circle cx="99" cy="71" r="5.8" fill="url(#berry-grad-vc1)"/>
+                  <ellipse cx="97.5" cy="69.5" rx="1.7" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 97.5 69.5)"/>
+                  <circle cx="108" cy="73" r="5.4" fill="url(#berry-grad-vc1)"/>
+                  <ellipse cx="106.5" cy="71.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 106.5 71.5)"/>
+                  <!-- Hàng 4 -->
+                  <circle cx="94" cy="81" r="5.4" fill="url(#berry-grad-vc1)"/>
+                  <ellipse cx="92.5" cy="79.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 92.5 79.5)"/>
+                  <circle cx="104" cy="82" r="5.2" fill="url(#berry-grad-vc1)"/>
+                  <ellipse cx="102.5" cy="80.5" rx="1.5" ry="0.9" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 102.5 80.5)"/>
+                  <!-- Hàng 5 -->
+                  <circle cx="99" cy="91" r="4.2" fill="url(#berry-grad-vc1)"/>
+                  <ellipse cx="97.8" cy="89.8" rx="1.2" ry="0.8" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 97.8 89.8)"/>
+                  <!-- Quả nhọn đỉnh chóp -->
+                  <circle cx="99" cy="99" r="3.2" fill="url(#berry-grad-vc1)"/>
+                  <ellipse cx="98" cy="98.2" rx="0.9" ry="0.5" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 98 98.2)"/>
+                </g>
+              </svg>
+
+              <!-- Dây leo & chùm nho nhỏ góc dưới trái (Variant C) -->
+              <svg class="vine-corner-bottomleft" viewBox="0 0 108 108" fill="none">
+                <defs>
+                  <radialGradient id="berry-grad-vc2" cx="35%" cy="30%" r="70%">
+                    <stop offset="0%" stop-color="#462544"/>
+                    <stop offset="35%" stop-color="#2D1F2F"/>
+                    <stop offset="75%" stop-color="#1E1A22"/>
+                    <stop offset="100%" stop-color="#141018"/>
+                  </radialGradient>
+                  <linearGradient id="leaf-grad-vc2" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#7A9A4C"/>
+                    <stop offset="50%" stop-color="#5F7F3A"/>
+                    <stop offset="100%" stop-color="#415C2B"/>
+                  </linearGradient>
+                </defs>
+                <path d="M14,44 C14,64 16,79 26,89 C36,96 54,98 75,96" stroke="#4E6B32" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="M14,44 C9,37 16,31 19,36 C22,40 17,44 14,43" stroke="#4E6B32" stroke-width="1.2" stroke-linecap="round"/>
+                <g class="vine-leaf-sway" style="transform-origin: 18px 70px;">
+                  <path d="M18,70 C13,64 5,66 4,72 C3,78 9,83 14,81 C11,86 15,92 21,90 C26,88 27,82 25,77 C29,80 35,77 35,71 C35,66 28,64 23,67 Z" fill="url(#leaf-grad-vc2)" stroke="#415C2B" stroke-width="0.6"/>
+                </g>
+                <g class="vine-leaf-sway-alt" style="transform-origin: 47px 96px;">
+                  <path d="M47,96 C45,90 39,88 35,92 C31,96 33,102 37,104 C35,107 39,111 44,109 C49,107 49,102 47,98 Z" fill="url(#leaf-grad-vc2)" stroke="#415C2B" stroke-width="0.5"/>
+                </g>
+                <g class="grape-cluster-swing" style="transform-origin: 25px 69px;">
+                  <path d="M25,69 L25,75" stroke="#545C33" stroke-width="1.8" stroke-linecap="round"/>
+                  <circle cx="19" cy="77" r="4.2" fill="url(#berry-grad-vc2)"/>
+                  <ellipse cx="17.8" cy="75.8" rx="1.2" ry="0.8" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 17.8 75.8)"/>
+                  <circle cx="26" cy="76" r="4.4" fill="url(#berry-grad-vc2)"/>
+                  <ellipse cx="24.8" cy="74.8" rx="1.3" ry="0.8" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 24.8 74.8)"/>
+                  <circle cx="33" cy="78" r="4.0" fill="url(#berry-grad-vc2)"/>
+                  <ellipse cx="31.8" cy="76.8" rx="1.2" ry="0.7" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 31.8 76.8)"/>
+                  <circle cx="22" cy="84" r="4.4" fill="url(#berry-grad-vc2)"/>
+                  <ellipse cx="20.8" cy="82.8" rx="1.3" ry="0.8" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 20.8 82.8)"/>
+                  <circle cx="29" cy="84" r="4.4" fill="url(#berry-grad-vc2)"/>
+                  <ellipse cx="27.8" cy="82.8" rx="1.3" ry="0.8" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 27.8 82.8)"/>
+                  <circle cx="24" cy="92" r="4.2" fill="url(#berry-grad-vc2)"/>
+                  <ellipse cx="22.8" cy="90.8" rx="1.2" ry="0.8" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 22.8 90.8)"/>
+                  <circle cx="30" cy="92" r="4.0" fill="url(#berry-grad-vc2)"/>
+                  <ellipse cx="28.8" cy="90.8" rx="1.2" ry="0.7" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 28.8 90.8)"/>
+                  <circle cx="27" cy="99" r="3.4" fill="url(#berry-grad-vc2)"/>
+                  <ellipse cx="26" cy="98" rx="1.0" ry="0.6" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 26 98)"/>
+                </g>
+              </svg>
+            </div>
+            <div class="card-media relative aspect-[16/10] overflow-hidden border-b border-gold/30 sm:aspect-[4/3] bg-gradient-to-br from-gold-50 via-cream to-amber-50 flex items-center justify-center p-6">
+              <div class="relative z-10 flex h-full flex-col items-center justify-center text-center">
+                <div class="mb-2 flex h-14 w-14 items-center justify-center rounded-full border border-gold/60 bg-cream/90 shadow-sm text-gold-600">
+                  <svg class="h-8 w-8 text-gold-600" aria-hidden="true"><use href="#ico-grape"></use></svg>
+                </div>
+                <span class="font-display text-base font-semibold text-grape">Nho Ngâm Mật Ong</span>
+                <span class="mt-1 text-[11px] font-medium uppercase tracking-[0.16em] text-gold-700">Mật ong rừng tự nhiên · 300ml</span>
+                <span class="mt-2 inline-flex items-center gap-1.5 rounded-full border border-gold/40 bg-cream/80 px-2.5 py-0.5 text-[10px] text-forest">
+                  <span class="h-1.5 w-1.5 rounded-full bg-forest"></span> 100% Thuần khiết
+                </span>
+              </div>
+              <!-- Nút "Xem nhanh" mở cửa sổ chi tiết (C4); bấm ảnh để phóng to (C5) -->
+              <button type="button" data-quickview
+                      class="quickview-open absolute inset-x-4 bottom-4 z-20 inline-flex items-center justify-center gap-1.5 rounded-full border border-gold/50 bg-cream/95 px-4 py-2.5 text-xs font-semibold text-grape shadow-sm hover:bg-cream">
+                <svg class="h-3.5 w-3.5" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="2.5"/></svg>
+                Xem nhanh
+              </button>
+            </div>
+            <div class="flex flex-1 flex-col p-5 sm:p-6">
+              <h3 class="font-display text-xl font-semibold leading-tight text-grape">Nho ngâm mật ong</h3>
+              <p class="mt-1.5 text-xs italic leading-snug text-gold-600">Nho rừng hoà mật – Ngọt lành từ thiên nhiên</p>
+              <p class="mt-3 flex-1 text-sm leading-relaxed text-ink/70">Tăng cượng đề kháng, hỗ trợ bảo vệ da, bổ sung đường tự nhiên. Có thể ăn trực tiếp cùng quả nho đã ngâm.</p>
+              <div class="mt-4 flex items-end justify-between gap-3 border-t border-gold/25 pt-4 sm:mt-5 sm:pt-5">
+                <div>
+                  <p class="text-[11px] uppercase tracking-[0.15em] text-forest/60">Giá</p>
+                  <p data-price class="font-display text-xl font-semibold text-grape">99.000đ</p>
+                  <p class="mt-0.5 text-[11px] leading-snug text-forest/60">1 lọ · 300ml</p>
+                </div>
+               <a href="#order-modal"
+                  data-order-trigger data-order-index="2"
+                  class="btn-primary btn-shine group shrink-0 rounded-full bg-grape px-5 py-2.5 text-sm font-semibold text-cream hover:bg-grape-800">
+                 Đặt mua
+                 <svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+              </div>
+            </div>
+          </article>
+
+           <article class="product-card reveal animate-fade-up card-lift card-tilt flex flex-col overflow-visible radius-organic-d" data-category="siro" style="animation-delay: 0.2s;">
+            <!-- Khung viền trang trí dây leo & chùm nho (Variant A) -->
+            <div class="card-vine-frame" aria-hidden="true">
+              <!-- Dây leo & chùm nho lớn góc trên phải (Variant A) -->
+              <svg class="vine-corner-topright" viewBox="0 0 138 138" fill="none">
+                <defs>
+                  <radialGradient id="berry-grad-va4" cx="35%" cy="30%" r="70%">
+                    <stop offset="0%" stop-color="#462544"/>
+                    <stop offset="35%" stop-color="#2D1F2F"/>
+                    <stop offset="75%" stop-color="#1E1A22"/>
+                    <stop offset="100%" stop-color="#141018"/>
+                  </radialGradient>
+                  <linearGradient id="leaf-grad-va4" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#7A9A4C"/>
+                    <stop offset="50%" stop-color="#5F7F3A"/>
+                    <stop offset="100%" stop-color="#415C2B"/>
+                  </linearGradient>
+                </defs>
+                <path d="M22,15 C54,14 82,14 100,18 C116,22 126,34 128,52 C129,72 127,95 125,116" stroke="#4E6B32" stroke-width="2.6" stroke-linecap="round"/>
+                <path d="M102,20 C102,26 100,32 98,38" stroke="#545C33" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="M78,14 C75,5 86,2 89,7 C92,12 87,15 84,13" stroke="#4E6B32" stroke-width="1.3" stroke-linecap="round"/>
+                <path d="M128,68 C136,73 138,83 133,87 C128,90 124,85 127,81" stroke="#4E6B32" stroke-width="1.3" stroke-linecap="round"/>
+                <g class="vine-leaf-sway" style="transform-origin: 50px 14px;">
+                  <path d="M50,14 C44,7 34,7 31,13 C28,19 32,25 38,25 C33,29 35,36 41,36 C47,36 50,30 52,24 C55,29 62,28 64,23 C66,17 60,11 54,12 Z" fill="url(#leaf-grad-va4)" stroke="#415C2B" stroke-width="0.7"/>
+                  <path d="M50,15 Q43,21 38,25 M50,15 Q46,26 43,33 M50,15 Q55,21 59,23" stroke="#364D23" stroke-width="0.7" fill="none"/>
+                </g>
+                <g class="vine-leaf-sway-alt" style="transform-origin: 96px 17px;">
+                  <path d="M96,17 C92,9 81,10 77,17 C73,23 78,31 84,30 C79,35 83,43 89,42 C96,41 98,34 100,28 C105,34 113,32 114,25 C115,18 108,12 101,14 Z" fill="url(#leaf-grad-va4)" stroke="#415C2B" stroke-width="0.8"/>
+                  <path d="M96,18 Q89,24 84,30 M96,18 Q92,30 90,40 M96,18 Q103,24 109,25" stroke="#364D23" stroke-width="0.8" fill="none"/>
+                </g>
+                <g class="vine-leaf-sway" style="transform-origin: 126px 48px;">
+                  <path d="M126,48 C129,42 136,44 136,50 C136,56 130,59 125,58 C128,63 124,69 119,68 C114,66 114,60 117,55 C112,52 114,46 119,46 C123,46 125,50 126,48 Z" fill="url(#leaf-grad-va4)" stroke="#415C2B" stroke-width="0.6"/>
+                  <path d="M126,48 Q129,54 130,58 M126,48 Q123,59 120,66" stroke="#364D23" stroke-width="0.6" fill="none"/>
+                </g>
+                <g class="grape-cluster-swing" style="transform-origin: 98px 38px;">
+                  <path d="M98,38 L97,46" stroke="#545C33" stroke-width="2" stroke-linecap="round"/>
+                  <circle cx="91" cy="49" r="5.2" fill="#1A151E"/>
+                  <circle cx="104" cy="50" r="5.4" fill="#1A151E"/>
+                  <circle cx="100" cy="60" r="5.4" fill="#1A151E"/>
+                  <circle cx="87" cy="50" r="5.4" fill="url(#berry-grad-va4)"/>
+                  <ellipse cx="85.5" cy="48.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 85.5 48.5)"/>
+                  <circle cx="96" cy="48" r="5.6" fill="url(#berry-grad-va4)"/>
+                  <ellipse cx="94.5" cy="46.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 94.5 46.5)"/>
+                  <circle cx="106" cy="49" r="5.5" fill="url(#berry-grad-va4)"/>
+                  <ellipse cx="104.5" cy="47.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 104.5 47.5)"/>
+                  <circle cx="115" cy="53" r="5.0" fill="url(#berry-grad-va4)"/>
+                  <ellipse cx="113.5" cy="51.5" rx="1.5" ry="0.9" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 113.5 51.5)"/>
+                  <circle cx="84" cy="59" r="5.4" fill="url(#berry-grad-va4)"/>
+                  <ellipse cx="82.5" cy="57.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 82.5 57.5)"/>
+                  <circle cx="93" cy="58" r="5.8" fill="url(#berry-grad-va4)"/>
+                  <ellipse cx="91.5" cy="56.5" rx="1.7" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 91.5 56.5)"/>
+                  <circle cx="103" cy="58" r="5.8" fill="url(#berry-grad-va4)"/>
+                  <ellipse cx="101.5" cy="56.5" rx="1.7" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 101.5 56.5)"/>
+                  <circle cx="112" cy="61" r="5.2" fill="url(#berry-grad-va4)"/>
+                  <ellipse cx="110.5" cy="59.5" rx="1.5" ry="0.9" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 110.5 59.5)"/>
+                  <circle cx="89" cy="68" r="5.6" fill="url(#berry-grad-va4)"/>
+                  <ellipse cx="87.5" cy="66.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 87.5 66.5)"/>
+                  <circle cx="99" cy="67" r="5.8" fill="url(#berry-grad-va4)"/>
+                  <ellipse cx="97.5" cy="65.5" rx="1.7" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 97.5 65.5)"/>
+                  <circle cx="108" cy="69" r="5.4" fill="url(#berry-grad-va4)"/>
+                  <ellipse cx="106.5" cy="67.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 106.5 67.5)"/>
+                  <circle cx="94" cy="77" r="5.4" fill="url(#berry-grad-va4)"/>
+                  <ellipse cx="92.5" cy="75.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 92.5 75.5)"/>
+                  <circle cx="104" cy="78" r="5.2" fill="url(#berry-grad-va4)"/>
+                  <ellipse cx="102.5" cy="76.5" rx="1.5" ry="0.9" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 102.5 76.5)"/>
+                  <circle cx="99" cy="87" r="4.2" fill="url(#berry-grad-va4)"/>
+                  <ellipse cx="97.8" cy="85.8" rx="1.2" ry="0.8" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 97.8 85.8)"/>
+                </g>
+              </svg>
+
+              <!-- Dây leo & chùm nho nhỏ góc dưới trái (Variant A) -->
+              <svg class="vine-corner-bottomleft" viewBox="0 0 108 108" fill="none">
+                <defs>
+                  <radialGradient id="berry-grad-va42" cx="35%" cy="30%" r="70%">
+                    <stop offset="0%" stop-color="#462544"/>
+                    <stop offset="35%" stop-color="#2D1F2F"/>
+                    <stop offset="75%" stop-color="#1E1A22"/>
+                    <stop offset="100%" stop-color="#141018"/>
+                  </radialGradient>
+                  <linearGradient id="leaf-grad-va42" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#7A9A4C"/>
+                    <stop offset="50%" stop-color="#5F7F3A"/>
+                    <stop offset="100%" stop-color="#415C2B"/>
+                  </linearGradient>
+                </defs>
+                <path d="M12,42 C12,62 15,78 26,89 C36,96 52,98 74,96" stroke="#4E6B32" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="M12,42 C7,35 14,29 17,34 C20,38 15,42 12,41" stroke="#4E6B32" stroke-width="1.2" stroke-linecap="round"/>
+                <g class="vine-leaf-sway" style="transform-origin: 16px 68px;">
+                  <path d="M16,68 C11,62 3,64 2,70 C1,76 7,81 12,79 C9,84 13,90 19,88 C24,86 25,80 23,75 C27,78 33,75 33,69 C33,64 26,62 21,65 Z" fill="url(#leaf-grad-va42)" stroke="#415C2B" stroke-width="0.6"/>
+                </g>
+                <g class="vine-leaf-sway-alt" style="transform-origin: 46px 96px;">
+                  <path d="M46,96 C44,90 38,88 34,92 C30,96 32,102 36,104 C34,107 38,111 43,109 C48,107 48,102 46,98 Z" fill="url(#leaf-grad-va42)" stroke="#415C2B" stroke-width="0.5"/>
+                </g>
+                <g class="grape-cluster-swing" style="transform-origin: 24px 68px;">
+                  <path d="M24,68 L24,74" stroke="#545C33" stroke-width="1.8" stroke-linecap="round"/>
+                  <circle cx="18" cy="76" r="4.2" fill="url(#berry-grad-va42)"/>
+                  <ellipse cx="16.8" cy="74.8" rx="1.2" ry="0.8" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 16.8 74.8)"/>
+                  <circle cx="25" cy="75" r="4.4" fill="url(#berry-grad-va42)"/>
+                  <ellipse cx="23.8" cy="73.8" rx="1.3" ry="0.8" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 23.8 73.8)"/>
+                  <circle cx="32" cy="77" r="4.0" fill="url(#berry-grad-va42)"/>
+                  <ellipse cx="30.8" cy="75.8" rx="1.2" ry="0.7" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 30.8 75.8)"/>
+                  <circle cx="21" cy="83" r="4.4" fill="url(#berry-grad-va42)"/>
+                  <ellipse cx="19.8" cy="81.8" rx="1.3" ry="0.8" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 19.8 81.8)"/>
+                  <circle cx="28" cy="83" r="4.4" fill="url(#berry-grad-va42)"/>
+                  <ellipse cx="26.8" cy="81.8" rx="1.3" ry="0.8" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 26.8 81.8)"/>
+                  <circle cx="23" cy="91" r="4.2" fill="url(#berry-grad-va42)"/>
+                  <ellipse cx="21.8" cy="89.8" rx="1.2" ry="0.8" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 21.8 89.8)"/>
+                  <circle cx="29" cy="91" r="4.0" fill="url(#berry-grad-va42)"/>
+                  <ellipse cx="27.8" cy="89.8" rx="1.2" ry="0.7" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 27.8 89.8)"/>
+                  <circle cx="26" cy="98" r="3.4" fill="url(#berry-grad-va42)"/>
+                  <ellipse cx="25" cy="97" rx="1.0" ry="0.6" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 25 97)"/>
+                </g>
+              </svg>
+            </div>
+            <div class="card-media relative aspect-[16/10] overflow-hidden border-b border-gold/30 sm:aspect-[4/3] bg-gradient-to-br from-grape-50 via-cream to-forest-50 flex items-center justify-center p-6">
+              <div class="relative z-10 flex h-full flex-col items-center justify-center text-center">
+                <div class="mb-2 flex h-14 w-14 items-center justify-center rounded-full border border-gold/60 bg-cream/90 shadow-sm text-grape">
+                  <svg class="h-8 w-8 text-grape" aria-hidden="true"><use href="#ico-leaf"></use></svg>
+                </div>
+                <span class="font-display text-base font-semibold text-grape">Nước Nho Đường Phèn</span>
+                <span class="mt-1 text-[11px] font-medium uppercase tracking-[0.16em] text-forest">Thanh nhiệt giải khát · 300ml</span>
+                <span class="mt-2 inline-flex items-center gap-1.5 rounded-full border border-gold/40 bg-cream/80 px-2.5 py-0.5 text-[10px] text-forest">
+                  <span class="h-1.5 w-1.5 rounded-full bg-forest"></span> Lên men tự nhiên
+                </span>
+              </div>
+              <!-- Nút "Xem nhanh" mở cửa sổ chi tiết (C4); bấm ảnh để phóng to (C5) -->
+              <button type="button" data-quickview
+                      class="quickview-open absolute inset-x-4 bottom-4 z-20 inline-flex items-center justify-center gap-1.5 rounded-full border border-gold/50 bg-cream/95 px-4 py-2.5 text-xs font-semibold text-grape shadow-sm hover:bg-cream">
+                <svg class="h-3.5 w-3.5" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="2.5"/></svg>
+                Xem nhanh
+              </button>
+            </div>
+            <div class="flex flex-1 flex-col p-5 sm:p-6">
+              <h3 class="font-display text-xl font-semibold leading-tight text-grape">Nước nho ngâm đường phèn</h3>
+              <p class="mt-1.5 text-xs italic leading-snug text-gold-600">Số lượng giới hạn – Vị ngon nguyên bản</p>
+              <p class="mt-3 flex-1 text-sm leading-relaxed text-ink/70">Giải khát, thanh nhiệt. Giàu vitamin C, A, E và chất chống oxy hoá tự nhiên, hỗ trợ tiêu hoá và tuần hoàn.</p>
+              <div class="mt-4 flex items-end justify-between gap-3 border-t border-gold/25 pt-4 sm:mt-5 sm:pt-5">
+                <div>
+                  <p class="text-[11px] uppercase tracking-[0.15em] text-forest/60">Giá</p>
+                  <p data-price class="font-display text-xl font-semibold text-grape">59.000đ</p>
+                  <p class="mt-0.5 text-[11px] leading-snug text-forest/60">1 lọ · 300ml</p>
+                </div>
+               <a href="#order-modal"
+                  data-order-trigger data-order-index="3"
+                  class="btn-primary btn-shine group shrink-0 rounded-full bg-grape px-5 py-2.5 text-sm font-semibold text-cream hover:bg-grape-800">
+                 Đặt mua
+                 <svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+              </div>
+            </div>
+          </article>
+
+           <article class="product-card reveal animate-fade-up card-lift card-tilt flex flex-col overflow-visible radius-organic-a" data-category="banh" style="animation-delay: 0.25s;">
+            <!-- Khung viền trang trí dây leo & chùm nho (Variant B - banh trung thu) -->
+            <div class="card-vine-frame" aria-hidden="true">
+              <!-- Dây leo & chùm nho lớn góc trên phải (Variant B - banh trung thu) -->
+              <svg class="vine-corner-topright" viewBox="0 0 138 138" fill="none">
+                <defs>
+                  <radialGradient id="berry-grad-vb6" cx="35%" cy="30%" r="70%">
+                    <stop offset="0%" stop-color="#462544"/>
+                    <stop offset="35%" stop-color="#2D1F2F"/>
+                    <stop offset="75%" stop-color="#1E1A22"/>
+                    <stop offset="100%" stop-color="#141018"/>
+                  </radialGradient>
+                  <linearGradient id="leaf-grad-vb6" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#7A9A4C"/>
+                    <stop offset="50%" stop-color="#5F7F3A"/>
+                    <stop offset="100%" stop-color="#415C2B"/>
+                  </linearGradient>
+                </defs>
+                <!-- Thân dây uốn sâu hơn với đường cong kép thanh nhã -->
+                <path d="M18,17 C48,15 78,13 98,17 C116,21 127,34 129,54 C131,74 128,96 126,118" stroke="#4E6B32" stroke-width="2.6" stroke-linecap="round"/>
+                <path d="M104,22 C108,30 106,38 103,44" stroke="#545C33" stroke-width="2.2" stroke-linecap="round"/>
+                <!-- 2 nhánh tua cuốn uốn dài ra ngoài mép -->
+                <path d="M82,13 C80,4 92,1 95,7 C98,12 92,16 88,14" stroke="#4E6B32" stroke-width="1.3" stroke-linecap="round"/>
+                <path d="M129,62 C137,67 139,78 133,82 C127,85 123,80 127,76" stroke="#4E6B32" stroke-width="1.3" stroke-linecap="round"/>
+                <!-- Lá 1 mép trên -->
+                <g class="vine-leaf-sway" style="transform-origin: 58px 15px;">
+                  <path d="M58,15 C52,9 43,8 39,14 C35,20 40,26 46,26 C41,31 43,38 49,37 C56,36 58,30 60,25 C63,30 70,29 72,24 C73,18 67,12 61,13 Z" fill="url(#leaf-grad-vb6)" stroke="#415C2B" stroke-width="0.7"/>
+                  <path d="M58,15 Q51,22 46,26 M58,15 Q54,27 51,34 M58,15 Q63,22 67,24" stroke="#364D23" stroke-width="0.7" fill="none"/>
+                </g>
+                <!-- Lá 2 góc bo: xòe 5 thùy rộng rủ xuống -->
+                <g class="vine-leaf-sway-alt" style="transform-origin: 104px 19px;">
+                  <path d="M104,19 C100,10 88,11 84,18 C80,24 85,32 91,31 C86,37 91,45 97,44 C104,43 106,36 108,29 C114,35 122,33 123,26 C124,19 116,13 109,15 Z" fill="url(#leaf-grad-vb6)" stroke="#415C2B" stroke-width="0.8"/>
+                  <path d="M104,19 Q96,25 91,31 M104,19 Q100,31 98,42 M104,19 Q111,25 117,26" stroke="#364D23" stroke-width="0.8" fill="none"/>
+                </g>
+                <!-- Lá 3 bên sườn -->
+                <g class="vine-leaf-sway" style="transform-origin: 128px 56px;">
+                  <path d="M128,56 C131,50 138,52 138,58 C138,64 132,67 127,66 C130,71 126,77 121,76 C116,74 116,68 119,63 C114,60 116,54 121,54 C125,54 127,58 128,56 Z" fill="url(#leaf-grad-vb6)" stroke="#415C2B" stroke-width="0.6"/>
+                </g>
+                <!-- Chùm nho lớn nghiêng nhẹ 5 độ sang phải tạo nét duyên dáng -->
+                <g class="grape-cluster-swing" style="transform-origin: 103px 44px; transform: rotate(5deg);">
+                  <path d="M103,44 L102,52" stroke="#545C33" stroke-width="2" stroke-linecap="round"/>
+                  <circle cx="95" cy="54" r="5.2" fill="#1A151E"/>
+                  <circle cx="108" cy="56" r="5.4" fill="#1A151E"/>
+                  <circle cx="104" cy="66" r="5.4" fill="#1A151E"/>
+                  <!-- Hàng 1 -->
+                  <circle cx="91" cy="55" r="5.4" fill="url(#berry-grad-vb6)"/>
+                  <ellipse cx="89.5" cy="53.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 89.5 53.5)"/>
+                  <circle cx="100" cy="54" r="5.6" fill="url(#berry-grad-vb6)"/>
+                  <ellipse cx="98.5" cy="52.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 98.5 52.5)"/>
+                  <circle cx="110" cy="56" r="5.5" fill="url(#berry-grad-vb6)"/>
+                  <ellipse cx="108.5" cy="54.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 108.5 54.5)"/>
+                  <circle cx="119" cy="60" r="5.0" fill="url(#berry-grad-vb6)"/>
+                  <ellipse cx="117.5" cy="58.5" rx="1.5" ry="0.9" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 117.5 58.5)"/>
+                  <!-- Hàng 2 -->
+                  <circle cx="89" cy="64" r="5.4" fill="url(#berry-grad-vb6)"/>
+                  <ellipse cx="87.5" cy="62.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 87.5 62.5)"/>
+                  <circle cx="98" cy="64" r="5.8" fill="url(#berry-grad-vb6)"/>
+                  <ellipse cx="96.5" cy="62.5" rx="1.7" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 96.5 62.5)"/>
+                  <circle cx="108" cy="65" r="5.8" fill="url(#berry-grad-vb6)"/>
+                  <ellipse cx="106.5" cy="63.5" rx="1.7" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 106.5 63.5)"/>
+                  <circle cx="117" cy="68" r="5.2" fill="url(#berry-grad-vb6)"/>
+                  <ellipse cx="115.5" cy="66.5" rx="1.5" ry="0.9" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 115.5 66.5)"/>
+                  <!-- Hàng 3 -->
+                  <circle cx="94" cy="74" r="5.6" fill="url(#berry-grad-vb6)"/>
+                  <ellipse cx="92.5" cy="72.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 92.5 72.5)"/>
+                  <circle cx="104" cy="74" r="5.8" fill="url(#berry-grad-vb6)"/>
+                  <ellipse cx="102.5" cy="72.5" rx="1.7" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 102.5 72.5)"/>
+                  <circle cx="113" cy="76" r="5.4" fill="url(#berry-grad-vb6)"/>
+                  <ellipse cx="111.5" cy="74.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 111.5 74.5)"/>
+                  <!-- Hàng 4 -->
+                  <circle cx="100" cy="83" r="5.4" fill="url(#berry-grad-vb6)"/>
+                  <ellipse cx="98.5" cy="81.5" rx="1.6" ry="1.0" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 98.5 81.5)"/>
+                  <circle cx="109" cy="84" r="5.2" fill="url(#berry-grad-vb6)"/>
+                  <ellipse cx="107.5" cy="82.5" rx="1.5" ry="0.9" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 107.5 82.5)"/>
+                  <!-- Hàng 5 -->
+                  <circle cx="105" cy="93" r="4.2" fill="url(#berry-grad-vb6)"/>
+                  <ellipse cx="103.8" cy="91.8" rx="1.2" ry="0.8" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 103.8 91.8)"/>
+                </g>
+              </svg>
+
+              <!-- Dây leo & chùm nho nhỏ góc dưới trái (Variant B - banh trung thu) -->
+              <svg class="vine-corner-bottomleft" viewBox="0 0 108 108" fill="none">
+                <defs>
+                  <radialGradient id="berry-grad-vb62" cx="35%" cy="30%" r="70%">
+                    <stop offset="0%" stop-color="#462544"/>
+                    <stop offset="35%" stop-color="#2D1F2F"/>
+                    <stop offset="75%" stop-color="#1E1A22"/>
+                    <stop offset="100%" stop-color="#141018"/>
+                  </radialGradient>
+                  <linearGradient id="leaf-grad-vb62" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#7A9A4C"/>
+                    <stop offset="50%" stop-color="#5F7F3A"/>
+                    <stop offset="100%" stop-color="#415C2B"/>
+                  </linearGradient>
+                </defs>
+                <path d="M10,48 C10,66 14,80 24,90 C34,97 52,99 76,97" stroke="#4E6B32" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="M10,48 C6,41 12,36 15,40 C18,44 13,48 10,47" stroke="#4E6B32" stroke-width="1.2" stroke-linecap="round"/>
+                <g class="vine-leaf-sway" style="transform-origin: 15px 72px;">
+                  <path d="M15,72 C10,66 2,68 1,74 C0,80 6,85 11,83 C8,88 12,94 18,92 C23,90 24,84 22,79 C26,82 32,79 32,73 C32,68 25,66 20,69 Z" fill="url(#leaf-grad-vb62)" stroke="#415C2B" stroke-width="0.6"/>
+                </g>
+                <g class="vine-leaf-sway-alt" style="transform-origin: 48px 97px;">
+                  <path d="M48,97 C46,91 40,89 36,93 C32,97 34,103 38,105 C36,108 40,112 45,110 C50,108 50,103 48,99 Z" fill="url(#leaf-grad-vb62)" stroke="#415C2B" stroke-width="0.5"/>
+                </g>
+                <g class="grape-cluster-swing" style="transform-origin: 23px 72px;">
+                  <path d="M23,72 L23,77" stroke="#545C33" stroke-width="1.8" stroke-linecap="round"/>
+                  <circle cx="17" cy="79" r="4.2" fill="url(#berry-grad-vb62)"/>
+                  <ellipse cx="15.8" cy="77.8" rx="1.2" ry="0.8" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 15.8 77.8)"/>
+                  <circle cx="24" cy="78" r="4.4" fill="url(#berry-grad-vb62)"/>
+                  <ellipse cx="22.8" cy="76.8" rx="1.3" ry="0.8" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 22.8 76.8)"/>
+                  <circle cx="31" cy="80" r="4.0" fill="url(#berry-grad-vb62)"/>
+                  <ellipse cx="29.8" cy="78.8" rx="1.2" ry="0.7" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 29.8 78.8)"/>
+                  <circle cx="20" cy="86" r="4.4" fill="url(#berry-grad-vb62)"/>
+                  <ellipse cx="18.8" cy="84.8" rx="1.3" ry="0.8" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 18.8 84.8)"/>
+                  <circle cx="27" cy="86" r="4.4" fill="url(#berry-grad-vb62)"/>
+                  <ellipse cx="25.8" cy="84.8" rx="1.3" ry="0.8" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 25.8 84.8)"/>
+                  <circle cx="22" cy="94" r="4.2" fill="url(#berry-grad-vb62)"/>
+                  <ellipse cx="20.8" cy="92.8" rx="1.2" ry="0.8" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 20.8 92.8)"/>
+                  <circle cx="28" cy="94" r="4.0" fill="url(#berry-grad-vb62)"/>
+                  <ellipse cx="26.8" cy="92.8" rx="1.2" ry="0.7" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 26.8 92.8)"/>
+                  <circle cx="25" cy="101" r="3.4" fill="url(#berry-grad-vb62)"/>
+                  <ellipse cx="24" cy="100" rx="1.0" ry="0.6" fill="#FFFFFF" opacity="0.35" transform="rotate(-30 24 100)"/>
+                </g>
+              </svg>
+            </div>
+            <div class="card-media relative aspect-[16/10] overflow-hidden border-b border-gold/30 sm:aspect-[4/3] bg-gradient-to-br from-gold-100 via-cream to-grape-50 flex items-center justify-center p-6">
+              <div class="relative z-10 flex h-full flex-col items-center justify-center text-center">
+                <div class="mb-2 flex h-14 w-14 items-center justify-center rounded-full border border-gold/60 bg-cream/90 shadow-sm text-gold-700">
+                  <svg class="h-8 w-8 text-gold-700" aria-hidden="true"><use href="#ico-vine"></use></svg>
+                </div>
+                <span class="font-display text-base font-semibold text-grape">Bánh Trung Thu Siro Nho</span>
+                <span class="mt-1 text-[11px] font-medium uppercase tracking-[0.16em] text-gold-700">Hộp quà đặc sản theo mùa</span>
+                <span class="mt-2 inline-flex items-center gap-1.5 rounded-full border border-gold/40 bg-cream/80 px-2.5 py-0.5 text-[10px] text-forest">
+                  <span class="h-1.5 w-1.5 rounded-full bg-forest"></span> Bánh nướng thủ công
+                </span>
+              </div>
+              <!-- Nút "Xem nhanh" mở cửa sổ chi tiết (C4); bấm ảnh để phóng to (C5) -->
+              <button type="button" data-quickview
+                      class="quickview-open absolute inset-x-4 bottom-4 z-20 inline-flex items-center justify-center gap-1.5 rounded-full border border-gold/50 bg-cream/95 px-4 py-2.5 text-xs font-semibold text-grape shadow-sm hover:bg-cream">
+                <svg class="h-3.5 w-3.5" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="2.5"/></svg>
+                Xem nhanh
+              </button>
+            </div>
+            <div class="flex flex-1 flex-col p-5 sm:p-6">
+              <h3 class="font-display text-xl font-semibold leading-tight text-grape">Bánh trung thu nhân siro nho rừng</h3>
+              <p class="mt-1.5 text-xs italic leading-snug text-gold-600">Trung thu nồng vị nho rừng</p>
+              <p class="mt-3 flex-1 text-sm leading-relaxed text-ink/70">Nhân siro nho rừng chua thanh, giảm vị ngọt ngấy của nhân đậu. Bánh mềm thơm, hợp để bày biện và tặng người thân dịp Trung Thu.</p>
+              <div class="mt-4 flex items-end justify-between gap-3 border-t border-gold/25 pt-4 sm:mt-5 sm:pt-5">
+                <div>
+                  <p class="text-[11px] uppercase tracking-[0.15em] text-forest/60">Giá</p>
+                  <p data-price class="font-display text-xl font-semibold text-grape">7.000đ/cái</p>
+                  <p class="mt-0.5 text-[11px] leading-snug text-forest/60">Lố 30 cái: 210.000đ</p>
+                </div>
+               <a href="#order-modal"
+                  data-order-trigger data-order-index="4"
+                  class="btn-primary btn-shine group shrink-0 rounded-full bg-grape px-5 py-2.5 text-sm font-semibold text-cream hover:bg-grape-800">
+                 Đặt mua
+                 <svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+  <!-- 5a) THÔNG TIN CHI TIẾT SẢN PHẨM
+               Công dụng / Cách dùng / Thành phần / Bảo quản cho từng sản phẩm.
+               Nội dung lấy từ info.md.
+
+               LƯU Ý QUAN TRỌNG: info.md có ghi ngày sản xuất và hạn sử dụng
+               (NSX / HSD). Đây là ngày của LÔ HÀNG cụ thể, đưa lên web sẽ
+               không đúng khi bán lô mới. Vì vậy mình KHÔNG đưa 2 ngày này lên.
+               Nếu bạn muốn có, hãy tự thêm vào mỗi mục "Thông tin" bên dưới.
+               ============================================================ -->
+          <div class="reveal mx-auto mt-10 max-w-4xl sm:mt-16">
+            <h3 class="font-display text-center text-2xl font-semibold text-grape sm:text-3xl">
+              Thông tin chi tiết từng sản phẩm
+            </h3>
+            <p class="mt-2 text-center text-sm text-ink/60">Bấm vào tên sản phẩm để xem đầy đủ</p>
+
+            <div class="mt-6 divide-y divide-gold/25 rounded-4xl border border-gold/40 bg-cream-50 px-3 sm:mt-8 sm:px-6 stagger-children" style="--stagger: 40ms;">
+
+              <!-- 1. Siro nho rừng -->
+              <details class="faq-item group animate-fade-up" name="chi-tiet" style="animation-delay: 0.35s;">
+                <summary class="flex cursor-pointer items-center justify-between gap-4 py-4 sm:py-5">
+                  <span class="font-body text-base font-semibold text-grape">Siro nho rừng <span class="text-xs font-normal text-forest/60">(300ml)</span></span>
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </summary>
+                <div class="pb-5 text-sm leading-relaxed text-ink/70 sm:pb-6">
+                  <p class="mb-4 text-xs italic text-gold-600">Số lượng giới hạn – Vị ngon nguyên bản</p>
+                  <p class="font-semibold text-grape">Công dụng</p>
+                  <ul class="mt-1.5 list-inside list-disc space-y-1">
+                    <li>Chống lão hóa mạnh mẽ, làm đẹp da nhờ hàm lượng chất chống oxy hóa tự nhiên cao.</li>
+                    <li>Hỗ trợ tim mạch, giảm cholesterol xấu, bảo vệ mạch máu.</li>
+                    <li>Kích thích tiêu hóa, thanh nhiệt, giải độc cơ thể và giúp ăn ngon miệng.</li>
+                  </ul>
+                  <p class="mt-5 font-semibold text-grape">Cách dùng</p>
+                  <p class="mt-1.5">Pha nước giải khát: hòa 2–3 thìa siro (30ml) với 120ml nước lọc, hoặc rưới trực tiếp lên sữa chua, kem tươi.</p>
+                  <p class="mt-5 font-semibold text-grape">Thành phần</p>
+                  <p class="mt-1.5">Quả nho rừng già thu hoạch thủ công chín mọng (80%), đường phèn kết tinh tinh khiết. Tuyệt đối không chất bảo quản, không phẩm màu nhân tạo.</p>
+                  <p class="mt-5 font-semibold text-grape">Giá</p>
+                  <p class="mt-1.5">69.000đ - 1 lọ · 300ml</p>
+                  <p class="mt-5 font-semibold text-grape">Bảo quản</p>
+                  <p class="mt-1.5">Để nơi khô ráo, thoáng mát, tránh ánh nắng trực tiếp. Khuyên dùng bảo quản trong ngăn mát tủ lạnh sau khi mở nắp. Dùng muỗng sạch và khô ráo, đậy kín nắp ngay sau khi dùng.</p>
+                  <!-- TODO: nếu muốn ghi NSX/HSD thì thêm ở đây -->
+                </div>
+              </details>
+
+              <!-- 2. Giấm nho tự nhiên -->
+              <details class="faq-item group animate-fade-up" name="chi-tiet" style="animation-delay: 0.35s;">
+                <summary class="flex cursor-pointer items-center justify-between gap-4 py-4 sm:py-5">
+                  <span class="font-body text-base font-semibold text-grape">Giấm nho tự nhiên <span class="text-xs font-normal text-forest/60">(300ml)</span></span>
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </summary>
+                <div class="pb-5 text-sm leading-relaxed text-ink/70 sm:pb-6">
+                  <p class="mb-4 text-xs italic text-gold-600">Bí quyết nâng tầm món ngon thượng hạng</p>
+                  <p class="font-semibold text-grape">Công dụng</p>
+                  <ul class="mt-1.5 list-inside list-disc space-y-1">
+                    <li>Hỗ trợ tiêu hóa, giảm đầy hơi, kích thích ngon miệng.</li>
+                    <li>Hỗ trợ kiểm soát đường huyết, hạ cholesterol, tốt cho tim mạch.</li>
+                    <li>Hỗ trợ đốt cháy mỡ thừa, thanh lọc cơ thể và giữ dáng.</li>
+                    <li>Dùng làm nước sốt salad, gia vị tẩm ướp giúp thịt mềm, thơm ngon.</li>
+                  </ul>
+                  <p class="mt-5 font-semibold text-grape">Cách dùng</p>
+                  <p class="mt-1.5">Pha uống: 1–2 muỗng canh (15–30ml) với 150ml nước ấm, có thể thêm mật ong. Uống sau bữa ăn.<br>Nấu ăn: trộn salad, làm nước chấm, sốt áp chảo hoặc tẩm ướp thực phẩm.</p>
+                  <p class="mt-5 font-semibold text-grape">Thành phần</p>
+                  <p class="mt-1.5">Quả nho rừng chín sinh thái, đường phèn/đường mía, men giấm tự nhiên, nước sạch tinh khiết. Không chất bảo quản.</p>
+                  <p class="mt-5 font-semibold text-grape">Giá</p>
+                  <p class="mt-1.5">50.000đ - 1 lọ · 300ml</p>
+                  <p class="mt-5 font-semibold text-grape">Bảo quản</p>
+                  <p class="mt-1.5">Để nơi khô ráo, thoáng mát, tránh ánh nắng trực tiếp. Đậy kín nắp sau khi mở. Có thể bảo quản trong ngăn mát tủ lạnh để duy trì chất lượng tốt nhất.</p>
+                </div>
+              </details>
+
+              <!-- 3. Nho ngâm mật ong -->
+              <details class="faq-item group animate-fade-up" name="chi-tiet" style="animation-delay: 0.35s;">
+                <summary class="flex cursor-pointer items-center justify-between gap-4 py-4 sm:py-5">
+                  <span class="font-body text-base font-semibold text-grape">Nho ngâm mật ong <span class="text-xs font-normal text-forest/60">(300ml)</span></span>
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </summary>
+                <div class="pb-5 text-sm leading-relaxed text-ink/70 sm:pb-6">
+                  <p class="mb-4 text-xs italic text-gold-600">Nho rừng hoà mật – Ngọt lành từ thiên nhiên</p>
+                  <p class="font-semibold text-grape">Công dụng</p>
+                  <ul class="mt-1.5 list-inside list-disc space-y-1">
+                    <li>Tăng cường đề kháng: bổ sung vitamin và các chất chống oxy hóa.</li>
+                    <li>Đẹp da: hỗ trợ bảo vệ da, làm chậm quá trình lão hóa.</li>
+                    <li>Hỗ trợ tiêu hóa.</li>
+                    <li>Bổ sung năng lượng: cung cấp đường tự nhiên cho cơ thể.</li>
+                  </ul>
+                  <p class="mt-5 font-semibold text-grape">Cách dùng</p>
+                  <p class="mt-1.5">Pha nước uống: dùng 1–2 thìa cà phê nước cốt pha với nước ấm. Ăn trực tiếp: có thể ăn kèm quả nho đã ngâm.</p>
+                  <p class="mt-3 rounded-xl border border-gold/40 bg-cream-100/50 p-3 text-xs text-ink/65">
+                    <strong class="text-grape">Lưu ý:</strong> sản phẩm chứa nhiều đường, dùng vừa phải; người bị tiểu đường nên thận trọng.
+                  </p>
+                  <p class="mt-5 font-semibold text-grape">Thành phần</p>
+                  <p class="mt-1.5">Quả nho rừng, mật ong.</p>
+                  <p class="mt-5 font-semibold text-grape">Giá</p>
+                  <p class="mt-1.5">99.000đ - 1 lọ · 300ml</p>
+                  <p class="mt-5 font-semibold text-grape">Bảo quản</p>
+                  <p class="mt-1.5">Bảo quản trong ngăn mát tủ lạnh, tránh ánh nắng trực tiếp và nơi có nhiệt độ cao. Dùng thìa sạch, khô khi lấy sản phẩm; không để nước lọt vào lọ. Nếu có mùi lạ, nổi mốc hoặc sủi bọt bất thường thì không sử dụng.</p>
+                </div>
+              </details>
+
+              <!-- 4. Nước nho ngâm đường phèn -->
+              <details class="faq-item group animate-fade-up" name="chi-tiet" style="animation-delay: 0.35s;">
+                <summary class="flex cursor-pointer items-center justify-between gap-4 py-4 sm:py-5">
+                  <span class="font-body text-base font-semibold text-grape">Nước nho ngâm đường phèn <span class="text-xs font-normal text-forest/60">(300ml)</span></span>
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </summary>
+                <div class="pb-5 text-sm leading-relaxed text-ink/70 sm:pb-6">
+                  <p class="mb-4 text-xs italic text-gold-600">Số lượng giới hạn – Vị ngon nguyên bản</p>
+                  <p class="font-semibold text-grape">Công dụng</p>
+                  <ul class="mt-1.5 list-inside list-disc space-y-1">
+                    <li>Giải khát, thanh nhiệt: bổ sung năng lượng và giúp cơ thể sảng khoái.</li>
+                    <li>Tăng cường sức đề kháng: giàu vitamin C, A, E và các chất chống oxy hóa tự nhiên.</li>
+                    <li>Hỗ trợ tiêu hóa và tuần hoàn: kích thích tiêu hóa tốt hơn, hỗ trợ cải thiện tuần hoàn máu.</li>
+                    <li>Hỗ trợ bảo vệ gan, thận và làm chậm quá trình lão hóa.</li>
+                  </ul>
+                  <p class="mt-5 font-semibold text-grape">Cách dùng</p>
+                  <p class="mt-1.5">Pha nước uống giải khát: lấy khoảng 2–3 muỗng lớn nước cốt nho rừng, pha cùng nước lọc và thêm đá viên tùy khẩu vị. Có thể dùng nguyên chất hoặc pha loãng.</p>
+                  <p class="mt-5 font-semibold text-grape">Thành phần</p>
+                  <p class="mt-1.5">Nho rừng tươi (nho tía/nho dại): 60–70%. Đường phèn: 30–40%.</p>
+                  <p class="mt-5 font-semibold text-grape">Giá</p>
+                  <p class="mt-1.5">59.000đ - 1 lọ · 300ml</p>
+                  <p class="mt-5 font-semibold text-grape">Bảo quản</p>
+                  <p class="mt-1.5">Để nơi khô ráo, thoáng mát, tránh ánh nắng trực tiếp. Nên bảo quản trong ngăn mát tủ lạnh (sau khi mở nắp hoặc sau khi chắt nước cốt) để giữ độ ngon và tránh lên men tiếp tục.</p>
+                </div>
+              </details>
+
+              <!-- 6. Bánh trung thu nhân siro nho rừng -->
+              <details class="faq-item group animate-fade-up" name="chi-tiet" style="animation-delay: 0.4s;">
+                <summary class="flex cursor-pointer items-center justify-between gap-4 py-4 sm:py-5">
+                  <span class="font-body text-base font-semibold text-grape">Bánh trung thu nhân siro nho rừng <span class="text-xs font-normal text-forest/60">(7.000đ/cái)</span></span>
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </summary>
+                <div class="pb-5 text-sm leading-relaxed text-ink/70 sm:pb-6">
+                  <p class="mb-4 text-xs italic text-gold-600">Trung thu nồng vị nho rừng</p>
+                  <p class="font-semibold text-grape">Đặc biệt của sản phẩm</p>
+                  <ul class="mt-1.5 list-inside list-disc space-y-1">
+                    <li>Nhân siro nho rừng Đình Lập chua thanh, giảm vị ngọt ngấy của nhân đậu.</li>
+                    <li>Mỗi chiếc 7.000đ, lố 30 chiếc giá 210.000đ - thuận tiện để chia cho người thân.</li>
+                    <li>Hợp bày biện mâm cúng, tặng người thân dịp Trung Thu.</li>
+                  </ul>
+                  <p class="mt-5 font-semibold text-grape">Cách dùng</p>
+                  <p class="mt-1.5">Ăn trực tiếp hoặc hâm nóng nhẹ bằng hơi nước cho thơm hơn.</p>
+                  <p class="mt-5 font-semibold text-grape">Thành phần</p>
+                  <p class="mt-1.5">Bột mì, đường, mỡ, nhân đậu xanh và siro nho rừng Đình Lập.</p>
+                  <p class="mt-5 font-semibold text-grape">Giá</p>
+                  <p class="mt-1.5">7.000đ/cái - lố 30 cái: 210.000đ</p>
+                  <p class="mt-5 font-semibold text-grape">Bảo quản</p>
+                  <p class="mt-1.5">Để nơi khô ráo, thoáng mát, tránh ánh nắng trực tiếp và nơi có nhiệt độ cao.</p>
+                </div>
+              </details>
+
+            </div>
+          </div>
+
+        <!-- Ghi chú bảng giá -->
+           <p class="reveal animate-fade-up mt-8 text-center text-sm text-ink/55 sm:mt-10" style="animation-delay: 0.3s;">
+          * Giá tính theo lọ (riêng bánh trung thu tính theo cái). Phí vận chuyển được báo lại khi bạn gửi đơn đặt hàng.
+        </p>
+      </div>
+    </section>
+
+<!-- ============================================================
+         9) FORM LIÊN HỆ / ĐẶT HÀNG
+         ============================================================ -->
+    <section id="lien-he" class="relative overflow-hidden bg-cream-200/40 py-12 sm:py-24 lg:py-30">
+      <svg class="decor-leaf hidden h-56 w-56 -right-10 top-6 lg:block" aria-hidden="true"><use href="#ico-vine"></use></svg>
+      <svg class="decor-leaf hidden h-40 w-40 left-4 bottom-8 lg:block" aria-hidden="true"><use href="#ico-grape"></use></svg>
+
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-8 sm:gap-12 lg:grid-cols-5 lg:gap-16">
+
+          <!-- Cột trái: thông tin liên hệ -->
+          <div class="lg:col-span-2">
+            <p class="eyebrow reveal animate-fade-right text-gold-600">Liên hệ</p>
+            <h2 class="font-display reveal animate-fade-up mt-4 text-3xl font-semibold leading-tight text-grape sm:text-4xl" style="animation-delay: 0.1s;">
+              Đặt hàng sản phẩm nho rừng
+            </h2>
+            <div class="title-underline reveal animate-fade-up mx-auto" style="animation-delay: 0.2s; width: 24px;"></div>
+            <p class="reveal animate-fade-up mt-6 text-base leading-relaxed text-ink/75" style="animation-delay: 0.3s;">
+              Điền thông tin bên cạnh, chúng tôi sẽ gửi báo giá và xác nhận đơn hàng
+              của bạn trong thời gian sớm nhất.
+            </p>
+
+            <!-- Thông tin liên hệ nhanh -->
+            <ul class="reveal stagger-children mt-6 space-y-3 sm:mt-8 sm:space-y-4" style="animation-delay: 0.2s;" data-animate-stagger="0.1">
+            <li class="flex items-center justify-between gap-3 rounded-2xl border border-gold/40 bg-cream-50 p-4 animate-fade-right" style="animation-delay: 0.08s;">
+              <div class="flex items-start gap-4">
+                <span class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-grape/10 text-grape animate-pulse-soft" style="animation-delay: 0.1s;">
+                  <svg class="h-5 w-5" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+                </span>
+                <span class="text-sm">
+                  <span class="block text-xs uppercase tracking-[0.15em] text-forest/60">Hotline / Zalo</span>
+                  <a href="tel:0378499946" class="font-semibold text-grape hover:text-gold-600 transition-colors duration-250 select-all">0378 499 946</a>
+                </span>
+              </div>
+              <button type="button" class="btn-copy inline-flex items-center gap-1.5 rounded-full border border-gold/50 bg-cream px-3 py-1 text-xs font-medium text-grape hover:bg-grape hover:text-cream transition-colors" data-copy-phone>
+                <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                <span class="copy-label">Sao chép</span>
+              </button>
+            </li>
+<li class="flex items-start gap-4 rounded-2xl border border-gold/40 bg-cream-50 p-4 animate-fade-right" style="animation-delay: 0.1s;">
+              <span class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-grape/10 text-grape animate-pulse-soft" style="animation-delay: 0.15s;">
+                <svg class="h-5 w-5" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+              </span>
+              <span class="text-sm">
+                <span class="block text-xs uppercase tracking-[0.15em] text-forest/60">Email</span>
+                <a href="mailto:ericquynhh@gmail.com" class="font-semibold text-grape hover:text-gold-600 transition-colors duration-250">ericquynhh@gmail.com</a>
+              </span>
+            </li>
+            <li class="flex items-start gap-4 rounded-2xl border border-gold/40 bg-cream-50 p-4 animate-fade-right" style="animation-delay: 0.2s;">
+              <span class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-grape/10 text-grape animate-pulse-soft" style="animation-delay: 0.25s;">
+                <svg class="h-5 w-5" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              </span>
+              <span class="text-sm">
+                <span class="block text-xs uppercase tracking-[0.15em] text-forest/60">Nguồn gốc</span>
+                <span class="font-semibold text-grape">Nho rừng Đình Lập - Lạng Sơn</span>
+              </span>
+            </li>
+            </ul>
+          </div>
+
+          <!-- Cột phải: form -->
+          <div class="lg:col-span-3">
+            <div class="reveal animate-fade-left rounded-4xl border border-gold/40 bg-cream-50 p-5 shadow-[0_30px_60px_-40px_rgba(74,25,66,0.55)] sm:p-9" style="animation-delay: 0.2s;">
+
+              <form id="contact-form" novalidate>
+                <div class="grid gap-4 sm:grid-cols-2 sm:gap-5">
+                  <!-- Họ tên -->
+                  <div class="sm:col-span-1 form-floating-group">
+                    <input
+                      type="text" id="ho-ten" name="ho-ten" required
+                      placeholder=" "
+                      class="field w-full rounded-xl border border-gold/45 bg-cream px-4 pt-6 pb-2 text-sm text-ink placeholder:text-ink/35 focus:outline-none" />
+                    <label for="ho-ten" class="floating-label">
+                      Họ và tên <span class="text-grape/60" aria-hidden="true">*</span>
+                    </label>
+                    <p id="ho-ten-error" class="field-error mt-2 text-xs font-medium text-[#b23a48]" role="alert"></p>
+                  </div>
+
+                  <!-- Số điện thoại -->
+                  <div class="sm:col-span-1 form-floating-group">
+                    <input
+                      type="tel" id="so-dien-thoai" name="so-dien-thoai" required
+                      inputmode="tel" autocomplete="tel"
+                      placeholder=" "
+                      class="field w-full rounded-xl border border-gold/45 bg-cream px-4 pt-6 pb-2 text-sm text-ink placeholder:text-ink/35 focus:outline-none" />
+                    <label for="so-dien-thoai" class="floating-label">
+                      Số điện thoại <span class="text-grape/60" aria-hidden="true">*</span>
+                    </label>
+                    <p id="so-dien-thoai-error" class="field-error mt-2 text-xs font-medium text-[#b23a48]" role="alert"></p>
+                  </div>
+
+                  <!-- Sản phẩm quan tâm -->
+                  <div class="sm:col-span-2">
+                    <label for="san-pham-quan-tam" class="mb-2 block text-sm font-medium text-grape">
+                      Sản phẩm quan tâm <span class="text-grape/60" aria-hidden="true">*</span>
+                    </label>
+                    <select
+                      id="san-pham-quan-tam" name="san-pham-quan-tam" required
+                      class="field w-full rounded-xl border border-gold/45 bg-cream px-4 py-3 text-sm text-ink focus:outline-none">
+                      <option value="">-- Chọn sản phẩm --</option>
+                      <option value="Siro nho rừng">Siro nho rừng - 69.000đ/lọ</option>
+                      <option value="Giấm nho tự nhiên">Giấm nho tự nhiên - 50.000đ/lọ</option>
+                      <option value="Nho ngâm mật ong">Nho ngâm mật ong - 99.000đ/lọ</option>
+                      <option value="Nước nho ngâm đường phèn">Nước nho ngâm đường phèn - 59.000đ/lọ</option>
+                      <option value="Bánh trung thu nhân siro nho rừng">Bánh trung thu nhân siro nho rừng - 7.000đ/cái</option>
+                      <option value="san-pham-khac">Sản phẩm khác / tư vấn thêm</option>
+                    </select>
+                    <p id="san-pham-quan-tam-error" class="field-error mt-2 text-xs font-medium text-[#b23a48]" role="alert"></p>
+                  </div>
+
+                  <!-- Lời nhắn -->
+                  <div class="sm:col-span-2 form-floating-group">
+                    <textarea
+                      id="loi-nhan" name="loi-nhan" rows="4"
+                      placeholder=" "
+                      class="field w-full resize-y rounded-xl border border-gold/45 bg-cream px-4 pt-6 pb-2 text-sm text-ink placeholder:text-ink/35 focus:outline-none"></textarea>
+                    <label for="loi-nhan" class="floating-label">
+                      Lời nhắn (số lượng, thời gian giao hàng mong muốn...)
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Nút gửi -->
+                <div class="mt-6 flex flex-col items-center gap-3.5 sm:mt-7 sm:flex-row sm:gap-4">
+                  <button
+                     type="submit"
+                     class="btn-primary btn-shine group inline-flex w-full items-center justify-center gap-2 rounded-full bg-grape px-8 py-3.5 text-sm font-semibold text-cream sm:w-auto">
+                     Gửi đơn đặt hàng
+                     <svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                   </button>
+                  <p class="text-xs leading-relaxed text-ink/55">
+                    * Đơn của bạn sẽ được gửi vào hộp thư của Nho Rừng Đình Lập. Chúng tôi sẽ
+                    liên hệ lại trong 24 giờ. Thông tin của bạn được giữ kín.
+                  </p>
+                </div>
+              </form>
+
+              <!-- Thông báo thành công (mặc định ẩn, JS thêm class .is-visible sau khi submit hợp lệ) -->
+            <div id="form-success"
+                 class="items-center gap-4 rounded-2xl border border-forest/30 bg-forest/10 p-6 animate-bounce-in">
+                <span class="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-forest text-cream">
+                  <svg class="h-6 w-6" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                </span>
+                <div>
+                  <p class="font-display text-lg font-semibold text-forest">Cảm ơn bạn!</p>
+                  <p class="mt-1 text-sm text-ink/70">
+                    Hãy kiểm tra lại ứng dụng email của bạn để gửi đơn đặt hàng. Chúng tôi sẽ
+                    liên hệ với bạn trong thời gian sớm nhất.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <!-- ============================================================
+         10) CHIA SẺ - giúp khách giới thiệu giúp mình
+         ============================================================ -->
+    <section id="chia-se" class="relative overflow-hidden bg-forest py-10 sm:py-14">
+      <svg class="decor-leaf decor-leaf--light hidden h-40 w-40 -left-8 top-6 lg:block" aria-hidden="true"><use href="#ico-grape"></use></svg>
+
+       <div class="relative mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+         <h2 class="font-display reveal animate-fade-up text-xl font-semibold text-cream sm:text-3xl">
+           Thấy sản phẩm từ nho rừng thích, chia sẻ giúp bạn nhé
+         </h2>
+         <p class="reveal animate-fade-up mt-3 text-sm text-cream/70" style="animation-delay: 0.1s;">
+           Một cú bấm là người thân cũng biết tới nho rừng của chúng tôi.
+         </p>
+
+         <div class="reveal animate-fade-up mt-6 flex flex-wrap items-center justify-center gap-2.5 sm:mt-7 sm:gap-3" style="animation-delay: 0.2s;">
+          <!-- Chia sẻ Facebook -->
+          <button type="button" data-share="facebook"
+                  class="share-btn btn-shine">
+            <svg class="h-4 w-4" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H8v3h2v7h3v-7h2.5l.5-3H13v-2c0-.6.4-1 1-1Z"/></svg>
+            Facebook
+          </button>
+
+          <!-- Chia sẻ qua Zalo -->
+          <button type="button" data-share="zalo" class="share-btn btn-shine">
+            <svg class="h-4 w-4" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 5.9 2 10.7c0 2.8 1.5 5.3 3.8 6.9-.2.8-.6 2-1.3 2.8-.3.4 0 1 .5.8 1.9-.6 3.3-1.5 4.2-2.1.9.2 1.8.3 2.8.3 5.5 0 10-3.9 10-8.7S17.5 2 12 2Zm4 10.3h-1.7l-2.5 3.7h-1.5l2.5-3.7H8.5V8.9h5.1V8h2v.9h.4Z"/></svg>
+            Zalo
+          </button>
+
+          <!-- Sao chép đường dẫn -->
+          <button type="button" data-share="copy" class="share-btn btn-shine">
+            <svg class="h-4 w-4" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+            <span data-share-copy-label>Sao chép link</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+  <!-- ============================================================
+         10b) DẢI CHỮ CHẠY NGƯỢC CHIỀU (B7)
+         Nội dung lặp 2 lần trong .marquee-track để chạy liền mạch.
+         ============================================================ -->
+    <div class="marquee-band marquee-band--reverse" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Nạp năng lượng xanh cùng Nho rừng Đình Lập.
+          <span class="marquee-dot">✦</span></span>
+        <span>Nạp năng lượng xanh cùng Nho rừng Đình Lập.
+          <span class="marquee-dot">✦</span></span>
+      </div>
+    </div>
+
+  <!-- ============================================================
+         9b) HỎI ĐÁP THƯỜNG GẶP (C2)
+         ============================================================ -->
+    <section id="hoi-dap" class="relative overflow-hidden bg-cream-50 py-12 sm:py-24 lg:py-30">
+      <svg class="decor-leaf hidden h-52 w-52 -left-10 top-10 lg:block" aria-hidden="true"><use href="#ico-grape"></use></svg>
+
+      <div class="relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="eyebrow reveal animate-fade-down text-gold-600">Giải đáp</p>
+          <h2 class="font-display reveal animate-fade-up mt-4 text-3xl font-semibold leading-tight text-grape sm:text-4xl lg:text-5xl" style="animation-delay: 0.1s;">
+            Câu hỏi thường gặp
+          </h2>
+          <div class="title-underline reveal animate-fade-up mx-auto" style="animation-delay: 0.2s; width: 24px;"></div>
+          <p class="reveal animate-fade-up mt-6 text-base leading-relaxed text-ink/70" style="animation-delay: 0.3s;">
+            Những điều khách hỏi nhiều nhất trước khi đặt hàng.
+          </p>
+        </div>
+
+        <div class="reveal animate-fade-up mt-8 divide-y divide-gold/25 rounded-4xl sm:mt-12 border border-gold/40 bg-cream-50 px-2 sm:px-5 stagger-children" style="animation-delay: 0.2s;" data-animate-stagger="0.1">
+          <!-- Câu 1 -->
+          <details class="faq-item group animate-fade-up" name="faq" open style="animation-delay: 0.1s;">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 px-3 py-4 text-left sm:px-2 sm:py-5">
+              <span class="font-body text-base font-semibold text-grape">Đổi trả được không?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-panel px-3 pb-5 text-sm leading-relaxed text-ink/70 sm:px-2">
+              Có. Bạn được đổi trả trong vòng <strong class="text-grape">7 ngày</strong> kể từ khi
+              nhận hàng. Gửi email cho Nho Rừng Đình Lập kèm ảnh sản phẩm, chúng tôi sẽ xử lý
+              ngay trong thời gian sớm nhất.
+            </div>
+          </details>
+
+          <!-- Câu 2 -->
+          <details class="faq-item group animate-fade-up" name="faq" style="animation-delay: 0.2s;">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 px-3 py-4 text-left sm:px-2 sm:py-5">
+              <span class="font-body text-base font-semibold text-grape">Đặt số lượng lớn có được ưu đãi không?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-panel px-3 pb-5 text-sm leading-relaxed text-ink/70 sm:px-2">
+              Có. Đơn số lượng lớn được ưu đãi <strong class="text-grape">7%</strong>. Bạn điền số
+              lượng cần mua ở ô «Lời nhắn», chúng tôi sẽ gửi báo giá ưu đãi chi tiết.
+            </div>
+          </details>
+        </div>
+
+         <p class="reveal animate-fade-up mt-6 text-center text-sm text-ink/60 sm:mt-8" style="animation-delay: 0.45s;">
+           Không tìm thấy câu trả lời?
+           <a href="#lien-he" class="font-semibold text-grape underline decoration-gold decoration-2 underline-offset-4 hover:text-gold-600 transition-colors duration-250">Gửi tin nhắn cho chúng tôi</a>
+         </p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         11) ĐĂNG KÝ NHẬN TIN (C11)
+         Ô này mở ứng dụng email của khách để gửi địa chỉ email về hộp thư
+         của Nho Rừng Đình Lập (không có máy chủ, không lưu trên web).
+         ============================================================ -->
+    <section id="newsletter" class="relative overflow-hidden bg-grape py-12 sm:py-20">
+      <svg class="decor-leaf decor-leaf--light hidden h-48 w-48 -left-8 top-6 lg:block" aria-hidden="true"><use href="#ico-vine"></use></svg>
+      <svg class="decor-leaf decor-leaf--light hidden h-36 w-36 -right-6 bottom-6 lg:block" aria-hidden="true"><use href="#ico-grape"></use></svg>
+
+      <div class="relative mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+         <h2 class="font-display reveal animate-fade-up text-xl font-semibold text-cream sm:text-3xl">
+           Nhận tin khi có mùa vụ nho mới
+         </h2>
+         <p class="reveal animate-fade-up mx-auto mt-3 max-w-xl text-sm leading-relaxed text-cream/75" style="animation-delay: 0.1s;">
+           Chúng tôi chỉ gửi khi có mùa vụ mới hoặc chương trình ưu đãi. Không spam.
+         </p>
+
+         <form id="newsletter-form" class="reveal animate-fade-up mx-auto mt-8 flex max-w-lg flex-col gap-3 sm:flex-row" novalidate style="animation-delay: 0.2s;">
+          <label for="newsletter-email" class="sr-only">Địa chỉ email của bạn</label>
+          <input
+            type="email" id="newsletter-email" name="email" required
+            autocomplete="email" placeholder="email của bạn"
+            class="field w-full rounded-full border border-gold/50 bg-cream/95 px-5 py-3.5 text-sm text-ink placeholder:text-ink/40 focus:outline-none" />
+          <button type="submit"
+                  class="btn-primary btn-shine shrink-0 rounded-full bg-gold px-7 py-3.5 text-sm font-semibold text-ink">
+            Đăng ký
+          </button>
+        </form>
+        <p id="newsletter-error" class="field-error mt-3 text-xs font-medium text-[#ffc9c9]" role="alert"></p>
+        <p id="newsletter-success" class="mt-3 hidden items-center justify-center gap-2 text-sm font-medium text-cream">
+          <svg class="h-4 w-4 text-gold-300" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          Đã đăng ký. Cảm ơn bạn!
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       11) FOOTER
+       ============================================================ -->
+  <footer id="footer" class="relative overflow-hidden bg-forest py-12 sm:py-20">
+    <div class="vine-marquee absolute inset-x-0 top-0 h-3" aria-hidden="true"></div>
+    <svg class="decor-leaf decor-leaf--light hidden h-64 w-64 -right-10 top-6 lg:block" aria-hidden="true"><use href="#ico-vine"></use></svg>
+
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-8 sm:gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+
+        <!-- Cột 1: logo + mô tả -->
+        <div class="lg:col-span-1 animate-fade-up" style="animation-delay: 0.05s;">
+          <div class="flex items-center gap-3">
+            <img src="assets/images/logo-180.png" alt="Logo Nho Rừng Đình Lập"
+                 width="56" height="56" loading="lazy"
+                 class="h-14 w-14 rounded-full border border-gold/50 bg-cream object-cover" />
+            <div class="leading-tight">
+              <p class="font-display text-lg font-semibold text-cream">Nho Rừng Đình Lập</p>
+              <p class="text-[10px] uppercase tracking-[0.2em] text-gold-300">An toàn từ thiên nhiên</p>
+            </div>
+          </div>
+          <p class="mt-4 text-sm leading-relaxed text-cream/70 sm:mt-5">
+            Siro, giấm, nho ngâm mật ong, nước nho ngâm đường phèn và bánh trung thu - tất cả chế biến
+            từ nho rừng thu hái thủ công tại Đình Lập, Lạng Sơn.
+          </p>
+        </div>
+
+        <!-- Cột 2: liên kết nhanh -->
+        <nav aria-label="Liên kết nhanh" class="animate-fade-up" style="animation-delay: 0.1s;">
+          <h3 class="font-display text-base font-semibold text-cream">Liên kết nhanh</h3>
+          <div class="title-underline mt-3 w-12"></div>
+          <ul class="mt-5 space-y-3 text-sm text-cream/70">
+            <li><a href="#cau-chuyen" class="footer-link">Câu chuyện thương hiệu</a></li>
+            <li><a href="#san-pham" class="footer-link">Sản phẩm</a></li>
+            <li><a href="#hoi-dap" class="footer-link">Hỏi đáp</a></li>
+            <li><a href="#lien-he" class="footer-link">Liên hệ</a></li>
+          </ul>
+        </nav>
+
+        <!-- Cột 3: thông tin liên hệ -->
+        <div class="animate-fade-up" style="animation-delay: 0.15s;">
+          <h3 class="font-display text-base font-semibold text-cream">Liên hệ &amp; nguồn gốc</h3>
+          <div class="title-underline mt-3 w-12"></div>
+<ul class="mt-4 space-y-3 text-sm text-cream/70 sm:mt-5 sm:space-y-4">
+            <li class="flex items-start gap-3">
+              <svg class="mt-0.5 h-4 w-4 shrink-0 text-gold-300" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>Nguồn gốc: Nho rừng Đình Lập, Lạng Sơn</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="mt-0.5 h-4 w-4 shrink-0 text-gold-300" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+              <a href="tel:0378499946" class="footer-link">Hotline / Zalo: 0378 499 946</a>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="mt-0.5 h-4 w-4 shrink-0 text-gold-300" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+              <a href="mailto:ericquynhh@gmail.com" class="footer-link">ericquynhh@gmail.com</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Cột 4: mạng xã hội -->
+        <div class="animate-fade-up" style="animation-delay: 0.2s;">
+          <h3 class="font-display text-base font-semibold text-cream">Theo dõi chúng tôi</h3>
+          <div class="title-underline mt-3 w-12"></div>
+          <p class="mt-5 text-sm text-cream/70">
+            Nhận thông tin về mùa vụ và chương trình ưu đãi.
+          </p>
+          <div class="mt-5 flex gap-3">
+            <a href="https://www.facebook.com/share/1DvChDViZA/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook" class="social-btn btn-shine inline-flex h-10 w-10 items-center justify-center rounded-full border border-gold/40 text-cream">
+              <svg class="h-4 w-4" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H8v3h2v7h3v-7h2.5l.5-3H13v-2c0-.6.4-1 1-1Z"/></svg>
+            </a>
+            <a href="https://www.tiktok.com/@nhorung47" target="_blank" rel="noopener" aria-label="TikTok" class="social-btn btn-shine inline-flex h-10 w-10 items-center justify-center rounded-full border border-gold/40 text-cream">
+              <svg class="h-4 w-4" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M16 3c.4 2.1 1.8 3.5 4 3.8v3c-1.5 0-2.8-.4-4-1.2V15a6 6 0 1 1-6-6c.3 0 .7 0 1 .1v3.1A3 3 0 1 0 13 15V3h3Z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dải bản quyền + dấu ấn thương hiệu -->
+      <div class="mt-10 flex flex-col items-center gap-6 border-t border-gold/25 pt-6 sm:mt-14 sm:gap-8 sm:pt-8 sm:flex-row sm:justify-between">
+
+        <!-- Chữ bản quyền -->
+        <div class="flex flex-col items-center gap-2 text-center sm:items-start sm:text-left">
+          <p class="text-xs text-cream/60">
+            &copy; <span id="current-year">2026</span> Nho Rừng Đình Lập. Bảo lưu mọi quyền.
+          </p>
+        </div>
+
+        <!-- ============================================================
+             DẤU ẤN THƯƠNG HIỆU (watermark) - con dấu vector, vẽ bằng SVG
+             Nhẹ hơn nhiều so với ảnh PNG, và sắc nét ở mọi kích thước màn hình.
+             ============================================================ -->
+        <figure class="brand-seal">
+          <svg viewBox="0 0 240 240" role="img"
+               aria-label="Dấu ấn thương hiệu: Nho Rừng Đình Lập - An toàn từ thiên nhiên">
+            <defs>
+              <!-- Cung trên: chữ chạy từ trái sang phải qua đỉnh -->
+              <path id="seal-arc-top" d="M 30 120 A 90 90 0 0 1 210 120" fill="none" />
+              <!-- Cung dưới: chạy từ trái sang phải qua đáy (đọc không bị ngược) -->
+              <path id="seal-arc-bottom" d="M 42 132 A 78 78 0 0 0 198 132" fill="none" />
+            </defs>
+
+            <!-- Các vòng tròn đồng tâm -->
+            <circle cx="120" cy="120" r="116" fill="none" stroke="currentColor" stroke-width="1" opacity=".45" />
+            <circle cx="120" cy="120" r="108" fill="none" stroke="currentColor" stroke-width="2" />
+            <circle cx="120" cy="120" r="64" fill="none" stroke="currentColor" stroke-width="1" opacity=".55" />
+
+            <!-- Chữ trên cung trên -->
+            <text class="seal-text" fill="currentColor">
+              <textPath href="#seal-arc-top" startOffset="50%" text-anchor="middle">AN TOÀN TỪ THIÊN NHIÊN</textPath>
+            </text>
+
+            <!-- Chữ trên cung dưới -->
+            <text class="seal-text seal-text--small" fill="currentColor">
+              <textPath href="#seal-arc-bottom" startOffset="50%" text-anchor="middle">100% NATURAL</textPath>
+            </text>
+
+            <!-- Dấu chấm nhỏ ngăn giữa 2 vòng chữ -->
+            <circle cx="54" cy="126" r="2.2" fill="currentColor" opacity=".7" />
+            <circle cx="186" cy="126" r="2.2" fill="currentColor" opacity=".7" />
+
+            <!-- Ở giữa: lá nho + chùm nho, vẽ tay bằng SVG -->
+            <g transform="translate(120 120)" fill="currentColor">
+              <!-- lá nho chéo bên trái -->
+              <g transform="translate(-19 -11) rotate(-28)" opacity=".5">
+                <path d="M0 0c-13 3-22 11-24 21-1 6 1 11 5 13 4 2 8 2 11 0 8-2 11-12 8-34Z"/>
+              </g>
+              <!-- cuống nho -->
+              <path d="M-2 -24c1-5 5-8 9-9-1 5-4 8-7 9h-2Z"/>
+              <!-- chùm nho, canh giữa tại gốc -->
+              <g transform="translate(-43.2 -44.7) scale(1.35)">
+                <circle cx="32" cy="16" r="7"/>
+                <circle cx="22" cy="27" r="7"/>
+                <circle cx="42" cy="27" r="7"/>
+                <circle cx="32" cy="29" r="7"/>
+                <circle cx="26" cy="40" r="7"/>
+                <circle cx="38" cy="40" r="7"/>
+                <circle cx="32" cy="51" r="6.2"/>
+              </g>
+            </g>
+          </svg>
+        </figure>
+      </div>
+
+      <!-- Dòng ghi công AI - cuối cùng trang, nổi bật -->
+      <p class="mt-8 text-center text-sm font-medium text-gold-300 sm:mt-10 sm:text-base">
+        <svg class="mr-2 inline-block h-4 w-4 align-[-2px] text-gold-200 sm:h-5 sm:w-5" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2l1.9 5.4a3 3 0 0 0 1.7 1.7L21 11l-5.4 1.9a3 3 0 0 0-1.7 1.7L12 20l-1.9-5.4a3 3 0 0 0-1.7-1.7L3 11l5.4-1.9a3 3 0 0 0 1.7-1.7L12 2Z"/>
+          <path d="M19 16l.7 2a1.2 1.2 0 0 0 .8.8l2 .7-2 .7a1.2 1.2 0 0 0-.8.8l-.7 2-.7-2a1.2 1.2 0 0 0-.8-.8l-2-.7 2-.7a1.2 1.2 0 0 0 .8-.8l.7-2Z"/>
+        </svg>
+        Trang web này được xây dựng với sự hỗ trợ của AI
+      </p>
+    </div>
+  </footer>
+
+<!-- ============================================================
+       THANH ĐẶT HÀNG DÍNH ĐÁY MÀN HÌNH - chỉ hiện trên điện thoại (C8)
+       Hiện khi khách đã cuộn qua phần đầu trang, và tự ẩn khi khách
+       tới mục đặt hàng để không che nút gửi.
+       ============================================================ -->
+  <div id="sticky-order" aria-hidden="true">
+    <div class="sticky-order__inner">
+      <div class="sticky-order__info">
+        <p class="text-[10px] uppercase tracking-[0.15em] text-cream/60">Sản phẩm từ nho rừng</p>
+        <p class="font-display text-base font-semibold leading-tight text-cream">Từ 50.000đ/lọ</p>
+      </div>
+      <a href="#order-modal"
+         data-order-trigger
+         class="btn-shine inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-gold px-6 py-3 text-sm font-semibold text-ink">
+        Đặt hàng ngay
+        <svg class="h-4 w-4" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- CỬA SỔ XEM NHANH SẢN PHẨM (C4) + XEM ẢNH PHÓNG TO (C5)
+       Nội dung lấy tự động từ thẻ sản phẩm tương ứng trên trang,
+       nên khi bạn sửa tên/mô tả ở đây thì cửa sổ cũng tự đổi theo. -->
+  <div id="quickview" role="dialog" aria-modal="true" aria-labelledby="quickview-title" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel">
+      <button type="button" class="modal-close" data-close aria-label="Đóng">
+        <svg class="h-5 w-5" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+
+      <div class="grid gap-0 sm:grid-cols-2">
+        <!-- Ảnh: bấm vào để phóng to (C5) -->
+        <button type="button" id="quickview-media"
+                class="card-media relative aspect-[4/3] w-full overflow-hidden bg-forest/10 text-left sm:aspect-auto sm:min-h-[22rem]"
+                aria-label="Xem ảnh lớn">
+          <span class="absolute inset-0 flex flex-col items-center justify-center gap-2">
+            <svg class="h-10 w-10 text-forest/45" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+            <span class="text-[10px] uppercase tracking-[0.2em] text-forest/60">Ảnh sản phẩm</span>
+            <span class="mt-1 inline-flex items-center gap-1.5 rounded-full border border-gold/50 px-3 py-1 text-[10px] uppercase tracking-wider text-forest/70">
+              <svg class="h-3 w-3" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg>
+              Bấm để phóng to
+            </span>
+          </span>
+        </button>
+
+        <!-- Thông tin -->
+        <div class="flex flex-col p-6 sm:p-8">
+          <p class="eyebrow text-gold-600">Xem nhanh</p>
+          <h2 id="quickview-title" class="font-display mt-3 text-2xl font-semibold text-grape sm:text-3xl">Sản phẩm</h2>
+          <p id="quickview-desc" class="mt-4 text-sm leading-relaxed text-ink/70"></p>
+
+          <div class="mt-6 border-y border-gold/30 py-5">
+            <p class="text-[11px] uppercase tracking-[0.15em] text-forest/60">Giá</p>
+            <p id="quickview-price" class="font-display mt-1 text-3xl font-semibold text-grape">Liên hệ</p>
+          </div>
+
+          <div class="mt-auto pt-6">
+            <button type="button"
+               id="quickview-order-btn"
+               data-order-trigger
+               class="btn-primary btn-shine inline-flex w-full items-center justify-center gap-2 rounded-full bg-grape px-8 py-3.5 text-sm font-semibold text-cream sm:w-auto">
+               Đặt mua sản phẩm này
+               <svg class="h-4 w-4" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+            <p class="mt-3 text-center text-xs text-ink/50">Hoặc gửi email tới ericquynhh@gmail.com để được tư vấn</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Xem ảnh phóng to (C5) -->
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="Xem ảnh lớn" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="lightbox-panel">
+      <button type="button" class="modal-close" data-close aria-label="Đóng">
+        <svg class="h-5 w-5" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+      <figure class="flex max-h-full flex-col items-center gap-4">
+        <!-- Khi có ảnh thật, thay khối này bằng <img> trong <picture> -->
+        <div class="flex h-full min-h-[16rem] w-full flex-col items-center justify-center gap-3 rounded-2xl border border-gold/40 bg-forest/10">
+          <svg class="h-14 w-14 text-cream/40" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+          <p class="text-xs uppercase tracking-[0.2em] text-cream/50">Ảnh sản phẩm</p>
+          <p class="max-w-xs text-center text-[11px] leading-relaxed text-cream/40">
+            Thay khối này bằng thẻ &lt;img&gt; thật, khung ảnh sẽ tự co giãn theo
+          </p>
+        </div>
+        <figcaption id="lightbox-caption" class="text-center text-sm text-cream/80">Ảnh sản phẩm</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       CỬA SỔ ĐẶT HÀNG RIÊNG BIỆT (2 BƯỚC)
+       Bước 1: Chọn sản phẩm (2 mũi tên trên dưới chỉ vào giữa + carousel kéo ngang)
+       Bước 2: Xác nhận & Gửi đơn qua Email (copy mẫu/email) hoặc Facebook
+       ============================================================ -->
+  <div id="order-modal" role="dialog" aria-modal="true" aria-labelledby="order-modal-title" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel order-modal-panel">
+      <!-- Nút đóng cửa sổ -->
+      <button type="button" class="modal-close" data-close aria-label="Đóng cửa sổ đặt hàng">
+        <svg class="h-5 w-5" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+
+      <!-- BƯỚC 1: CHỌN SẢN PHẨM -->
+      <div id="order-step-1" class="order-step p-4 sm:p-7">
+        <div class="text-center mb-3 sm:mb-4">
+          <p class="eyebrow text-gold-600">Đặt hàng trực tiếp</p>
+          <h2 id="order-modal-title" class="font-display mt-1 text-2xl sm:text-3xl font-semibold text-grape">Chọn sản phẩm đặt mua</h2>
+          <p class="text-xs sm:text-sm text-ink/70 mt-1">Kéo ngang hoặc chạm vào sản phẩm để chọn</p>
+        </div>
+
+        <!-- MŨI TÊN TRÊN CHỈ XUỐNG GIỮA (↓) -->
+        <div class="order-arrow-row order-arrow-top" aria-hidden="true">
+          <div class="order-arrow-bubble">
+            <span class="text-[11px] font-semibold text-grape uppercase tracking-wider">Sản phẩm đang chọn</span>
+            <svg class="order-arrow-icon down-arrow h-4 w-4 text-gold-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 4v16m0 0l-6-6m6 6l6-6"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- VÙNG CAROUSEL SẢN PHẨM Ở GIỮA (KÉO NGANG) -->
+        <div class="order-carousel-wrapper relative my-3">
+          <!-- Nút điều hướng trái/phải -->
+          <button type="button" id="order-prev-btn" class="order-carousel-nav prev-btn" aria-label="Sản phẩm trước">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button type="button" id="order-next-btn" class="order-carousel-nav next-btn" aria-label="Sản phẩm tiếp theo">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+
+          <!-- Dải sản phẩm kéo ngang -->
+          <div id="order-carousel" class="order-carousel" role="listbox" aria-label="Danh sách sản phẩm">
+            <!-- Nội dung sản phẩm được tạo động từ JavaScript -->
+          </div>
+        </div>
+
+        <!-- MŨI TÊN DƯỚI CHỈ LÊN GIỮA (↑) -->
+        <div class="order-arrow-row order-arrow-bottom" aria-hidden="true">
+          <div class="order-arrow-bubble">
+            <svg class="order-arrow-icon up-arrow h-4 w-4 text-gold-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 20V4m0 0l-6 6m6-6l6 6"/>
+            </svg>
+            <span class="text-[11px] font-semibold text-grape uppercase tracking-wider">Kéo ngang để đổi sản phẩm</span>
+          </div>
+        </div>
+
+        <!-- BÊN DƯỚI: THÔNG TIN SẢN PHẨM, GIÁ TIỀN, MÔ TẢ & NÚT ĐẶT HÀNG -->
+        <div class="order-active-details mt-4 rounded-2xl border border-gold/35 bg-cream-50/90 p-4 sm:p-5 shadow-sm">
+          <div class="flex flex-wrap items-baseline justify-between gap-2 border-b border-gold/25 pb-3">
+            <div>
+              <h3 id="order-active-title" class="font-display text-xl sm:text-2xl font-semibold text-grape">Siro nho rừng</h3>
+              <p id="order-active-unit" class="text-xs text-forest/70 mt-0.5">1 lọ · 300ml</p>
+            </div>
+            <div class="text-right">
+              <span class="text-[10px] uppercase tracking-wider text-forest/60 block">Đơn giá</span>
+              <span id="order-active-price" class="font-display text-2xl sm:text-3xl font-semibold text-gold-600">69.000đ</span>
+            </div>
+          </div>
+
+          <p id="order-active-desc" class="mt-3 text-xs sm:text-sm leading-relaxed text-ink/75 min-h-[3rem]">
+            Chống lão hoá, làm đẹp da nhờ chất chống oxy hoá tự nhiên. Hỗ trợ tim mạch, kích thích tiêu hoá, thanh nhiệt.
+          </p>
+
+          <div class="mt-4 pt-1">
+            <button type="button" id="btn-goto-step2" class="btn-primary btn-shine w-full inline-flex items-center justify-center gap-2 rounded-full bg-grape py-3.5 px-6 text-sm sm:text-base font-semibold text-cream shadow-md hover:bg-grape-800 transition-all">
+              <span>Đặt hàng sản phẩm này</span>
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- BƯỚC 2: UI CHI TIẾT ĐƠN HÀNG & PHƯƠNG THỨC GỬI (Email / Facebook) -->
+      <div id="order-step-2" class="order-step p-4 sm:p-7 hidden">
+        <!-- Nút quay lại bước 1 -->
+        <div class="flex items-center justify-between mb-4 pb-3 border-b border-gold/25">
+          <button type="button" id="btn-back-to-step1" class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-grape hover:text-gold-600 transition-colors">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            <span>Quay lại chọn sản phẩm khác</span>
+          </button>
+          <span class="text-[11px] uppercase tracking-wider text-forest/60 font-medium">Bước 2 / 2</span>
+        </div>
+
+        <div class="text-center sm:text-left mb-4">
+          <h2 class="font-display text-xl sm:text-2xl font-semibold text-grape">Xác nhận thông tin &amp; Gửi đơn hàng</h2>
+          <p class="text-xs text-ink/70 mt-1">Vì website tĩnh không có máy chủ backend, quý khách có thể gửi đơn trực tiếp qua Email hoặc Facebook</p>
+        </div>
+
+        <!-- Khối chứa Tên sản phẩm, Ảnh sản phẩm, Giá, Mô tả sản phẩm -->
+        <div class="order-confirm-card flex flex-col sm:flex-row gap-4 items-center rounded-2xl border border-gold/40 bg-gradient-to-r from-grape-50/50 via-cream to-gold-50/30 p-4">
+          <div id="order-confirm-media" class="h-20 w-20 sm:h-24 sm:w-24 shrink-0 rounded-xl overflow-hidden border border-gold/40 bg-cream">
+            <img id="order-confirm-img" src="assets/images/product-siro.jpg" alt="Ảnh sản phẩm" class="h-full w-full object-cover">
+          </div>
+          <div class="flex-1 text-center sm:text-left w-full">
+            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+              <h3 id="order-confirm-title" class="font-display text-lg sm:text-xl font-semibold text-grape">Siro nho rừng</h3>
+              <span id="order-confirm-price" class="font-display text-lg sm:text-xl font-semibold text-gold-600">69.000đ</span>
+            </div>
+            <p id="order-confirm-desc" class="text-xs text-ink/70 mt-1 line-clamp-2">
+              Chống lão hoá, làm đẹp da nhờ chất chống oxy hoá tự nhiên. Hỗ trợ tim mạch, kích thích tiêu hoá, thanh nhiệt.
+            </p>
+            <!-- Chọn số lượng -->
+            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-3 mt-2.5 pt-2 border-t border-gold/20">
+              <span class="text-xs text-forest/70 font-medium">Số lượng:</span>
+              <div class="inline-flex items-center rounded-lg border border-gold/50 bg-cream">
+                <button type="button" id="qty-minus" class="px-2.5 py-1 text-sm font-bold text-grape hover:bg-gold/20" aria-label="Giảm số lượng">−</button>
+                <span id="qty-display" class="px-3 text-xs font-semibold text-ink min-w-[2rem] text-center">1</span>
+                <button type="button" id="qty-plus" class="px-2.5 py-1 text-sm font-bold text-grape hover:bg-gold/20" aria-label="Tăng số lượng">+</button>
+              </div>
+              <span id="order-confirm-total" class="text-xs font-semibold text-grape">(Tổng tiền: 69.000đ)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CÁC LỰA CHỌN GỬI ĐƠN HÀNG: EMAIL & FACEBOOK -->
+        <div class="mt-5 space-y-4">
+          <p class="text-xs uppercase tracking-wider font-semibold text-forest/80">Lựa chọn gửi đơn đặt hàng:</p>
+
+          <!-- 1. GỬI BẰNG EMAIL -->
+          <div class="rounded-2xl border border-gold/40 bg-cream-50 p-4 shadow-2xs">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5">
+              <div class="flex items-center gap-2.5">
+                <span class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-grape/10 text-grape">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+                </span>
+                <div>
+                  <span class="block text-[11px] uppercase tracking-wider text-forest/60">Địa chỉ Email nhận đơn</span>
+                  <span class="text-sm font-semibold text-grape select-all">ericquynhh@gmail.com</span>
+                </div>
+              </div>
+              <button type="button" id="btn-copy-email" class="btn-copy inline-flex items-center justify-center gap-1.5 rounded-full border border-gold/60 bg-cream px-3.5 py-1.5 text-xs font-medium text-grape hover:bg-grape hover:text-cream transition-colors">
+                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                <span class="copy-label">Sao chép Email</span>
+              </button>
+            </div>
+
+            <!-- Khung Mẫu gửi đơn -->
+            <div class="mt-3.5 pt-3 border-t border-gold/20">
+              <div class="flex items-center justify-between text-xs text-ink/75 mb-1.5">
+                <span class="font-medium">Mẫu nội dung gửi đơn đặt hàng:</span>
+                <button type="button" id="btn-copy-template" class="btn-copy inline-flex items-center gap-1 text-gold-600 hover:text-grape font-semibold underline decoration-gold transition-colors">
+                  <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                  <span class="copy-label">Sao chép Mẫu gửi</span>
+                </button>
+              </div>
+              <div id="order-template-box" class="rounded-xl border border-gold/30 bg-cream/90 p-3 text-xs leading-relaxed text-ink/80 select-all font-mono whitespace-pre-wrap max-h-40 overflow-y-auto"></div>
+            </div>
+
+            <!-- Nút mở nhanh email client -->
+            <a id="btn-open-email-client" href="mailto:ericquynhh@gmail.com" target="_blank" class="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-grape/30 bg-grape/5 hover:bg-grape/10 py-2.5 text-xs font-semibold text-grape transition-colors">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+              <span>Mở ứng dụng Email gửi ngay</span>
+            </a>
+          </div>
+
+          <!-- 2. GỬI BẰNG FACEBOOK -->
+          <div class="rounded-2xl border border-blue-200 bg-blue-50/50 p-4 shadow-2xs">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+              <div class="flex items-center gap-2.5">
+                <span class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#1877F2] text-white">
+                  <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </span>
+                <div>
+                  <span class="block text-[11px] uppercase tracking-wider text-forest/60">Gửi đơn qua Facebook</span>
+                  <span class="text-sm font-semibold text-grape">Nhắn tin Fanpage Nho Rừng Đình Lập</span>
+                </div>
+              </div>
+              <a id="btn-goto-facebook" href="https://www.facebook.com/share/1DvChDViZA/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 rounded-full bg-[#1877F2] hover:bg-[#166fe5] px-5 py-2.5 text-xs font-semibold text-white shadow-sm transition-all hover:scale-102">
+                <span>Đến Facebook đặt hàng</span>
+                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- 3. LIÊN HỆ ĐẶT HÀNG QUA SỐ ĐIỆN THOẠI / ZALO -->
+          <div class="rounded-2xl border border-forest/30 bg-forest/5 p-4 shadow-2xs">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+              <div class="flex items-center gap-2.5">
+                <span class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-forest/15 text-forest">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+                </span>
+                <div>
+                  <span class="block text-[11px] uppercase tracking-wider text-forest/70 font-medium">Hotline / Zalo tư vấn &amp; đặt hàng</span>
+                  <a href="tel:0378499946" class="text-base font-bold text-grape hover:text-forest transition-colors select-all">0378 499 946</a>
+                </div>
+              </div>
+              <div class="flex items-center gap-2">
+                <button type="button" id="btn-copy-phone" class="btn-copy inline-flex items-center justify-center gap-1.5 rounded-full border border-forest/40 bg-cream px-3.5 py-1.5 text-xs font-medium text-forest hover:bg-forest hover:text-cream transition-colors">
+                  <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                  <span class="copy-label">Sao chép SĐT</span>
+                </button>
+                <a href="tel:0378499946" class="inline-flex items-center justify-center gap-1.5 rounded-full bg-forest hover:bg-forest-700 px-4 py-1.5 text-xs font-semibold text-cream shadow-xs transition-colors">
+                  <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+                  <span>Gọi ngay</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       NÚT VỀ ĐẦU TRANG (xuất hiện sau khi cuộn)
+       ============================================================ -->
+  <button id="back-to-top" type="button" aria-label="Về đầu trang"
+          class="fixed bottom-6 right-5 z-40 inline-flex h-12 w-12 items-center justify-center rounded-full border border-gold/50 bg-grape text-cream shadow-lg sm:bottom-8 sm:right-8 group">
+    <svg class="btt-progress-svg" viewBox="0 0 36 36" aria-hidden="true">
+      <path class="btt-progress-circle" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+    </svg>
+    <svg class="relative z-10 h-5 w-5 transition-transform duration-200 group-hover:-translate-y-0.5" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+  </button>
+
+  <!-- Script xử lý tương tác: menu, header, progress, parallax, fade-in, validate form -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

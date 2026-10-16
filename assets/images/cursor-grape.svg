@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
+  <defs>
+    <!-- Filter tạo viền sáng + bóng đổ để thấy rõ trên cả nền tối và sáng -->
+    <filter id="grape-glow" x="-20%" y="-20%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="1.5" stdDeviation="1" flood-color="#000000" flood-opacity="0.55"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="0.8" flood-color="#FBF7EE" flood-opacity="0.9"/>
+    </filter>
+
+    <!-- Gradient quả nho đen ánh tím thẫm (Black / Deep Velvet Grape) -->
+    <radialGradient id="berry-grad" cx="35%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#5A2452"/>
+      <stop offset="35%" stop-color="#361334"/>
+      <stop offset="75%" stop-color="#1E0A1D"/>
+      <stop offset="100%" stop-color="#0E040E"/>
+    </radialGradient>
+
+    <!-- Gradient quả nho lớp sau (tối hơn một chút để tạo chiều sâu) -->
+    <radialGradient id="berry-back" cx="35%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#42183C"/>
+      <stop offset="60%" stop-color="#230B21"/>
+      <stop offset="100%" stop-color="#0A020A"/>
+    </radialGradient>
+
+    <!-- Gradient cuống nho & lá nho tự nhiên -->
+    <linearGradient id="stem-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7CA86D"/>
+      <stop offset="60%" stop-color="#3F6B38"/>
+      <stop offset="100%" stop-color="#223E1E"/>
+    </linearGradient>
+
+    <linearGradient id="leaf-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#88C070"/>
+      <stop offset="60%" stop-color="#467B38"/>
+      <stop offset="100%" stop-color="#23461C"/>
+    </linearGradient>
+  </defs>
+
+  <g filter="url(#grape-glow)">
+    <!-- 1. Đầu kim nhọn / cuống nho chỉ hướng chuột (Hotspot tại 3, 2) -->
+    <!-- Mũi nhọn cuống đóng vai trò đầu trỏ chính xác -->
+    <path d="M3.5 2.5 L6 7.5 C6.8 9.2 8.5 10.5 10.5 11 L13 11.5" stroke="url(#stem-grad)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Mũi trỏ sắc sảo tại đầu cuống -->
+    <path d="M3.5 2.5 L2 5.5 L6 4.5 Z" fill="#7CA86D"/>
+
+    <!-- Tua cuốn nhỏ nghệ thuật -->
+    <path d="M7 6.5 C5.5 5 4.5 7.5 5.8 8.8 C6.8 9.5 8 8.5 7.5 7.5" stroke="#7CA86D" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+
+    <!-- Lá nho organic xanh non vươn sang phải -->
+    <path d="M11 9 C13 6 17 5 21 7 C21.5 9 19.5 11 20 12 C18 12.5 16 11.5 14 12.5 C12.5 12.8 11.8 11 11 9 Z" fill="url(#leaf-grad)" stroke="#223E1E" stroke-width="0.6"/>
+    <!-- Gân lá -->
+    <path d="M12 9.5 Q16 8.5 19 8" stroke="#A6DE8C" stroke-width="0.6" stroke-linecap="round" fill="none"/>
+
+    <!-- 2. Các quả nho lớp sau (tạo chiều sâu 3D) -->
+    <circle cx="11" cy="14" r="3.6" fill="url(#berry-back)"/>
+    <circle cx="21" cy="14.5" r="3.4" fill="url(#berry-back)"/>
+    <circle cx="21" cy="21" r="3.2" fill="url(#berry-back)"/>
+
+    <!-- 3. Các quả nho lớp trước (chùm nho đen căng mọng) -->
+    <!-- Hàng trên -->
+    <circle cx="16" cy="13.5" r="4.2" fill="url(#berry-grad)"/>
+    <ellipse cx="14.8" cy="12.2" rx="1.8" ry="1.1" fill="#9C4C8E" opacity="0.75" transform="rotate(-25 14.8 12.2)"/>
+    <circle cx="14.2" cy="11.8" r="0.6" fill="#FFFFFF" opacity="0.85"/>
+
+    <!-- Hàng giữa bên trái -->
+    <circle cx="11.5" cy="19" r="4.2" fill="url(#berry-grad)"/>
+    <ellipse cx="10.3" cy="17.7" rx="1.8" ry="1.1" fill="#9C4C8E" opacity="0.75" transform="rotate(-25 10.3 17.7)"/>
+    <circle cx="9.8" cy="17.2" r="0.6" fill="#FFFFFF" opacity="0.85"/>
+
+    <!-- Hàng giữa bên phải -->
+    <circle cx="17.5" cy="19.5" r="4.2" fill="url(#berry-grad)"/>
+    <ellipse cx="16.3" cy="18.2" rx="1.8" ry="1.1" fill="#9C4C8E" opacity="0.75" transform="rotate(-25 16.3 18.2)"/>
+    <circle cx="15.8" cy="17.8" r="0.6" fill="#FFFFFF" opacity="0.85"/>
+
+    <!-- Hàng dưới -->
+    <circle cx="14.5" cy="24.5" r="3.8" fill="url(#berry-grad)"/>
+    <ellipse cx="13.5" cy="23.4" rx="1.6" ry="0.9" fill="#9C4C8E" opacity="0.75" transform="rotate(-25 13.5 23.4)"/>
+    <circle cx="13" cy="23" r="0.5" fill="#FFFFFF" opacity="0.85"/>
+
+    <!-- Quả nho chóp đáy -->
+    <circle cx="15" cy="29.2" r="2.8" fill="url(#berry-grad)"/>
+    <ellipse cx="14.2" cy="28.4" rx="1.1" ry="0.6" fill="#9C4C8E" opacity="0.7" transform="rotate(-25 14.2 28.4)"/>
+    <circle cx="13.9" cy="28.1" r="0.4" fill="#FFFFFF" opacity="0.85"/>
+  </g>
+</svg>

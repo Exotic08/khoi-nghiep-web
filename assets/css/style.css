@@ -1,0 +1,2371 @@
+/* ============================================================
+   NHO RỪNG - Landing page stylesheet
+   Bảng màu chuẩn: grape #4A1942 | forest #2F4A3A | cream #F7F1E6
+                    gold  #B8925A | ink    #1F1A17
+   Toàn bộ màu sắc định nghĩa trong <script> tailwind.config (index.html).
+   File này chỉ chứa style gốc, không dùng lại utility Tailwind.
+
+   NGUYÊN TẮC HIỆU SUẤT:
+   - Chỉ animate `transform` và `opacity` (chạy trên GPU, không repaint).
+   - Không transition `box-shadow` (repaint mỗi khung hình); dùng lớp ::after
+     chuyển `opacity` thay thế.
+   - Không dùng filter: blur() / backdrop-filter trong lúc cuộn.
+   ============================================================ */
+
+:root {
+  /* ===== DESIGN TOKENS ===== */
+  /* Bảng màu thương hiệu chuẩn */
+  --color-grape: #4A1942;
+  --color-grape-50: #F7EEF5;
+  --color-grape-100: #EEDCEC;
+  --color-grape-200: #DDB9D8;
+  --color-grape-300: #C996C3;
+  --color-grape-400: #A9639F;
+  --color-grape-500: #8C4480;
+  --color-grape-600: #6B3061;
+  --color-grape-700: #4A1942;
+  --color-grape-800: #3B1434;
+  --color-grape-900: #2C0F27;
+
+  --color-forest: #2F4A3A;
+  --color-forest-50: #F2F5F1;
+  --color-forest-100: #E2EAE0;
+  --color-forest-200: #C3D4C0;
+  --color-forest-300: #9DB89A;
+  --color-forest-600: #456245;
+  --color-forest-700: #2F4A3A;
+  --color-forest-800: #253A2E;
+
+  --color-cream: #F7F1E6;
+  --color-cream-50: #FDFBF6;
+  --color-cream-100: #F7F1E6;
+  --color-cream-200: #EFE5D3;
+  --color-cream-300: #E3D5BB;
+  --color-cream-card: rgba(253, 251, 246, 0.96);
+
+  --color-gold: #B8925A;
+  --color-gold-50: #FAF4E9;
+  --color-gold-100: #F2E4CB;
+  --color-gold-200: #E5CDA3;
+  --color-gold-300: #D8B37C;
+  --color-gold-400: #C8A06B;
+  --color-gold-500: #B8925A;
+  --color-gold-600: #9C7946;
+
+  --color-ink: #1F1A17;
+  --color-ink-muted: rgba(31, 26, 23, 0.65);
+  --color-ink-subtle: rgba(31, 26, 23, 0.45);
+
+  /* ===== MOTION TOKENS ===== */
+  /* Thời lượng chuẩn */
+  --dur-instant: 120ms;
+  --dur-fast: 180ms;
+  --dur-base: 280ms;
+  --dur-medium: 420ms;
+  --dur-slow: 600ms;
+  --dur-reveal: 750ms;
+
+  /* Đường cong gia tốc tự nhiên (Artisanal Organic Curves) */
+  --ease-organic: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-bounce-soft: cubic-bezier(0.34, 1.35, 0.64, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Bóng đổ chiều sâu */
+  --shadow-sm: 0 2px 8px -2px rgba(31, 26, 23, 0.08);
+  --shadow-md: 0 12px 28px -10px rgba(74, 25, 66, 0.16);
+  --shadow-lg: 0 24px 50px -20px rgba(74, 25, 66, 0.28);
+  --shadow-glow-gold: 0 0 24px rgba(184, 146, 90, 0.35);
+  --shadow-glow-grape: 0 0 30px rgba(74, 25, 66, 0.35);
+}
+
+/* ---------- 1. Custom Cursor (Chùm Nho Đen & Bàn Tay Trỏ) ---------- */
+@media (pointer: fine) {
+  html, body {
+    cursor: url('../images/cursor-grape.svg') 3 2, auto;
+  }
+
+  /* Trạng thái Bàn tay trỏ (Hand / Pointer): Bàn tay nâng chùm nho đen */
+  a,
+  button,
+  [role="button"],
+  input[type="submit"],
+  input[type="button"],
+  input[type="reset"],
+  select,
+  summary,
+  .cursor-pointer,
+  .btn-primary,
+  .filter-tab-btn,
+  [data-quickview],
+  [data-close],
+  .lightbox-open,
+  label[for],
+  .toast-close,
+  .story-block,
+  .timeline-step,
+  .card-lift,
+  .quickview-open {
+    cursor: url('../images/cursor-grape-pointer.svg') 3 2, pointer !important;
+  }
+
+  input[type="text"],
+  input[type="tel"],
+  input[type="email"],
+  textarea {
+    cursor: text;
+  }
+
+  /* Lớp hào quang theo dõi chuột hữu cơ (Organic Cursor Follower Aura) */
+  #grape-cursor-aura {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 28px;
+    margin-left: -14px;
+    margin-top: -14px;
+    border-radius: 9999px;
+    pointer-events: none;
+    z-index: 9999;
+    border: 1.5px solid rgba(197, 155, 39, 0.45);
+    background: radial-gradient(circle, rgba(197, 155, 39, 0.15) 0%, rgba(74, 25, 66, 0.06) 60%, transparent 100%);
+    opacity: 0;
+    transform: translate3d(-100px, -100px, 0) scale(0.6);
+    transition: opacity 0.25s ease,
+                border-color 0.25s ease,
+                background 0.25s ease,
+                width 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+                height 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform, opacity;
+  }
+
+  #grape-cursor-aura.is-visible {
+    opacity: 1;
+  }
+
+  #grape-cursor-aura.is-hovering {
+    width: 38px;
+    height: 38px;
+    margin-left: -19px;
+    margin-top: -19px;
+    border-color: rgba(197, 155, 39, 0.9);
+    background: radial-gradient(circle, rgba(197, 155, 39, 0.3) 0%, rgba(74, 25, 66, 0.15) 70%, transparent 100%);
+    box-shadow: 0 0 14px rgba(197, 155, 39, 0.4);
+  }
+
+  #grape-cursor-aura.is-active {
+    border-color: var(--color-grape);
+    background: radial-gradient(circle, rgba(74, 25, 66, 0.35) 0%, transparent 70%);
+  }
+
+  /* Giọt sương óng ánh bung nở nhẹ khi click (Tactile Dewdrop Burst) */
+  .cursor-burst-particle {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background: radial-gradient(circle at 35% 30%, #F5CE68 0%, #4A1942 100%);
+    box-shadow: 0 0 6px rgba(197, 155, 39, 0.7);
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate3d(-50%, -50%, 0);
+    animation: dewdropBurst 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+}
+
+@keyframes dewdropBurst {
+  0% {
+    opacity: 1;
+    transform: translate3d(-50%, -50%, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(calc(-50% + var(--dx, 0px)), calc(-50% + var(--dy, 0px)), 0) scale(0.2);
+  }
+}
+
+/* ---------- 2. Reset / nền tảng ---------- */
+html {
+  scroll-behavior: smooth; /* cuộn mượt khi bấm menu neo */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-cream); /* nền giấy kem */
+  color: var(--color-ink);             /* chữ mực */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden; /* tránh tràn ngang do họa tiết trang trí */
+}
+
+/* Khoảng trắng cho header cố định khi bấm menu neo tới section */
+section[id],
+footer[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+/* Chọn text: nền tím, chữ kem */
+::selection {
+  background-color: #4a1942;
+  color: #f7f1e6;
+}
+
+/* Thanh cuộn mảnh tông màu thương hiệu */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f7f1e6;
+}
+::-webkit-scrollbar-thumb {
+  background: #b8925a;
+  border-radius: 9999px;
+  border: 3px solid #f7f1e6;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #4a1942;
+}
+
+/* Focus ring dùng chung, dễ nhìn + accessible */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #b8925a;
+  outline-offset: 3px;
+  border-radius: 0.5rem;
+}
+
+/* ---------- 2. Typography ---------- */
+.font-display {
+  font-family: "Playfair Display", ui-serif, Georgia, serif;
+}
+.font-body {
+  font-family: "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Gạch chân bằng gradient dưới tiêu đề (gold -> grape) */
+.title-underline {
+  background-image: linear-gradient(90deg, #b8925a 0%, #4a1942 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 2px;
+  background-position: left 100%;
+  padding-bottom: 0.6rem;
+}
+
+/* Nhãn nhỏ phía trên tiêu đề section */
+.eyebrow {
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Vạch trang trí đứng trước nhãn section */
+.eyebrow-line::before {
+  content: "";
+  display: inline-block;
+  width: 1.75rem;
+  height: 1px;
+  margin-right: 0.65rem;
+  vertical-align: middle;
+  background-color: currentColor;
+  opacity: 0.55;
+}
+
+/* ---------- 3. Họa tiết lá / dây nho trang trí ---------- */
+.decor-leaf {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.14;
+  color: #4a1942;
+}
+
+/* Họa tiết trên nền tối (hero/footer) dùng màu kem */
+.decor-leaf--light {
+  color: #f7f1e6;
+  opacity: 0.1;
+}
+
+/* Rọt nho nền mờ cho section nền kem */
+.bg-vine-pattern {
+  background-image: radial-gradient(circle at 1px 1px, rgba(184, 146, 90, 0.16) 1px, transparent 0),
+    radial-gradient(circle at 1px 1px, rgba(74, 25, 66, 0.08) 1px, transparent 0);
+  background-size: 28px 28px, 56px 56px;
+  background-position: 0 0, 14px 14px;
+}
+
+/* Dải sọc chéo mảnh trang trí (viền section, chân trang) */
+.vine-marquee {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(184, 146, 90, 0.12) 0px,
+    rgba(184, 146, 90, 0.12) 2px,
+    transparent 2px,
+    transparent 10px
+  );
+}
+
+/* ---------- 4. Header ---------- */
+#site-header {
+  will-change: transform, background-color, box-shadow, border-color;
+  transition: transform var(--dur-medium) var(--ease-organic),
+              background-color var(--dur-base) var(--ease-smooth),
+              box-shadow var(--dur-base) var(--ease-smooth),
+              border-color var(--dur-base) var(--ease-smooth);
+}
+
+/* Ẩn thông minh khi cuộn xuống và hiện khi cuộn ngược lên */
+#site-header.is-hidden {
+  transform: translate3d(0, -100%, 0);
+}
+
+/* Nền kem kính mờ sau khi cuộn hoặc khi menu mobile đang mở */
+#site-header.is-scrolled,
+#site-header.menu-open {
+  background-color: rgba(247, 241, 230, 0.96);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom-color: rgba(184, 146, 90, 0.35);
+  box-shadow: 0 10px 30px -15px rgba(31, 26, 23, 0.2);
+}
+
+/* Đổi màu chữ header theo nền */
+#site-header .js-brand-name,
+#site-header .js-nav-link {
+  color: var(--color-cream);
+  transition: color var(--dur-base) var(--ease-smooth);
+}
+#site-header .js-brand-tag {
+  color: rgba(247, 241, 230, 0.82);
+  transition: color var(--dur-base) var(--ease-smooth);
+}
+#site-header.is-scrolled .js-brand-name,
+#site-header.menu-open .js-brand-name,
+#site-header.is-scrolled .js-nav-link {
+  color: var(--color-grape);
+}
+#site-header.is-scrolled .js-nav-link:hover {
+  color: var(--color-gold-600);
+}
+#site-header.is-scrolled .js-brand-tag,
+#site-header.menu-open .js-brand-tag {
+  color: var(--color-forest);
+}
+
+/* Mục menu đang ở section hiện tại (JS gắn aria-current) */
+#site-header .js-nav-link[aria-current="true"] {
+  color: var(--color-gold-300);
+}
+#site-header .js-nav-link[aria-current="true"]::after {
+  transform: scaleX(1);
+}
+#site-header.is-scrolled .js-nav-link[aria-current="true"] {
+  color: var(--color-gold-600);
+}
+
+/* Gạch chân chạy mượt (GPU transform: scaleX) */
+.nav-link {
+  position: relative;
+  padding-bottom: 4px;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--color-gold), var(--color-grape));
+  border-radius: 9999px;
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
+  transition: transform var(--dur-base) var(--ease-organic);
+}
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* Thanh tiến trình đọc trang (dưới mép header) */
+.scroll-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2.5px;
+  overflow: hidden;
+  pointer-events: none;
+}
+.scroll-progress__bar {
+  height: 100%;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  background-image: linear-gradient(90deg, var(--color-gold) 0%, var(--color-grape) 65%, var(--color-forest) 100%);
+  will-change: transform;
+}
+
+/* Menu mobile: trượt xuống mượt mà từ dưới header (position: absolute không kéo dãn header) */
+#mobile-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  will-change: transform, opacity;
+  transform: translate3d(0, -10px, 0);
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  box-shadow: 0 20px 35px -10px rgba(31, 26, 23, 0.22);
+  transition: transform var(--dur-base) var(--ease-organic),
+              opacity var(--dur-fast) var(--ease-smooth),
+              visibility var(--dur-fast) var(--ease-smooth);
+}
+#mobile-menu.is-open {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+/* Nút hamburger -> chữ X */
+#menu-toggle {
+  transition: background-color var(--dur-base) var(--ease-smooth),
+              border-color var(--dur-base) var(--ease-smooth),
+              transform var(--dur-fast) var(--ease-organic);
+}
+#menu-toggle:active {
+  transform: scale(0.94);
+}
+#site-header.is-scrolled #menu-toggle,
+#site-header.menu-open #menu-toggle {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-color: rgba(184, 146, 90, 0.45);
+}
+#menu-toggle .bar {
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  transform-origin: center;
+}
+#menu-toggle[aria-expanded="true"] .bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+#menu-toggle[aria-expanded="true"] .bar:nth-child(2) {
+  opacity: 0;
+}
+#menu-toggle[aria-expanded="true"] .bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ---------- 5. Hero ---------- */
+/* Ảnh xíu 20px làm nền trong lúc ảnh lớn đang tải (blur-up).
+   Để trên lớp RIÊNG, không nằm trong .hero-media — vì .hero-media bị
+   parallax dịch chuyển liên tục, đặt nền ảnh vào đó sẽ bị vẽ lại
+   mỗi khung hình (đo thực tế: FPS rơi từ 59 xuống 46). */
+.hero-lqip {
+  position: absolute;
+  inset: 0;
+  background-image: var(--lqip, none);
+  background-size: cover;
+  background-position: center;
+  pointer-events: none;
+}
+
+/* Khung chứa ảnh, dùng làm mốc cho hiệu ứng parallax */
+.hero-media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  will-change: transform;
+}
+
+/* Ảnh hero mờ dần từ bản LQIP sang bản nét khi tải xong.
+   Chỉ ẩn khi JS bật: nếu JS lỗi thì ảnh vẫn hiện bình thường. */
+.js .hero-image {
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+.js .hero-image.is-loaded {
+  opacity: 1;
+}
+
+/* Ảnh bìa đã được tăng rõ nét, tương phản và độ nét ngay trong file
+   (assets/images/cover-hero.jpg), nên KHÔNG dùng filter: CSS ở đây.
+   Bộ lọc runtime trên ảnh full-screen buộc trình duyệt vẽ lại ảnh
+   liên tục: đo thực tế FPS rơi từ 58 xuống 27 khi cuộn. */
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale3d(1.06, 1.06, 1); /* chừa chỗ cho parallax để không lộ viền */
+  animation: heroZoom 16s ease-out forwards;
+}
+@keyframes heroZoom {
+  from {
+    transform: scale3d(1.14, 1.14, 1);
+  }
+  to {
+    transform: scale3d(1.06, 1.06, 1);
+  }
+}
+
+/* Lớp phủ màu thương hiệu (tím -> xanh lá), làm chậm để lộ ảnh */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    118deg,
+    rgba(74, 25, 66, 0.78) 0%,
+    rgba(74, 25, 66, 0.52) 38%,
+    rgba(58, 42, 62, 0.34) 62%,
+    rgba(47, 74, 58, 0.44) 100%
+  );
+}
+
+/* Lớp scrim riêng cho vùng chữ (tối dần từ trái sang phải trên desktop) */
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(26, 14, 22, 0.55) 0%,
+    rgba(26, 14, 22, 0.3) 40%,
+    rgba(26, 14, 22, 0.08) 70%,
+    rgba(26, 14, 22, 0) 85%
+  );
+}
+
+/* Dưới lg chữ tràn gần hết chiều ngang, nên tối đều theo chiều dọc
+   thay vì theo chiều ngang để mọi dòng chữ đều dễ đọc. */
+@media (max-width: 1023px) {
+  .hero-scrim {
+    background: linear-gradient(
+      to bottom,
+      rgba(26, 14, 22, 0.65) 0%,
+      rgba(26, 14, 22, 0.42) 45%,
+      rgba(26, 14, 22, 0.65) 100%
+    );
+  }
+}
+
+/* Vignette: tối nhẹ 4 góc, tạo cảm giác ảnh chuyên nghiệp */
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(130% 108% at 50% 42%, rgba(31, 26, 23, 0) 52%, rgba(31, 26, 23, 0.42) 100%);
+}
+
+/* Chuyển mềm xuống section kế tiếp */
+.hero-fade-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 9rem;
+  background: linear-gradient(
+    to bottom,
+    rgba(247, 241, 230, 0) 0%,
+    rgba(247, 241, 230, 0.82) 86%,
+    rgba(247, 241, 230, 1) 100%
+  );
+}
+
+/* Tiêu đề hero: chuyển màu kem -> gold, nét hơn và sang trọng hơn */
+.hero-title {
+  color: #f7f1e6; /* dự phòng nếu trình duyệt không hỗ trợ background-clip */
+  filter: drop-shadow(0 2px 14px rgba(26, 14, 22, 0.7));
+}
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+  .hero-title {
+    background-image: linear-gradient(100deg, #ffffff 0%, #f7f1e6 38%, #e3d5bb 68%, #b8925a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+/* Khi JS đã tách tiêu đề thành từng thẻ <span class="hero-word">, gradient
+   được đặt trên từng từ. Nếu để nguyên gradient ở .hero-title thì lớp nền
+   của h1 sẽ vẽ lại toàn bộ chữ ở vị trí gốc, chồng lên các từ đang bay vào
+   -> hiện ra hiện tượng "chữ đè lên nhau". Vì vậy tắt gradient ở h1. */
+.hero-title.is-split {
+  background-image: none;
+  color: #f7f1e6;
+  -webkit-text-fill-color: currentColor;
+}
+
+/* Nội dung hero trượt lên khi vào trang */
+.hero-content {
+  animation: heroUp 0.9s ease-out both;
+}
+@keyframes heroUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 26px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* ---------- 7. Thành phần niềm tin (chứng nhận, cam kết) ---------- */
+/* Huy hiệu chứng nhận trong dải trên đầu trang */
+.trust-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+/* Logo đối tác: xám mờ, lên màu khi rê chuột */
+.partner-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0 1.1rem;
+  border: 1px dashed rgba(184, 146, 90, 0.55);
+  border-radius: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(31, 26, 23, 0.45);
+  will-change: border-color, color, opacity;
+  transition: border-color 0.25s ease, color 0.25s ease, opacity 0.25s ease;
+}
+.partner-logo:hover {
+  color: #4a1942;
+  border-color: rgba(184, 146, 90, 0.95);
+  background-color: rgba(253, 251, 246, 1);
+}
+
+/* Chip thanh toán / vận chuyển */
+.pill-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid rgba(184, 146, 90, 0.5);
+  border-radius: 9999px;
+  background-color: rgba(253, 251, 246, 1);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(74, 25, 66, 0.85);
+  will-change: background-color, color, border-color;
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+.pill-chip:hover {
+  background-color: #4a1942;
+  border-color: #4a1942;
+  color: #f7f1e6;
+}
+
+/* ---------- 7b. Nút chia sẻ ---------- */
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.25rem;
+  border: 1px solid rgba(184, 146, 90, 0.5);
+  border-radius: 9999px;
+  background-color: rgba(247, 241, 230, 0.06);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #f7f1e6;
+  cursor: pointer;
+  will-change: transform;
+  transform: translateZ(0);
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.share-btn:hover {
+  transform: translate3d(0, -3px, 0) scale(1.035);
+}
+.share-btn.is-copied {
+  border-color: #2f4a3a;
+}
+
+/* Lớp lá nổi ở trước mặt ảnh bìa.
+   Tách khỏi .hero-media để parallax lệch tốc độ (tạo chiều sâu). */
+.hero-fg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Một chiếc lá trôi: chuyển động bằng transform nên chạy trên GPU,
+   không tốn CPU kể cả khi trang đang cuộn. */
+.float-leaf {
+  position: absolute;
+  color: #f7f1e6;
+  opacity: 0.1;
+  animation: leafDrift linear infinite;
+}
+/* Lá trôi: chỉ dùng translate + rotate, KHÔNG dùng scale().
+   Khi có scale() trong keyframe, trình duyệt phải vẽ lại lá ở mỗi khung hình
+   thay vì chỉ dịch chuyển lớp có sẵn (đo thực tế: bỏ scale() FPS 47 -> 53).
+   Lá nằm trong .hero-fg; JS tự gắn .is-offscreen để dừng khi cuộn qua. */
+.float-leaf-1 { width: 5rem;    left: 6%;   top: 16%; animation-duration: 17s; animation-delay: -2s; }
+.float-leaf-2 { width: 3.25rem; left: 24%;  top: 66%; animation-duration: 23s; animation-delay: -9s; }
+.float-leaf-3 { width: 5.5rem;  right: 8%;  top: 22%; animation-duration: 25s; animation-delay: -14s; }
+
+@keyframes leafDrift {
+  0%   { transform: translate3d(0, 24vh, 0) rotate(0deg); opacity: 0; }
+  12%  { opacity: 0.13; }
+  50%  { transform: translate3d(3.5vw, -18vh, 0) rotate(190deg); opacity: 0.1; }
+  88%  { opacity: 0.13; }
+  100% { transform: translate3d(-2vw, -60vh, 0) rotate(380deg); opacity: 0; }
+}
+
+/* Tạm dừng chuyển động lặp vô hạn khi không nhìn thấy.
+   Nếu không, lá và dải chữ vẫn chạy ngay cả khi đã cuộn ra khỏi màn hình,
+   giữ CPU bận (đo thực tế: FPS rơi 58 -> 43 khi bật lại). */
+.is-offscreen .float-leaf,
+.is-offscreen .marquee-track,
+.page-hidden .float-leaf,
+.page-hidden .marquee-track {
+  animation-play-state: paused;
+}
+
+
+
+/* ---------- 5c. Ánh sáng đuổi theo chuột trên thẻ giá trị ---------- */
+/* Vệt sáng radial-gradient đặt theo vị trí chuột (JS cập nhật --mx/--my) */
+.spotlight-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: radial-gradient(
+    240px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(184, 146, 90, 0.22),
+    rgba(184, 146, 90, 0) 70%
+  );
+  z-index: 1;
+}
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+
+/* ---------- 5d. Nghiêng 3D theo chuột trên thẻ sản phẩm ---------- */
+/* Dùng biến --rx/--ry do JS ghi, để tránh phải ghi đè transform trong inline style. */
+.card-lift.card-tilt {
+  transition: transform 0.25s ease, border-color 0.35s ease;
+  transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+}
+.card-lift.card-tilt.is-tilting {
+  transition: border-color 0.35s ease; /* bám theo chuột, không trễ */
+}
+.card-lift.card-tilt:hover {
+  transform: perspective(1100px)
+             rotateX(var(--rx, 0deg))
+             rotateY(var(--ry, 0deg))
+             translate3d(0, -6px, 0);
+}
+
+/* ---------- 5e. Góc bo không đồng nhất (B6) - tự nhiên, mềm mại hơn ---------- */
+/* Thay cho việc mọi thẻ đều bo đều nhau như công nghiệp. */
+.radius-organic-a { border-radius: 2.75rem 2.75rem 1rem 2.75rem; }
+.radius-organic-b { border-radius: 1rem 2.75rem 2.75rem 2.75rem; }
+.radius-organic-c { border-radius: 2.75rem 1rem 2.75rem 2.75rem; }
+.radius-organic-d { border-radius: 2.75rem 2.75rem 2.75rem 1rem; }
+@media (max-width: 639px) {
+  /* Trên điện thoại các góc lệch nhau nhìn rối, dùng bo đều cho gọn */
+  .radius-organic-a,
+  .radius-organic-b,
+  .radius-organic-c,
+  .radius-organic-d {
+    border-radius: 1.75rem;
+  }
+}
+
+/* ---------- 6. Dải chữ chạy ngang (marquee) ---------- */
+.marquee-band {
+  position: relative;
+  overflow: hidden;
+  background-color: #4a1942;
+  border-top: 1px solid rgba(184, 146, 90, 0.3);
+  border-bottom: 1px solid rgba(184, 146, 90, 0.3);
+  padding: 0.85rem 0;
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  gap: 2.5rem;
+  padding-right: 2.5rem;
+  animation: marqueeScroll 32s linear infinite;
+  will-change: transform;
+}
+.marquee-track > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 2.5rem;
+  white-space: nowrap;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #f7f1e6;
+}
+.marquee-track .marquee-dot {
+  color: #d8b37c;
+  font-size: 0.6rem;
+}
+@keyframes marqueeScroll {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* Bản chạy ngược chiều (dải thứ hai gần chân trang) */
+.marquee-band--reverse {
+  background-color: #2f4a3a;
+}
+.marquee-band--reverse .marquee-track {
+  animation-direction: reverse;
+}
+.marquee-band--reverse .marquee-track > span {
+  color: #f3e6cd;
+}
+
+/* ---------- 6b. Lưới bento - ô lớn xen ô nhỏ (B1) ---------- */
+.bento-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+  .bento-grid > .bento-big {
+    grid-column: span 2;
+  }
+}
+@media (min-width: 1024px) {
+  .bento-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-rows: minmax(0, 1fr);
+  }
+  /* Ô lớn chiếm 2 cột × 2 hàng */
+  .bento-grid > .bento-big {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+}
+
+/* ---------- 6c. Gallery xếp lệch (B2) ---------- */
+/* Dùng CSS columns: trình duyệt tự xếp, không cần JS, không tốn CPU */
+.masonry {
+  column-count: 2;
+  column-gap: 1rem;
+}
+@media (min-width: 768px) {
+  .masonry {
+    column-count: 3;
+    column-gap: 1.25rem;
+  }
+}
+@media (min-width: 1280px) {
+  .masonry {
+    column-count: 4;
+  }
+}
+.masonry-item {
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  margin-bottom: 1rem;
+  display: block;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(184, 146, 90, 0.45);
+  background-color: #fdfbf6;
+  will-change: transform, border-color;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s ease,
+    box-shadow 0.35s ease;
+}
+.masonry-item:hover {
+  transform: translate3d(0, -5px, 0) scale(1.02);
+  border-color: rgba(184, 146, 90, 0.95);
+  box-shadow: 0 18px 34px -26px rgba(74, 25, 66, 0.55);
+}
+/* Nhãn tên khoảnh trồng nổi ở đáy ảnh */
+.masonry-item figcaption {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  padding: 0.85rem 1rem;
+  background: linear-gradient(to top, rgba(31, 26, 23, 0.8), rgba(31, 26, 23, 0));
+  color: #f7f1e6;
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+/* ---------- 6d. Câu chuyện cuộn (B3) ---------- */
+/* Ảnh bên trái đứng yên, khối chữ bên phải sáng dần khi cuộn tới */
+@media (min-width: 1024px) {
+  /* Chỉ desktop mới làm mờ, để điện thoại đọc bình thường */
+  .js .story-block {
+    opacity: 0.28;
+    transform: translate3d(0, 10px, 0);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .js .story-block.is-active {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* ---------- 6e. Bảng so sánh (B4) ---------- */
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.compare-table th,
+.compare-table td {
+  padding: 0.95rem 1rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid rgba(184, 146, 90, 0.3);
+}
+.compare-table thead th {
+  font-family: "Playfair Display", ui-serif, Georgia, serif;
+  font-size: 1rem;
+  font-weight: 600;
+  border-bottom-width: 2px;
+}
+.compare-table tbody th {
+  font-weight: 500;
+  color: rgba(31, 26, 23, 0.65);
+}
+.compare-table .col-us {
+  background-color: rgba(74, 25, 66, 0.06);
+  color: #4a1942;
+}
+.compare-table thead .col-us {
+  background-color: rgba(74, 25, 66, 0.12);
+  color: #4a1942;
+}
+/* Dấu tích cho cột của bạn */
+.compare-table .tick {
+  color: #2f4a3a;
+  font-weight: 700;
+}
+
+/* ---------- 6f. Ảnh băng ngang trước chân trang (B5) ---------- */
+.banner-band {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.banner-band__media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-color: #2f4a3a;
+  background-image: linear-gradient(135deg, rgba(74, 25, 66, 0.82), rgba(47, 74, 58, 0.9));
+  background-size: cover;
+  background-position: center;
+}
+/* Vân sọc nhẹ cho đỡ trơn */
+.banner-band__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(184, 146, 90, 0.1) 0px,
+    rgba(184, 146, 90, 0.1) 2px,
+    transparent 2px,
+    transparent 12px
+  );
+}
+
+/* ---------- 7. Card ---------- */
+/* Bóng đổ được dựng sẵn ở lớp ::after rồi chuyển `opacity` khi hover,
+   thay vì transition box-shadow (repaint mỗi khung hình). */
+.card-lift {
+  position: relative;
+  will-change: transform, border-color;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s ease;
+}
+.card-lift::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 22px 45px -28px rgba(74, 25, 66, 0.55);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+.card-lift:hover,
+.card-lift:focus-within {
+  transform: translate3d(0, -6px, 0);
+  border-color: rgba(184, 146, 90, 0.75);
+}
+.card-lift:hover::after,
+.card-lift:focus-within::after {
+  opacity: 1;
+}
+
+/* Card có overflow-hidden (sẽ cắt bóng đổ ra ngoài) nên không dùng lớp bóng ở trên;
+   thay bằng viền sáng hơn + nâng nhẹ + phóng ảnh + ánh sương quét. */
+.card-shine.card-lift::after {
+  content: none;
+}
+.card-shine.card-lift:hover,
+.card-shine.card-lift:focus-within {
+  border-color: rgba(184, 146, 90, 0.9);
+}
+
+/* Ánh sương quét ngang khi rê (chỉ chạy lúc hover) */
+.card-shine {
+  position: relative;
+  overflow: hidden;
+}
+.card-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 2;
+  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.32) 50%, transparent 70%);
+  transform: translate3d(-120%, 0, 0);
+  will-change: transform;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.card-shine:hover::after {
+  transform: translate3d(120%, 0, 0);
+}
+
+/* Ảnh trong card phóng to nhẹ khi rê */
+.card-media {
+  overflow: hidden;
+}
+.card-media img {
+  will-change: transform;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.card-lift:hover .card-media img {
+  transform: scale(1.06);
+}
+
+/* Khung placeholder ảnh */
+.placeholder-frame {
+  background-image: linear-gradient(135deg, rgba(47, 74, 58, 0.12) 0%, rgba(74, 25, 66, 0.12) 100%);
+}
+.placeholder-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(184, 146, 90, 0.14) 0px,
+    rgba(184, 146, 90, 0.14) 1px,
+    transparent 1px,
+    transparent 12px
+  );
+}
+
+/* Dấu nháy kép trang trí cho thẻ đánh giá */
+.quote-mark {
+  position: absolute;
+  top: 0.25rem;
+  right: 1rem;
+  font-family: "Playfair Display", ui-serif, Georgia, serif;
+  font-size: 5rem;
+  line-height: 1;
+  color: #b8925a;
+  opacity: 0.18;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ---------- 8. Timeline quy trình ---------- */
+/* Đường nối ngang (desktop): mặc định cuộn ngắn lại 0, JS gắn .is-drawn để vẽ dần */
+.timeline-line {
+  position: absolute;
+  top: 2.75rem;
+  left: 12%;
+  right: 12%;
+  height: 2px;
+  background-image: linear-gradient(
+    90deg,
+    rgba(184, 146, 90, 0) 0%,
+    rgba(184, 146, 90, 0.85) 12%,
+    rgba(184, 146, 90, 0.85) 88%,
+    rgba(184, 146, 90, 0) 100%
+  );
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+.js .timeline-line {
+  transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.js .timeline-line.is-drawn {
+  transform: scaleX(1);
+}
+/* Đường nối dọc (mobile) */
+.timeline-line-v {
+  position: absolute;
+  top: 2.5rem;
+  bottom: 2.5rem;
+  left: 1.75rem;
+  width: 2px;
+  background-image: linear-gradient(
+    180deg,
+    rgba(184, 146, 90, 0) 0%,
+    rgba(184, 146, 90, 0.85) 10%,
+    rgba(184, 146, 90, 0.85) 90%,
+    rgba(184, 146, 90, 0) 100%
+  );
+}
+.timeline-dot {
+  transition: transform 0.35s ease, background-color 0.35s ease, color 0.35s ease;
+}
+.timeline-item:hover .timeline-dot {
+  transform: scale(1.1);
+  background-color: #4a1942;
+  color: #f7f1e6;
+}
+
+/* ---------- 9. Form ---------- */
+.field {
+  will-change: border-color, box-shadow, background-color;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+.field:focus {
+  border-color: #b8925a;
+  box-shadow: 0 0 0 3px rgba(184, 146, 90, 0.22);
+  background-color: #fffdf8;
+}
+.field.is-error {
+  border-color: #b23a48;
+  box-shadow: 0 0 0 3px rgba(178, 58, 72, 0.16);
+}
+.field-error {
+  display: none;
+}
+.field-error.is-visible {
+  display: block;
+  animation: shake 0.35s ease;
+}
+@keyframes shake {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  25% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  75% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+#form-success {
+  display: none;
+}
+#form-success.is-visible {
+  display: flex;
+  animation: heroUp 0.5s ease-out both;
+}
+
+/* ---------- 9b. Thanh đặt hàng dính đáy - chỉ điện thoại (C8) ---------- */
+/* Trên máy tính không hiện: ở đó khách đã có nút cố định trên đầu trang. */
+#sticky-order {
+  display: none;
+}
+@media (max-width: 767px) {
+  #sticky-order {
+    display: block;
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 45;
+    will-change: transform;
+    transform: translate3d(0, 110%, 0);
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  #sticky-order.is-visible {
+    transform: translate3d(0, 0, 0);
+  }
+  .sticky-order__inner {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.7rem 1rem;
+    /* nền gần như đặc để không cần blur (blur sẽ vẽ lại mỗi khung hình) */
+    background-color: rgba(74, 25, 66, 0.97);
+    border-top: 1px solid rgba(184, 146, 90, 0.45);
+    box-shadow: 0 -8px 24px -18px rgba(31, 26, 23, 0.8);
+  }
+  .sticky-order__info {
+    min-width: 0;
+  }
+  /* Chừa chỗ cuối trang cho thanh này, tránh che mất nội dung */
+  body.has-sticky-order {
+    padding-bottom: 4.5rem;
+  }
+}
+
+/* Nút "Xem nhanh" trên thẻ sản phẩm: hiện khi rê chuột.
+   Trên máy cảm ứng không có rê chuột nên phải hiện luôn. */
+.quickview-open {
+  opacity: 0;
+  transform: translate3d(0, 6px, 0) scale(0.95);
+  will-change: transform, opacity;
+  transition: opacity 0.28s ease, transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.card-media:hover .quickview-open,
+.card-media:focus-within .quickview-open,
+.quickview-open:focus-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+@media (hover: none) {
+  .quickview-open {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- 9c. Cửa sổ xem nhanh & phóng to ảnh (C4, C5) ---------- */
+#quickview[hidden],
+#lightbox[hidden],
+#order-modal[hidden] {
+  display: none;
+}
+#quickview,
+#lightbox,
+#order-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(31, 26, 23, 0.72);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+#quickview.is-open .modal-backdrop,
+#lightbox.is-open .modal-backdrop,
+#order-modal.is-open .modal-backdrop {
+  opacity: 1;
+}
+.modal-panel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 44rem;
+  max-height: 90vh;
+  overflow-y: auto;
+  border: 1px solid rgba(184, 146, 90, 0.5);
+  border-radius: 1.75rem;
+  background-color: #fdfbf6;
+  box-shadow: 0 30px 70px -30px rgba(31, 26, 23, 0.7);
+  opacity: 0;
+  will-change: transform, opacity;
+  transform: translate3d(0, 18px, 0) scale(0.98);
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+#quickview.is-open .modal-panel,
+#order-modal.is-open .modal-panel {
+  opacity: 1;
+  transform: none;
+}
+.lightbox-panel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 56rem;
+  max-height: 90vh;
+  padding: 1rem;
+  opacity: 0;
+  will-change: transform, opacity;
+  transform: scale(0.96);
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+#lightbox.is-open .lightbox-panel {
+  opacity: 1;
+  transform: none;
+}
+.modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 2;
+  display: inline-flex;
+  height: 2.5rem;
+  width: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1px solid rgba(184, 146, 90, 0.5);
+  background-color: rgba(253, 251, 246, 0.95);
+  color: #4a1942;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+.modal-close:hover {
+  background-color: #4a1942;
+  color: #f7f1e6;
+  transform: rotate(90deg);
+}
+#lightbox .modal-close {
+  background-color: rgba(31, 26, 23, 0.6);
+  color: #f7f1e6;
+}
+/* Khi cửa sổ mở, khóa cuộn trang phía sau */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* ---------- 9e. Cửa sổ Đặt Hàng Riêng Biệt (Order Modal UI) ---------- */
+.order-modal-panel {
+  max-width: 44rem;
+}
+
+/* 2 Mũi tên trên và dưới chỉ vào giữa */
+.order-arrow-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 5;
+}
+.order-arrow-bubble {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  background: rgba(253, 251, 246, 0.95);
+  border: 1px solid rgba(184, 146, 90, 0.45);
+  border-radius: 9999px;
+  box-shadow: 0 4px 12px -2px rgba(31, 26, 23, 0.08);
+}
+.order-arrow-icon.down-arrow {
+  animation: arrowBounceDown 1.6s ease-in-out infinite;
+}
+.order-arrow-icon.up-arrow {
+  animation: arrowBounceUp 1.6s ease-in-out infinite;
+}
+@keyframes arrowBounceDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+@keyframes arrowBounceUp {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* Wrapper & Carousel kéo ngang */
+.order-carousel-wrapper {
+  position: relative;
+}
+.order-carousel {
+  display: flex;
+  gap: 0.875rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 0.75rem 1.5rem;
+  cursor: grab;
+  user-select: none;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.order-carousel:active {
+  cursor: grabbing;
+}
+.order-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+/* Thẻ sản phẩm trong carousel */
+.order-carousel-item {
+  flex: 0 0 150px;
+  scroll-snap-align: center;
+  position: relative;
+  border-radius: 1.25rem;
+  border: 1.5px solid rgba(184, 146, 90, 0.35);
+  background-color: #fbf8f0;
+  padding: 0.75rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+@media (min-width: 640px) {
+  .order-carousel-item {
+    flex: 0 0 170px;
+  }
+}
+.order-carousel-item:hover {
+  border-color: rgba(184, 146, 90, 0.7);
+  transform: translateY(-2px);
+}
+.order-carousel-item.is-selected {
+  border-color: #b8925a;
+  border-width: 2px;
+  background-color: #ffffff;
+  box-shadow: 0 12px 28px -6px rgba(74, 25, 66, 0.22), 0 0 0 2px rgba(184, 146, 90, 0.5);
+  transform: scale(1.04);
+}
+.order-item-media {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background-color: rgba(74, 25, 66, 0.05);
+  border: 1px solid rgba(184, 146, 90, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.order-item-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.order-item-title {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.25;
+  color: #4a1942;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.2rem;
+}
+.order-item-price {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #b8925a;
+}
+.order-item-badge {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.35rem;
+  font-size: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.15rem 0.4rem;
+  border-radius: 9999px;
+  background-color: #4a1942;
+  color: #f7f1e6;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.order-carousel-item.is-selected .order-item-badge {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Nút điều hướng previous / next của carousel */
+.order-carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: none;
+  height: 2.25rem;
+  width: 2.25rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1px solid rgba(184, 146, 90, 0.5);
+  background-color: rgba(253, 251, 246, 0.92);
+  color: #4a1942;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+@media (min-width: 640px) {
+  .order-carousel-nav {
+    display: inline-flex;
+  }
+}
+.order-carousel-nav:hover {
+  background-color: #4a1942;
+  color: #f7f1e6;
+}
+.order-carousel-nav.prev-btn {
+  left: 0.25rem;
+}
+.order-carousel-nav.next-btn {
+  right: 0.25rem;
+}
+
+/* Nút copy & hiệu ứng feedback */
+.btn-copy {
+  cursor: pointer;
+  user-select: none;
+}
+.btn-copy.is-copied {
+  border-color: #3b5e47;
+  color: #3b5e47;
+}
+
+/* ---------- 9d. Hỏi đáp & Chi tiết dạng bật (Accordion mượt) ---------- */
+.faq-item {
+  border-radius: 1.25rem;
+  transition: background-color var(--dur-fast) var(--ease-smooth),
+              border-color var(--dur-fast) var(--ease-smooth);
+}
+.faq-item > summary {
+  list-style: none;
+  user-select: none;
+  outline: none;
+}
+.faq-item > summary::-webkit-details-marker {
+  display: none;
+}
+.faq-item > summary:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+  border-radius: 0.75rem;
+}
+.faq-icon {
+  position: relative;
+  flex: none;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(184, 146, 90, 0.45);
+  background-color: rgba(253, 251, 246, 0.8);
+  will-change: transform, background-color, border-color;
+  transition: transform var(--dur-base) var(--ease-organic),
+              background-color var(--dur-base) var(--ease-smooth),
+              border-color var(--dur-base) var(--ease-smooth);
+}
+.faq-item:hover .faq-icon {
+  border-color: var(--color-gold);
+  background-color: var(--color-cream-50);
+}
+.faq-icon::before,
+.faq-icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.75rem;
+  height: 1.5px;
+  background-color: var(--color-grape);
+  transform: translate(-50%, -50%);
+  border-radius: 2px;
+}
+.faq-icon::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+  transition: transform var(--dur-base) var(--ease-organic), opacity var(--dur-fast) var(--ease-smooth);
+}
+.faq-item[open] .faq-icon {
+  background-color: var(--color-gold);
+  border-color: var(--color-gold);
+}
+.faq-item[open] .faq-icon::before {
+  background-color: var(--color-cream);
+}
+.faq-item[open] .faq-icon::after {
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+/* Nội dung accordion có hiệu ứng trượt mượt */
+.faq-panel {
+  will-change: opacity, transform;
+  animation: panelSlideDown var(--dur-base) var(--ease-organic) both;
+}
+@keyframes panelSlideDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -6px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* ---------- 9e. Form đăng ký nhận tin (C11) ---------- */
+#newsletter-success.is-visible {
+  display: flex;
+  animation: heroUp 0.4s var(--ease-organic) both;
+}
+
+/* ---------- 9f. Floating Label cho Form Liên Hệ ---------- */
+.form-floating-group {
+  position: relative;
+}
+.form-floating-group input.field,
+.form-floating-group textarea.field {
+  padding-top: 1.6rem;
+  padding-bottom: 0.65rem;
+}
+.form-floating-group label {
+  position: absolute;
+  left: 1rem;
+  top: 1.05rem;
+  font-size: 0.875rem;
+  color: var(--color-ink-muted);
+  pointer-events: none;
+  transform-origin: left top;
+  will-change: transform, color;
+  transition: transform var(--dur-fast) var(--ease-smooth),
+              color var(--dur-fast) var(--ease-smooth);
+}
+.form-floating-group:focus-within label,
+.form-floating-group.has-value label {
+  transform: translate3d(0, -0.62rem, 0) scale(0.78);
+  color: var(--color-grape);
+  font-weight: 600;
+}
+
+/* ---------- 9g. Bộ lọc danh mục sản phẩm (Tabs + Sliding Pill) ---------- */
+.filter-tabs-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  background-color: rgba(74, 25, 66, 0.05);
+  border: 1px solid rgba(184, 146, 90, 0.35);
+  border-radius: 9999px;
+  padding: 4px;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.filter-tabs-wrapper::-webkit-scrollbar {
+  display: none;
+}
+.filter-tab-pill {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 0;
+  border-radius: 9999px;
+  background-color: var(--color-grape);
+  box-shadow: 0 4px 14px -3px rgba(74, 25, 66, 0.4);
+  transition: transform var(--dur-base) var(--ease-organic),
+              width var(--dur-base) var(--ease-organic);
+  pointer-events: none;
+  z-index: 1;
+}
+.filter-tab-btn {
+  position: relative;
+  z-index: 2;
+  padding: 0.5rem 1.15rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  border-radius: 9999px;
+  border: none;
+  background: transparent;
+  color: var(--color-ink);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color var(--dur-fast) var(--ease-smooth);
+}
+.filter-tab-btn.is-active {
+  color: var(--color-cream);
+  font-weight: 600;
+}
+.filter-tab-btn:hover:not(.is-active) {
+  color: var(--color-grape);
+}
+
+/* Ẩn hiện sản phẩm lọc mượt mà */
+.product-card {
+  transition: transform var(--dur-medium) var(--ease-organic),
+              opacity var(--dur-medium) var(--ease-smooth);
+}
+.product-card.is-filtered-out {
+  display: none !important;
+}
+
+/* ---------- 9h. Toast Notifications ---------- */
+#toast-container {
+  position: fixed;
+  top: 5rem;
+  right: 1.5rem;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  pointer-events: none;
+}
+@media (max-width: 639px) {
+  #toast-container {
+    top: auto;
+    bottom: 5.5rem;
+    left: 1rem;
+    right: 1rem;
+    align-items: center;
+  }
+}
+.toast-item {
+  pointer-events: auto;
+  min-width: 17rem;
+  max-width: 24rem;
+  padding: 0.85rem 1.25rem;
+  background-color: rgba(74, 25, 66, 0.97);
+  color: var(--color-cream);
+  border: 1px solid rgba(184, 146, 90, 0.5);
+  border-radius: 1rem;
+  box-shadow: 0 16px 36px -12px rgba(31, 26, 23, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  will-change: transform, opacity;
+  transform: translate3d(110%, 0, 0);
+  opacity: 0;
+  transition: transform var(--dur-medium) var(--ease-organic),
+              opacity var(--dur-base) var(--ease-smooth);
+}
+@media (max-width: 639px) {
+  .toast-item {
+    transform: translate3d(0, 30px, 0);
+    width: 100%;
+  }
+}
+.toast-item.is-visible {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+}
+.toast-item.is-leaving {
+  transform: translate3d(110%, 0, 0) scale(0.95);
+  opacity: 0;
+}
+@media (max-width: 639px) {
+  .toast-item.is-leaving {
+    transform: translate3d(0, 20px, 0) scale(0.95);
+  }
+}
+
+/* ---------- 10. Fade-in khi cuộn (Scroll Reveal System) ---------- */
+/* Chỉ ẩn nội dung khi JavaScript đã bật (class .js do script gắn ở <head>).
+   Dùng transform + opacity chạy hoàn toàn trên GPU (không layout thrashing). */
+.js .reveal {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+  will-change: transform, opacity;
+  transition: opacity var(--dur-reveal) var(--ease-organic),
+              transform var(--dur-reveal) var(--ease-organic);
+}
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1) !important;
+}
+
+/* Các biến thể hướng xuất hiện */
+.js .reveal.animate-fade-down {
+  transform: translate3d(0, -20px, 0);
+}
+.js .reveal.animate-fade-left {
+  transform: translate3d(24px, 0, 0);
+}
+.js .reveal.animate-fade-right {
+  transform: translate3d(-24px, 0, 0);
+}
+.js .reveal.animate-scale-in {
+  transform: scale(0.92);
+}
+
+/* Trễ xuất hiện theo bậc thang */
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+.reveal-delay-4 { transition-delay: 0.32s; }
+
+/* ---------- 11. Link & nút tương tác ---------- */
+.footer-link {
+  position: relative;
+  transition: color var(--dur-fast) var(--ease-smooth);
+}
+.footer-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 1px;
+  width: 0;
+  background: linear-gradient(90deg, var(--color-gold), var(--color-grape));
+  transition: width var(--dur-base) var(--ease-organic);
+}
+.footer-link:hover {
+  color: var(--color-gold);
+}
+.footer-link:hover::after {
+  width: 100%;
+}
+
+.social-btn {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  transition: transform var(--dur-fast) var(--ease-smooth),
+              opacity var(--dur-fast) var(--ease-smooth),
+              border-color var(--dur-fast) var(--ease-smooth);
+}
+.social-btn:hover {
+  transform: translate3d(0, -3px, 0);
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+.social-btn:active {
+  transform: translate3d(0, 0, 0) scale(0.95);
+}
+
+/* Nút về đầu trang: vòng tiến trình cuộn tròn tinh tế */
+#back-to-top {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.25rem;
+  z-index: 40;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 9999px;
+  background-color: var(--color-grape);
+  color: var(--color-cream);
+  border: 1px solid rgba(184, 146, 90, 0.4);
+  box-shadow: 0 10px 25px -8px rgba(74, 25, 66, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  will-change: transform, opacity;
+  transform: translate3d(0, 16px, 0) scale(0.85);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform var(--dur-base) var(--ease-organic),
+              opacity var(--dur-base) var(--ease-smooth),
+              visibility var(--dur-base),
+              background-color var(--dur-fast) var(--ease-smooth);
+}
+#back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+#back-to-top:hover {
+  transform: translate3d(0, -3px, 0) scale(1.05);
+  background-color: var(--color-grape-800);
+}
+#back-to-top:active {
+  transform: translate3d(0, 0, 0) scale(0.95);
+}
+.btt-progress-svg {
+  position: absolute;
+  inset: -3px;
+  width: calc(100% + 6px);
+  height: calc(100% + 6px);
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+.btt-progress-circle {
+  fill: none;
+  stroke: var(--color-gold);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  transition: stroke-dashoffset 0.1s linear;
+}
+
+/* Ánh sương quét qua nút CTA */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+  will-change: transform;
+  transform: translateZ(0);
+  transition: transform var(--dur-base) var(--ease-organic);
+}
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -60%;
+  width: 45%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  transform: skewX(-18deg);
+  pointer-events: none;
+  transition: opacity var(--dur-fast) var(--ease-smooth);
+}
+.btn-shine:hover::after {
+  opacity: 1;
+  animation: btnSweep 0.75s ease-out;
+}
+@keyframes btnSweep {
+  to {
+    left: 120%;
+  }
+}
+.btn-shine:hover {
+  transform: translate3d(0, -3px, 0) scale(1.03);
+}
+.btn-shine:active {
+  transform: translate3d(0, 0, 0) scale(0.97) !important;
+}
+.btn-shine:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+  border-radius: 9999px;
+}
+
+/* Nút CTA chính */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  will-change: transform;
+  transform: translateZ(0);
+  transition: transform var(--dur-base) var(--ease-organic);
+}
+.btn-primary:hover {
+  transform: translate3d(0, -3px, 0) scale(1.03);
+}
+.btn-primary:active {
+  transform: translate3d(0, 0, 0) scale(0.97) !important;
+}
+.btn-primary:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* Con dấu vector watermark */
+.brand-seal {
+  color: var(--color-gold);
+  opacity: 0.75;
+  width: 8.5rem;
+  flex: none;
+  will-change: transform, opacity;
+  transition: opacity var(--dur-base) var(--ease-smooth),
+              transform var(--dur-slow) var(--ease-organic);
+}
+.brand-seal:hover {
+  opacity: 1;
+  transform: scale(1.04);
+}
+.brand-seal svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.brand-seal:hover #seal-arc-top,
+.brand-seal:hover svg circle[stroke-width="1"] {
+  filter: drop-shadow(0 0 6px rgba(184, 146, 90, 0.5));
+}
+.brand-seal .seal-text {
+  font-family: "Playfair Display", ui-serif, Georgia, serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 2.1px;
+}
+.brand-seal .seal-text--small {
+  font-size: 12.5px;
+  letter-spacing: 3px;
+}
+@media (max-width: 639px) {
+  .brand-seal {
+    width: 7rem;
+    opacity: 0.65;
+  }
+}
+
+/* ---------- 11c. Entrance Animation Keyframes ---------- */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translate3d(0, 24px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translate3d(0, -20px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translate3d(-24px, 0, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translate3d(24px, 0, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes pulseSoft {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50%      { opacity: 1; transform: scale(1.04); }
+}
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes bounceIn {
+  0%   { opacity: 0; transform: scale(0.6) translate3d(0, 16px, 0); }
+  60%  { opacity: 1; transform: scale(1.03) translate3d(0, 0, 0); }
+  100% { opacity: 1; transform: scale(1) translate3d(0, 0, 0); }
+}
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25%      { transform: rotate(-3deg); }
+  75%      { transform: rotate(3deg); }
+}
+
+/* Áp dụng cho hero (khởi chạy ngay khi vào trang) */
+.js #hero .animate-fade-up { animation: fadeInUp 0.7s var(--ease-organic) both; }
+.js #hero .animate-fade-down { animation: fadeInDown 0.7s var(--ease-organic) both; }
+.js #hero .animate-fade-left { animation: fadeInLeft 0.65s var(--ease-organic) both; }
+.js #hero .animate-fade-right { animation: fadeInRight 0.65s var(--ease-organic) both; }
+.js #hero .animate-bounce-in { animation: bounceIn 0.7s var(--ease-bounce-soft) both; }
+.js .animate-pulse-soft { animation: pulseSoft 3s ease-in-out infinite; }
+.js .animate-spin-slow { animation: spinSlow 20s linear infinite; }
+.js .animate-wiggle { animation: wiggle 0.4s ease-in-out; }
+
+/* Stagger cho danh sách con */
+.js .stagger-children > *:nth-child(1) { transition-delay: 0.05s; }
+.js .stagger-children > *:nth-child(2) { transition-delay: 0.1s; }
+.js .stagger-children > *:nth-child(3) { transition-delay: 0.15s; }
+.js .stagger-children > *:nth-child(4) { transition-delay: 0.2s; }
+.js .stagger-children > *:nth-child(5) { transition-delay: 0.25s; }
+.js .stagger-children > *:nth-child(6) { transition-delay: 0.3s; }
+.js .stagger-children > *:nth-child(7) { transition-delay: 0.35s; }
+.js .stagger-children > *:nth-child(8) { transition-delay: 0.4s; }
+
+/* Parallax decor nhẹ */
+.parallax-slow {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Thẻ nổi bật tinh tế (thay cho ping nhấp nháy liên tục) */
+.badge-highlight {
+  position: relative;
+  transition: transform var(--dur-fast) var(--ease-smooth),
+              box-shadow var(--dur-fast) var(--ease-smooth);
+}
+.badge-highlight:hover {
+  transform: scale(1.04);
+  box-shadow: var(--shadow-glow-gold);
+}
+
+/* ============================================================
+   KHUNG TRANG TRÍ DÂY LEO NHO CHO CARD SẢN PHẨM (ARTISANAL VINE FRAME)
+   ============================================================ */
+
+/* 1. Thiết lập thẻ sản phẩm theo chuẩn thiết kế cao cấp */
+.product-card {
+  position: relative;
+  background-color: #FCFAF5 !important; /* Nền trắng ngà */
+  border: 1px solid #D9C3A0 !important; /* Viền mảnh màu vàng be */
+  border-radius: 28px !important;       /* Bo góc lớn ~28px */
+  overflow: visible !important;          /* Cho phép dây leo tràn nhẹ 8-14px */
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.35s ease,
+              box-shadow 0.35s ease,
+              opacity var(--dur-base) var(--ease-organic) !important;
+  will-change: transform, border-color, box-shadow;
+}
+
+/* Đảm bảo vùng ảnh vẫn giữ bo góc riêng 28px */
+.product-card .card-media {
+  border-top-left-radius: 27px;
+  border-top-right-radius: 27px;
+  overflow: hidden;
+}
+
+/* Khi hover card: viền chuyển vàng đồng (#C9A35F) */
+.product-card:hover {
+  border-color: #C9A35F !important;
+  box-shadow: 0 20px 42px -16px rgba(74, 26, 63, 0.18),
+              0 0 0 1px #C9A35F !important;
+  transform: translate3d(0, -6px, 0);
+}
+
+.product-card.is-filtered-out {
+  display: none !important;
+}
+
+/* 2. Khung dây leo trang trí (Vine Frame Wrapper) */
+.card-vine-frame {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 25; /* Nằm trên viền card nhưng không chặn click */
+  filter: drop-shadow(0 2px 3px rgba(40, 30, 20, 0.15)); /* Đổ bóng nhẹ theo yêu cầu */
+}
+
+/* Vị trí góc trên bên phải */
+.vine-corner-topright {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  width: 138px;
+  height: 138px;
+  overflow: visible;
+  pointer-events: none;
+}
+
+/* Vị trí góc dưới bên trái */
+.vine-corner-bottomleft {
+  position: absolute;
+  bottom: -10px;
+  left: -10px;
+  width: 108px;
+  height: 108px;
+  overflow: visible;
+  pointer-events: none;
+}
+
+/* Nội dung thẻ (tên, mô tả, giá) nằm TRÊN khung dây leo trang trí (z-index 25),
+   nếu không chùm nho ở góc dưới trái sẽ đè lên dòng dung tích / giá. */
+.product-card > div:last-child {
+  position: relative;
+  z-index: 30;
+}
+
+/* 3. Hiệu ứng Motion khi hover card */
+/* Lá đung đưa nhẹ: xoay 2-3 độ, chu kỳ 3s, ease-in-out */
+.product-card:hover .vine-leaf-sway {
+  animation: vineLeafSway 3s ease-in-out infinite;
+}
+.product-card:hover .vine-leaf-sway-alt {
+  animation: vineLeafSwayAlt 3.4s ease-in-out infinite;
+}
+
+/* Chùm nho lắc lư nhẹ quanh điểm cuống */
+.product-card:hover .grape-cluster-swing {
+  animation: grapeClusterSwing 3.2s ease-in-out infinite;
+}
+
+@keyframes vineLeafSway {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(2.8deg);
+  }
+}
+
+@keyframes vineLeafSwayAlt {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-2.4deg);
+  }
+}
+
+@keyframes grapeClusterSwing {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-2.2deg);
+  }
+}
+
+/* 4. Responsive: Trên mobile (<640px) thu nhỏ họa tiết ~70% và chỉ giữ chùm góc trên phải */
+@media (max-width: 639px) {
+  .vine-corner-topright {
+    top: -8px;
+    right: -8px;
+    width: 96px;
+    height: 96px;
+    transform: scale(0.72);
+    transform-origin: top right;
+  }
+  .vine-corner-bottomleft {
+    display: none !important; /* Ẩn chùm nho góc dưới trái trên mobile */
+  }
+}
+
+/* Tôn trọng prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .product-card:hover .vine-leaf-sway,
+  .product-card:hover .vine-leaf-sway-alt,
+  .product-card:hover .grape-cluster-swing {
+    animation: none !important;
+  }
+}
+
+/* ---------- 12. Tôn trọng prefers-reduced-motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  /* Vẫn hiện nội dung dù tắt chuyển động */
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .hero-image,
+  .hero-content {
+    animation: none;
+  }
+  .js .hero-image {
+    opacity: 1; /* không làm mờ ảnh khi người dùng tắt chuyển động */
+  }
+  .marquee-track {
+    animation: none;
+    transform: none;
+  }
+  /* Lá đứng yên thay vì trôi (đặt opacity cố định, vì khung hình cuối của
+     leafDrift là opacity 0 sẽ làm lá biến mất hẳn) */
+  .float-leaf {
+    animation: none !important;
+    opacity: 0.07;
+  }
+
+}
+
+/* ---------- 13. In ấn ---------- */
+@media print {
+  #site-header,
+  #menu-toggle,
+  #mobile-menu,
+  #back-to-top {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+}
+
+/* ============================================================
+   21. TOAU UONG GIA DIEN DIEN THOAI
+   Muc tieu: page ngan hon ~25%, de quyet biet giua cac muc,
+   nhung van giu khoang cach thoa va ti le chu nho.
+   Chi ap dung duoi 640px - may tinh/tablet giu nguyen bo cuc.
+   ============================================================ */
+@media (max-width: 639px) {
+  /* Dai chu chay gap hon mot chut */
+  .marquee-band {
+    padding: 0.6rem 0;
+  }
+
+  /* Tieu de muc: giam 1 cap nho de khong tran man hinh */
+  section h2 {
+    letter-spacing: -0.01em;
+  }
+
+  /* Nut "Xem nhanh" mac dinh an, chi hien khi hover.
+     Tren dien thoai khong co chuot/hover -> phai hien luon,
+     neu lai khach khong mo duoc cua so chi tiet san pham. */
+  .quickview-open {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Bo loc danh muc: 4 the khong vua mot hang tren dien thoai ->
+     chuyen thanh luoi 2 cot, tat ca danh muc deu thay ngay,
+     khong phai keo ngang. */
+  .filter-tabs-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    width: 100%;
+    max-width: 21rem;
+    overflow: visible;
+    border-radius: 1.25rem;
+    padding: 5px;
+  }
+  .filter-tab-btn {
+    width: 100%;
+    padding: 0.55rem 0.4rem;
+    font-size: 0.78rem;
+    text-align: center;
+  }
+  .filter-tab-pill {
+    display: none;
+  }
+  .filter-tab-btn.is-active {
+    background-color: var(--color-grape);
+    color: var(--color-cream);
+    box-shadow: 0 4px 12px -4px rgba(74, 25, 66, 0.45);
+  }
+
+  /* The san pham: phan anh nho hon, chu gon hon */
+  .product-card .card-media {
+    max-height: 15rem;
+  }
+
+  /* Nut dong cuoi man hinh: sat day hon */
+  .sticky-order__inner {
+    padding: 0.55rem 0.9rem;
+    gap: 0.6rem;
+  }
+
+  /* Con dau chan trang: nho lai */
+  .brand-seal {
+    width: 6rem;
+    opacity: 0.6;
+  }
+
+  /* Anh trang trí o goc the san pham: rut gon cho de doc chu */
+  .card-vine-frame {
+    opacity: 0.85;
+  }
+
+  /* Tieu de hero: dong chu sat nhau mot chút tren man hinh nho */
+  .hero-title {
+    letter-spacing: -0.015em;
+  }
+
+  /* Nut trong form: cao hon mot chút de de bam */
+  .field {
+    font-size: 0.95rem;
+  }
+
+  /* Khoang cach giua cac muc dung chung cua Tailwind tren mobile */
+  .eyebrow {
+    letter-spacing: 0.16em;
+  }
+}
