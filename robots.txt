@@ -1,0 +1,6 @@
+# robots.txt cho Nho Rừng Đình Lập (https://nhorungdinhlap.vercel.app/)
+User-agent: *
+Allow: /
+
+# Sơ đồ trang web
+Sitemap: https://nhorungdinhlap.vercel.app/sitemap.xml
