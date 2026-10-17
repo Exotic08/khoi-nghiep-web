@@ -2,5 +2,14 @@
 User-agent: *
 Allow: /
 
+# Cho phép Googlebot và Googlebot-Image thu thập favicon và hình ảnh
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /favicon.ico
+Allow: /assets/images/
+
 # Sơ đồ trang web
 Sitemap: https://nhorungdinhlap.vercel.app/sitemap.xml
+

@@ -16,6 +16,10 @@
   <meta name="theme-color" content="#4A1942" />
   <link rel="canonical" href="https://nhorungdinhlap.vercel.app/" />
 
+  <!-- Tên thương hiệu ứng dụng / PWA -->
+  <meta name="application-name" content="Nho Rừng Đình Lập" />
+  <meta name="apple-mobile-web-app-title" content="Nho Rừng Đình Lập" />
+
   <!-- Open Graph (Facebook / Zalo preview) -->
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="vi_VN" />
@@ -35,46 +39,57 @@
   <meta name="twitter:description" content="Siro, giấm, nho ngâm mật ong, nước nho ngâm đường phèn - từ nho rừng thu hái thủ công tại Đình Lập, Lạng Sơn." />
   <meta name="twitter:image" content="https://nhorungdinhlap.vercel.app/assets/images/cover-hero.jpg" />
 
-  <!-- Schema.org JSON-LD (Dữ liệu có cấu trúc cho Google Search) -->
+  <!-- ============================================================
+       GOOGLE SEARCH SITE NAME & STRUCTURED DATA (Schema.org JSON-LD)
+       Chuẩn định danh tên trang web theo khuyến nghị của Google Search
+       ============================================================ -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebSite",
-        "@id": "https://nhorungdinhlap.vercel.app/#website",
-        "url": "https://nhorungdinhlap.vercel.app/",
-        "name": "Nho Rừng Đình Lập",
-        "description": "Sản phẩm tự nhiên từ nho rừng thu hái thủ công tại Đình Lập, Lạng Sơn",
-        "inLanguage": "vi-VN"
-      },
-      {
-        "@type": "LocalBusiness",
-        "@id": "https://nhorungdinhlap.vercel.app/#organization",
-        "name": "Nho Rừng Đình Lập",
-        "url": "https://nhorungdinhlap.vercel.app/",
-        "logo": "https://nhorungdinhlap.vercel.app/assets/images/logo-180.png",
-        "image": "https://nhorungdinhlap.vercel.app/assets/images/cover-hero.jpg",
-        "telephone": "+84378499946",
-        "priceRange": "50.000đ - 300.000đ",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Huyện Đình Lập",
-          "addressRegion": "Tỉnh Lạng Sơn",
-          "addressCountry": "VN"
-        },
-        "sameAs": [
-          "https://www.facebook.com/share/1DvChDViZA/?mibextid=wwXIfr"
-        ]
-      }
+    "@type": "WebSite",
+    "name": "Nho Rừng Đình Lập",
+    "alternateName": [
+      "Nho Rung Dinh Lap",
+      "Nho Rừng Đình Lập Lạng Sơn"
+    ],
+    "url": "https://nhorungdinhlap.vercel.app/"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://nhorungdinhlap.vercel.app/#organization",
+    "name": "Nho Rừng Đình Lập",
+    "url": "https://nhorungdinhlap.vercel.app/",
+    "logo": "https://nhorungdinhlap.vercel.app/assets/images/favicon-192x192.png",
+    "image": "https://nhorungdinhlap.vercel.app/assets/images/cover-hero.jpg",
+    "telephone": "+84378499946",
+    "priceRange": "50.000đ - 300.000đ",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Huyện Đình Lập",
+      "addressRegion": "Tỉnh Lạng Sơn",
+      "addressCountry": "VN"
+    },
+    "sameAs": [
+      "https://www.facebook.com/share/1DvChDViZA/?mibextid=wwXIfr"
     ]
   }
   </script>
 
-<!-- Favicon dùng logo tròn -->
-<link rel="icon" type="image/png" sizes="64x64" href="assets/images/logo-64.png" />
-<link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo-32.png" />
-<link rel="apple-touch-icon" href="assets/images/logo-180.png" />
+  <!-- ============================================================
+       FAVICON & APP ICONS (Chuẩn Google Search: bội số 48px)
+       Google Search yêu cầu favicon kích thước là bội số 48px (48x48, 96x96, 144x144, 192x192)
+       ============================================================ -->
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/images/favicon-48x48.png" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/images/favicon-96x96.png" />
+  <link rel="icon" type="image/png" sizes="144x144" href="/assets/images/favicon-144x144.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/favicon-192x192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
 
 <!-- GHI CHÚ ẢNH:
      cover-hero.jpg   : bản gốc đã nâng nét, dùng làm ảnh dự phòng
