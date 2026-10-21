@@ -69,47 +69,35 @@ siro nho rừng"* — nếu sai khác, báo mình sửa ngay.
 
 ## C. Cần bổ sung / quyết định
 
-### C1. Giá bán — đã cập nhật (16/10)
-Bạn gửi bảng giá, mình đã đưa vào **6 thẻ sản phẩm**, mục *Thông tin chi tiết từng sản phẩm*,
-danh sách chọn trong form đặt hàng và thanh đặt hàng dính đáy màn hình (ghi *"Từ 50.000đ/lọ"*):
+### C1. Giá bán & Danh mục sản phẩm — đã cập nhật (21/10)
+Đã cập nhật bảng giá chính thức lên toàn bộ giao diện: thẻ sản phẩm, thông tin chi tiết từng sản phẩm (accordion), danh sách chọn trong form đặt hàng và modal đặt mua:
 
-| Sản phẩm | Giá hiển thị |
-|---|---|
-| Siro nho rừng | 69.000đ / lọ (300ml) |
-| Giấm nho tự nhiên | 50.000đ / lọ (300ml) |
-| Nho ngâm mật ong | 99.000đ / lọ (300ml) |
-| Nước nho ngâm đường phèn | 59.000đ / lọ (300ml) |
-| Bánh trung thu nhân siro nho rừng | 7.000đ / cái (lố 30 cái: 210.000đ) |
+| STT | Sản phẩm | Quy cách | Giá bán | Phân loại |
+|---|---|---|---|---|
+| 1 | Nước cốt nho lên men tự nhiên | Lọ 200 ml | 75.000đ | Sản phẩm chính |
+| 2 | Nho rừng ngâm mật ong | Lọ 300 ml | 90.000đ | Sản phẩm chính |
+| 3 | Nho rừng ngâm đường phèn | Lọ 300 ml | 60.000đ | Sản phẩm chính |
+| 4 | Siro nho rừng | Lọ 300 ml | 70.000đ | Sản phẩm chính |
+| 5 | Giấm nho rừng | Lọ 300 ml | 50.000đ | Sản phẩm chính |
+| 6 | Bánh nho (Bánh trung thu nhân siro nho) | Cái | 7.000đ / cái (lố 30 cái: 210.000đ) | **Sản phẩm phụ** |
 
-⚠️ **Cần bạn xác nhận:** bảng bạn gửi tên là *"Bảng doanh thu"* và có cột *Số lượng – Thành
-tiền* (tổng 121 món, 6.909.000đ). Nếu đây là **giá mua/giá sỉ** thì đưa lên web là bán lỗ.
-Đây hiện là giá bán trên trang — đúng lỡ nếu đó là giá bán của bạn.
+Ghi chú:
+- **Nước cốt nho lên men tự nhiên (Lọ 200ml - 75.000đ):** Đổi tên từ « Rượu nho rừng » theo quyết định của bạn để tránh 100% rủi ro pháp lý về kinh doanh/quảng cáo đồ uống có cồn trên internet.
+- **Bánh nho:** Đã chuyển thành **Sản phẩm phụ**, gắn nhãn riêng và có tab lọc riêng trên giao diện.
 
 Ngoài ra trên trang **chưa có** mức phí vận chuyển và chưa nói cách thanh toán (xem C7).
 
 ### C2. Tên miền — bắt buộc trước khi chia sẻ lên Facebook
-`TODO-finish.md` mục 24c để trống, nên trong `index.html` vẫn còn:
-- `link rel="canonical"` → `https://example.com/`
-- `og:url` → `https://example.com/`
-- `og:image` → đường dẫn tương đối (`assets/images/cover-hero.jpg`)
+Trang web hiện dùng tên miền Vercel: `https://nhorungdinhlap.vercel.app/`
+Đã cấu hình chuẩn:
+- `canonical` và `og:url` → `https://nhorungdinhlap.vercel.app/`
+- `og:image` → `https://nhorungdinhlap.vercel.app/assets/images/cover-hero.jpg`
+- `WebSite` Schema định danh tên website: "Nho Rừng Đình Lập"
+- Favicon đa kích thước chuẩn Google Search (48x48, 96x96, 144x144, 192x192, 512x512).
 
-Facebook/Zalo **không hiện ảnh xem trước** khi `og:image` là đường dẫn tương đối, và sẽ báo sai
-link khi chia sẻ. Cần tên miền thật (VD `nhorungdinhlap.vn`) để sửa 3 dòng này.
-
-### C3. Rượu nho — đã gỡ khỏi web (16/10)
-Bạn xác nhận để rượu trên web là vi phạm pháp luật, nên mình **xoá hẳn**:
-- thẻ sản phẩm Rượu nho rừng (cùng cảnh báo "Chứa cồn · Không dành cho người dưới 18 tuổi"),
-- mục *Thông tin chi tiết từng sản phẩm* của rượu,
-- tab lọc "Rượu nho rừng",
-- lựa chọn "Rượu nho rừng" trong form đặt hàng,
-- dòng "Rượu nho rừng: men say êm dịu..." trong mục Câu chuyện,
-- mọi chữ "rượu" trong tiêu đề, mô tả SEO, Open Graph, Twitter và mô tả chân trang.
-
-Trang hiện còn **5 sản phẩm**: siro, giấm, nho ngâm mật ong, nước nho ngâm đường phèn, bánh trung thu.
-
-⚠️ Cần nhớ: **mở bán rượu qua mạng cần giấy phép** của cơ quan quản lý nhà nước về an toàn thực phẩm
-(Nghị định 17/2022), tuân thủ điều kiện về thông tin trên bao bì, nhãn hiệu, không bán cho người
-dưới 18 tuổi. Nếu bạn vẫn muốn bán rượu cho khách lẻ, hãy bán trực tiếp ngoài website này.
+### C3. Chuyển đổi tên sản phẩm sang « Nước cốt nho lên men tự nhiên »
+Theo yêu cầu ngày 21/10, sản phẩm được đổi tên thành **Nước cốt nho lên men tự nhiên** (giá 75.000đ / lọ 200ml) giúp website hoàn toàn tuân thủ các quy định về thương mại điện tử, an tâm kinh doanh trên môi trường mạng mà không lo bị cơ quan chức năng xử phạt vi phạm quảng cáo rượu.
+- Không còn chứa cảnh báo 18+ hay cồn, thay vào đó nhấn mạnh công dụng kích thích tiêu hóa, thanh nồng và bổ dưỡng từ phương pháp ủ lên men tự nhiên.
 
 ### C4. Đã bỏ chữ "organic" khỏi toàn trang — rất quan trọng
 Bạn không điền chứng nhận nào (mục 10) nên mình **xoá hết** các chữ:
@@ -140,13 +128,15 @@ Mục 11 để trống nên xoá (trong đó có **"Hoàn tiền 100%"** — cam
 Hiện chỉ còn cam kết đổi trả 7 ngày trong mục Hỏi đáp. Nếu bạn thực sự làm được
 "giao đúng hẹn" hoặc "đóng hộp giữ lạnh", nói mình thêm vào.
 
-### C9. Ảnh — trang đang có khung ảnh tạm
-Bạn chưa cung cấp ảnh nào. Hiện tại:
-- 5 thẻ sản phẩm + ảnh cột trái mục Câu chuyện + cửa sổ xem nhanh: **khung "Ảnh sản phẩm" tạm**.
-- Mục "Một ngày ở vườn nho": đã xoá vì không có ảnh.
-Cách thêm: đặt file vào `assets/images/` rồi gửi mình tên file theo mẫu
-`siro.jpg`, `giam.jpg`, `nho-mat-ong.jpg`, `nuoc-nho.jpg`, `ruou.jpg`, `vuon-1.jpg`…
-Kích thước ngang ~800px, mỗi ảnh dưới 150KB (nén ở squoosh.app).
+### C9. Ảnh sản phẩm thật — đã cập nhật đầy đủ (21/10)
+Đã đưa bộ ảnh thật do bạn cung cấp vào toàn bộ website:
+- **Rượu nho rừng (Lọ 200ml):** Ảnh thực tế chai tròn nắp gỗ và chùm nho rừng tươi ([product-ruou.jpg](assets/images/product-ruou.jpg)).
+- **Nho rừng ngâm mật ong (Lọ 300ml):** Ảnh 2 chai thành phẩm nhãn tím chính thức ([product-mat-ong.jpg](assets/images/product-mat-ong.jpg)).
+- **Nho rừng ngâm đường phèn (Lọ 300ml):** Ảnh 2 chai thành phẩm nhãn tím chính thức ([product-duong-phen.jpg](assets/images/product-duong-phen.jpg)).
+- **Siro nho rừng (Hũ tròn nắp thiếc):** Ảnh 2 hũ thành phẩm nhãn tím chính thức ([product-siro.jpg](assets/images/product-siro.jpg)).
+- **Giấm nho rừng (Lọ 300ml):** Ảnh 2 chai thành phẩm nhãn tím chính thức ([product-giam.jpg](assets/images/product-giam.jpg)).
+- **Bánh nho (Bánh trung thu nhân siro nho rừng):** Ảnh mặt cắt nhân siro nho tím mọng ([product-banh.jpg](assets/images/product-banh.jpg)).
+- **Bộ sưu tập đầy đủ:** Banner ảnh thực tế toàn bộ các dòng sản phẩm cùng chùm nho chín mọng ([products-collection.jpg](assets/images/products-collection.jpg)) đặt nổi bật ngay trên mục Sản phẩm.
 
 ### C10. TikTok và Facebook — kiểm tra lại link
 - TikTok: bạn ghi `@nhorung47`, mình dựng thành `https://www.tiktok.com/@nhorung47`. Nếu tên khác

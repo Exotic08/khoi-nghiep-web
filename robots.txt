@@ -7,7 +7,9 @@ User-agent: Googlebot
 Allow: /
 
 User-agent: Googlebot-Image
+Allow: /
 Allow: /favicon.ico
+Allow: /site.webmanifest
 Allow: /assets/images/
 
 # Sơ đồ trang web

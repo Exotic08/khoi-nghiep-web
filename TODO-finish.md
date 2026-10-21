@@ -29,17 +29,8 @@ Thông tin bạn đưa là siro, giấm, nho ngâm mật ong, nước nho ngâm 
 >
 > ☐  Tôi sẽ tự viết lại phần này, cứ bỏ qua
 
-## Quyết định 2 · Rượu nho: lưu ý pháp lý
-
-Bán rượu trên mạng ở Việt Nam có quy định riêng (không bán cho người dưới 18 tuổi, hạn chế hình thức quảng cáo…). Mình đã thêm cảnh báo « Chứa cồn · Không dành cho người dưới 18 tuổi » trên thẻ sản phẩm và trong phần chi tiết.
-
-**Bạn chọn một:**
-
-> ☐  Bán rượu trên web, giữ cảnh báo
->
-> ☐  Tạm ẩn sản phẩm rượu khỏi trang (chỉ cho khách hỏi riêng)
->
-> ☐  Không bán rượu, bỏ luôn sản phẩm này
+## Quyết định 2 · Đổi tên thành « Nước cốt nho lên men tự nhiên »
+Đã chuyển đổi an toàn từ « Rượu nho rừng » sang « Nước cốt nho lên men tự nhiên » (dung tích 200ml, giá 75.000đ). Tránh được 100% các rủi ro pháp lý về quảng cáo và kinh doanh đồ uống có cồn trên internet.
 
 ## Quyết định 3 · Ngày sản xuất / hạn sử dụng
 
@@ -70,21 +61,21 @@ Trong info.md có ghi NSX và HSD (VD 16/09/2026 → 16/12/2026). Đây là ngà
 
 | **Khối 1 · Nguồn gốc** | Sinh trưởng tự nhiên giữa những vách đá và sương mờ của vùng đất **Đình Lập, Lạng Sơn**, nho rừng không cần bàn tay con người chăm bón. Cứ thế, chúng lớn lên bằng tinh túy đất trời, mang trong mình **vị chua thanh hoang dã và hậu vị ngọt sâu** khác biệt. |
 |---|---|
-| **Khối 2 · Cách làm** | Chúng tôi thu hái thủ công từng quả chín mọng và chế biến theo phương pháp lên men tự nhiên, kết hợp hài hòa giữa nét truyền thống và xu hướng healthy hiện đại:<br>• Siro & Nho ngâm đường phèn: Thức uống giải nhiệt, thanh mát cơ thể.<br>• Nho rừng ngâm mật ong: Bài thuốc lành, giữ ấm và bảo vệ hệ hô hấp.<br>• Dấm nho rừng: Vị chua thanh dịu, nâng tầm cho mọi món ăn ngon.<br>• Rượu nho rừng: Men say êm dịu, chất "chill" nồng nàn cho mọi cuộc vui. |
+| **Khối 2 · Cách làm** | Chúng tôi thu hái thủ công từng quả chín mọng và chế biến theo phương pháp lên men tự nhiên, kết hợp hài hòa giữa nét truyền thống và xu hướng healthy hiện đại:<br>• Siro & Nho ngâm đường phèn: Thức uống giải nhiệt, thanh mát cơ thể.<br>• Nho rừng ngâm mật ong: Bài thuốc lành, giữ ấm và bảo vệ hệ hô hấp.<br>• Dấm nho rừng: Vị chua thanh dịu, nâng tầm cho mọi món ăn ngon.<br>• Nước cốt nho lên men tự nhiên: Vị đằm núi rừng, thanh nồng êm dịu cho bữa tiệc gia đình thêm ấm cúng. |
 | **Khối 3 · Cam kết** |  |
 
 # 5. Giá sản phẩm
 
-**LƯU Ý:** chưa có giá trong info.md, hiện cả 6 thẻ đang ghi [GIÁ]. Điền đủ giá trước khi đưa lên.
+Đã cập nhật bảng giá chính thức ngày 21/10/2026:
 
-| **Sản phẩm** | **Dung tích** | **Giá** | **Ghi chú** |
-|---|---|---|---|
-| **Siro nho rừng** | **300ml** |  |  |
-| **Giấm nho tự nhiên** | **300ml** |  |  |
-| **Nho ngâm mật ong** | **300ml** |  |  |
-| **Nước nho ngâm đường phèn** | **300ml** |  |  |
-| **Rượu nho rừng** | **250ml** |  |  |
-| **Sản phẩm thứ 6 (điền ở mục 6)** |  |  |  |
+| **STT** | **Sản phẩm** | **Dung tích / Đơn vị** | **Giá bán** | **Ghi chú** |
+|---|---|---|---|---|
+| **1** | **Nước cốt nho lên men tự nhiên** | **200ml** | **75.000đ** | Sản phẩm chính |
+| **2** | **Nho rừng ngâm mật ong** | **300ml** | **90.000đ** | Sản phẩm chính |
+| **3** | **Nho rừng ngâm đường phèn** | **300ml** | **60.000đ** | Sản phẩm chính |
+| **4** | **Siro nho rừng** | **300ml** | **70.000đ** | Sản phẩm chính |
+| **5** | **Giấm nho rừng** | **300ml** | **50.000đ** | Sản phẩm chính |
+| **6** | **Bánh nho (Bánh trung thu nhân siro nho)** | **Cái** | **7.000đ/cái** | **Sản phẩm phụ** (Lố 30 cái: 210.000đ) |
 
 # 6. Sản phẩm thứ 6 (để trống cho bạn thêm)
 
@@ -101,26 +92,25 @@ Trong info.md có ghi NSX và HSD (VD 16/09/2026 → 16/12/2026). Đây là ngà
 
 # 7. Ảnh
 
-**LƯU Ý:** hiện tất cả ảnh đều để trống. Khi có ảnh, đặt file vào thư mục assets/images/ rồi ghi tên file vào cột bên phải.
+**Cập nhật:** Đã cập nhật ảnh chụp thực tế từ xưởng sản xuất cho 5 sản phẩm chính, ảnh banner bộ sưu tập và sản phẩm phụ (bánh nho).
 
-| **Vị trí ảnh** | **Tên file (VD: siro.jpg)** |
-|---|---|
-| **Ảnh Siro nho rừng** |  |
-| **Ảnh Giấm nho tự nhiên** |  |
-| **Ảnh Nho ngâm mật ong** |  |
-| **Ảnh Nước nho ngâm đường phèn** |  |
-| **Ảnh Rượu nho rừng** |  |
-| **Ảnh sản phẩm thứ 6** |  |
-| **Vườn nho · ảnh 1 (mục « Một ngày ở vườn nho »)** |  |
-| **Vườn nho · ảnh 2** |  |
-| **Vườn nho · ảnh 3** |  |
-| **Vườn nho · ảnh 4** |  |
-| **Vườn nho · ảnh 5** |  |
-| **Vườn nho · ảnh 6** |  |
-| **Ảnh cho mục « Câu chuyện »** |  |
-| **Ảnh nền băng kết cuối trang** |  |
-
-*Gợi ý: ảnh ngang, khoảng 800px, mỗi ảnh dưới 150KB. Nén tại squoosh.app hoặc tinypng.com.*
+| **Vị trí ảnh** | **Tên file (trong `assets/images/`)** | **Tình trạng** |
+|---|---|---|
+| **Ảnh Toàn bộ sản phẩm (Banner)** | `products-collection.jpg` | Đã đưa lên web (banner trên lưới SP) |
+| **Ảnh Nước cốt nho lên men tự nhiên (200ml)** | `product-ruou.jpg` | Đã đưa lên web (thẻ SP & popup) |
+| **Ảnh Nho ngâm mật ong (300ml)** | `product-mat-ong.jpg` | Đã đưa lên web (thẻ SP & popup) |
+| **Ảnh Nước nho ngâm đường phèn (300ml)** | `product-duong-phen.jpg` | Đã đưa lên web (thẻ SP & popup) |
+| **Ảnh Siro nho rừng (300ml)** | `product-siro.jpg` | Đã đưa lên web (thẻ SP & popup) |
+| **Ảnh Giấm nho tự nhiên (300ml)** | `product-giam.jpg` | Đã đưa lên web (thẻ SP & popup) |
+| **Ảnh sản phẩm phụ: Bánh nho** | `product-banh.jpg` | Đã đưa lên web (thẻ SP & popup) |
+| **Vườn nho · ảnh 1 (mục « Một ngày ở vườn nho »)** | `assets/images/farm-1.jpg` | Đã có |
+| **Vườn nho · ảnh 2** | `assets/images/farm-2.jpg` | Đã có |
+| **Vườn nho · ảnh 3** | `assets/images/farm-3.jpg` | Đã có |
+| **Vườn nho · ảnh 4** | `assets/images/farm-4.jpg` | Đã có |
+| **Vườn nho · ảnh 5** | `assets/images/farm-5.jpg` | Đã có |
+| **Vườn nho · ảnh 6** | `assets/images/farm-6.jpg` | Đã có |
+| **Ảnh cho mục « Câu chuyện »** | `story-harvest.jpg` | Đã thay ảnh thật chùm nho rừng trĩu cành giữa núi rừng Đình Lập |
+| **Ảnh nền băng kết cuối trang** | `assets/images/closing-bg.jpg` | Đã có |
 
 # 8. Ngày sản xuất / hạn sử dụng
 

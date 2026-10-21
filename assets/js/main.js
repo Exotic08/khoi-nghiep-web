@@ -831,6 +831,12 @@
           }
         }
 
+        var cardOrderBtn = card.querySelector("[data-order-trigger]");
+        var qvOrderBtn = document.getElementById("quickview-order-btn");
+        if (qvOrderBtn && cardOrderBtn) {
+          qvOrderBtn.dataset.orderIndex = cardOrderBtn.dataset.orderIndex || "0";
+        }
+
         lastFocused = btn;
         open(modal);
       });
@@ -938,11 +944,44 @@
 
     var ORDER_PRODUCTS = [
       {
+        id: "ruou",
+        title: "Nước cốt nho lên men tự nhiên",
+        subtitle: "Vị đằm núi rừng – Lên men truyền thống",
+        price: "75.000đ",
+        unitPrice: 75000,
+        unit: "1 lọ · 200ml",
+        desc: "Lên men tự nhiên từ dịch quả nho rừng già và đường phèn nguyên chất. Hương vị thanh nồng êm dịu, kích thích tiêu hóa và hỗ trợ tuần hoàn máu.",
+        img: "assets/images/product-ruou.jpg",
+        badge: "Lên men tự nhiên"
+      },
+      {
+        id: "mat-ong",
+        title: "Nho rừng ngâm mật ong",
+        subtitle: "Mật ong hoa rừng – Ngọt dịu bổ dưỡng",
+        price: "90.000đ",
+        unitPrice: 90000,
+        unit: "1 lọ · 300ml",
+        desc: "Tăng cường đề kháng, hỗ trợ bảo vệ da, bổ sung đường tự nhiên. Có thể ăn trực tiếp cùng quả nho đã ngâm.",
+        img: "assets/images/product-mat-ong.jpg",
+        badge: "Mật ong rừng"
+      },
+      {
+        id: "duong-phen",
+        title: "Nho rừng ngâm đường phèn",
+        subtitle: "Đường phèn thanh mát – Dễ uống mỗi ngày",
+        price: "60.000đ",
+        unitPrice: 60000,
+        unit: "1 lọ · 300ml",
+        desc: "Giải khát, thanh nhiệt. Giàu vitamin C, A, E và chất chống oxy hoá tự nhiên, hỗ trợ tiêu hoá và tuần hoàn.",
+        img: "assets/images/product-duong-phen.jpg",
+        badge: "Thanh nhiệt mát lành"
+      },
+      {
         id: "siro",
         title: "Siro nho rừng",
         subtitle: "Số lượng giới hạn – Vị ngon nguyên bản",
-        price: "69.000đ",
-        unitPrice: 69000,
+        price: "70.000đ",
+        unitPrice: 70000,
         unit: "1 lọ · 300ml",
         desc: "Chống lão hoá, làm đẹp da nhờ chất chống oxy hoá tự nhiên. Hỗ trợ tim mạch, kích thích tiêu hoá, thanh nhiệt.",
         img: "assets/images/product-siro.jpg",
@@ -950,7 +989,7 @@
       },
       {
         id: "giam",
-        title: "Giấm nho tự nhiên",
+        title: "Giấm nho rừng",
         subtitle: "Lên men tự nhiên – Thanh lọc cơ thể",
         price: "50.000đ",
         unitPrice: 50000,
@@ -960,37 +999,15 @@
         badge: "Lên men tự nhiên"
       },
       {
-        id: "mat-ong",
-        title: "Nho ngâm mật ong",
-        subtitle: "Mật ong hoa rừng – Ngọt dịu bổ dưỡng",
-        price: "99.000đ",
-        unitPrice: 99000,
-        unit: "1 lọ · 300ml",
-        desc: "Tăng cường đề kháng, hỗ trợ bảo vệ da, bổ sung đường tự nhiên. Có thể ăn trực tiếp cùng quả nho đã ngâm.",
-        img: "assets/images/product-siro.jpg",
-        badge: "Mật ong rừng"
-      },
-      {
-        id: "duong-phen",
-        title: "Nước nho ngâm đường phèn",
-        subtitle: "Đường phèn thanh mát – Dễ uống mỗi ngày",
-        price: "59.000đ",
-        unitPrice: 59000,
-        unit: "1 lọ · 300ml",
-        desc: "Giải khát, thanh nhiệt. Giàu vitamin C, A, E và chất chống oxy hoá tự nhiên, hỗ trợ tiêu hoá và tuần hoàn.",
-        img: "assets/images/product-giam.jpg",
-        badge: "Giải nhiệt mát lành"
-      },
-      {
         id: "banh",
-        title: "Bánh trung thu nhân siro nho",
+        title: "Bánh nho (Sản phẩm phụ)",
         subtitle: "Vỏ mềm truyền thống – Nhân siro độc bản",
         price: "7.000đ/cái",
         unitPrice: 7000,
         unit: "Lẻ 7.000đ · Lố 30 cái: 210.000đ",
-        desc: "Nhân siro nho rừng chua thanh, giảm vị ngọt ngấy của nhân đậu. Bánh mềm thơm, hợp để bày biện và tặng người thân dịp Trung Thu.",
-        img: "assets/images/logo-180.png",
-        badge: "Đặc sản mùa lễ"
+        desc: "Sản phẩm phụ đặc sản: nhân siro nho rừng chua thanh tự nhiên hòa cùng nhân đậu thơm bùi, vỏ mềm vàng ruộm. Rất hợp thưởng trà và làm quà biếu.",
+        img: "assets/images/product-banh.jpg",
+        badge: "Sản phẩm phụ"
       }
     ];
 
@@ -1573,8 +1590,9 @@
         setPillPosition(btn);
 
         cards.forEach(function (card) {
-          var cardCat = card.getAttribute("data-category");
-          var match = (cat === "all") || (cardCat === cat);
+          var cardCat = card.getAttribute("data-category") || "";
+          var cardCats = cardCat.split(" ");
+          var match = (cat === "all") || (cardCats.indexOf(cat) !== -1) || (cardCat === cat);
 
           if (match) {
             card.classList.remove("is-filtered-out");
