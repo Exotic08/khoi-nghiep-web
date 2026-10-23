@@ -75,7 +75,6 @@ Trong info.md có ghi NSX và HSD (VD 16/09/2026 → 16/12/2026). Đây là ngà
 | **3** | **Nho rừng ngâm đường phèn** | **300ml** | **60.000đ** | Sản phẩm chính |
 | **4** | **Siro nho rừng** | **300ml** | **70.000đ** | Sản phẩm chính |
 | **5** | **Giấm nho rừng** | **300ml** | **50.000đ** | Sản phẩm chính |
-| **6** | **Bánh nho (Bánh trung thu nhân siro nho)** | **Cái** | **7.000đ/cái** | **Sản phẩm phụ** (Lố 30 cái: 210.000đ) |
 
 # 6. Sản phẩm thứ 6 (để trống cho bạn thêm)
 
@@ -92,7 +91,7 @@ Trong info.md có ghi NSX và HSD (VD 16/09/2026 → 16/12/2026). Đây là ngà
 
 # 7. Ảnh
 
-**Cập nhật:** Đã cập nhật ảnh chụp thực tế từ xưởng sản xuất cho 5 sản phẩm chính, ảnh banner bộ sưu tập và sản phẩm phụ (bánh nho).
+**Cập nhật:** Đã cập nhật ảnh chụp thực tế từ xưởng sản xuất cho 5 sản phẩm chính và ảnh banner bộ sưu tập.
 
 | **Vị trí ảnh** | **Tên file (trong `assets/images/`)** | **Tình trạng** |
 |---|---|---|
@@ -102,7 +101,6 @@ Trong info.md có ghi NSX và HSD (VD 16/09/2026 → 16/12/2026). Đây là ngà
 | **Ảnh Nước nho ngâm đường phèn (300ml)** | `product-duong-phen.jpg` | Đã đưa lên web (thẻ SP & popup) |
 | **Ảnh Siro nho rừng (300ml)** | `product-siro.jpg` | Đã đưa lên web (thẻ SP & popup) |
 | **Ảnh Giấm nho tự nhiên (300ml)** | `product-giam.jpg` | Đã đưa lên web (thẻ SP & popup) |
-| **Ảnh sản phẩm phụ: Bánh nho** | `product-banh.jpg` | Đã đưa lên web (thẻ SP & popup) |
 | **Vườn nho · ảnh 1 (mục « Một ngày ở vườn nho »)** | `assets/images/farm-1.jpg` | Đã có |
 | **Vườn nho · ảnh 2** | `assets/images/farm-2.jpg` | Đã có |
 | **Vườn nho · ảnh 3** | `assets/images/farm-3.jpg` | Đã có |

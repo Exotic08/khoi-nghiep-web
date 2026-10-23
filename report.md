@@ -57,7 +57,7 @@ siro nho rừng"* — nếu sai khác, báo mình sửa ngay.
 | Băng lớn **kết trang** trước chân trang (mục 20) | Xoá hẳn |
 | 6 ảnh **"Một ngày ở vườn nho"** (mục 7) | Xoá hẳn cả mục vì không có ảnh nào |
 | **Sản phẩm thứ 6** (thẻ sản phẩm + mục chi tiết) | Xoá hẳn, danh mục còn 5 sản phẩm |
-| **Giá cả 6 thẻ sản phẩm** | Đã điền theo bảng giá bạn gửi (mục C1). Ghi chú cuối mục: *"Giá tính theo lọ (riêng bánh trung thu tính theo cái). Phí vận chuyển được báo lại khi bạn gửi đơn."* |
+| **Giá cả 5 thẻ sản phẩm** | Đã điền theo bảng giá bạn gửi (mục C1). Ghi chú cuối mục: *"Giá tính theo lọ. Phí vận chuyển được báo lại khi bạn gửi đơn."* |
 | Nút Instagram / YouTube ở chân trang | Xoá (bạn không có link) |
 | Số điện thoại & địa chỉ ở mục Liên hệ + chân trang | Xoá; thay ô *Địa chỉ* bằng **Nguồn gốc: Nho rừng Đình Lập, Lạng Sơn** (lấy từ chính câu chuyện của bạn) |
 | Nhãn **"Bán chạy"** trên thẻ sản phẩm đầu tiên | Xoá (không xác nhận được) |
@@ -79,11 +79,10 @@ siro nho rừng"* — nếu sai khác, báo mình sửa ngay.
 | 3 | Nho rừng ngâm đường phèn | Lọ 300 ml | 60.000đ | Sản phẩm chính |
 | 4 | Siro nho rừng | Lọ 300 ml | 70.000đ | Sản phẩm chính |
 | 5 | Giấm nho rừng | Lọ 300 ml | 50.000đ | Sản phẩm chính |
-| 6 | Bánh nho (Bánh trung thu nhân siro nho) | Cái | 7.000đ / cái (lố 30 cái: 210.000đ) | **Sản phẩm phụ** |
 
 Ghi chú:
 - **Nước cốt nho lên men tự nhiên (Lọ 200ml - 75.000đ):** Đổi tên từ « Rượu nho rừng » theo quyết định của bạn để tránh 100% rủi ro pháp lý về kinh doanh/quảng cáo đồ uống có cồn trên internet.
-- **Bánh nho:** Đã chuyển thành **Sản phẩm phụ**, gắn nhãn riêng và có tab lọc riêng trên giao diện.
+- **Bánh nho:** Đã gỡ bỏ khỏi website theo yêu cầu.
 
 Ngoài ra trên trang **chưa có** mức phí vận chuyển và chưa nói cách thanh toán (xem C7).
 
@@ -135,7 +134,6 @@ Hiện chỉ còn cam kết đổi trả 7 ngày trong mục Hỏi đáp. Nếu 
 - **Nho rừng ngâm đường phèn (Lọ 300ml):** Ảnh 2 chai thành phẩm nhãn tím chính thức ([product-duong-phen.jpg](assets/images/product-duong-phen.jpg)).
 - **Siro nho rừng (Hũ tròn nắp thiếc):** Ảnh 2 hũ thành phẩm nhãn tím chính thức ([product-siro.jpg](assets/images/product-siro.jpg)).
 - **Giấm nho rừng (Lọ 300ml):** Ảnh 2 chai thành phẩm nhãn tím chính thức ([product-giam.jpg](assets/images/product-giam.jpg)).
-- **Bánh nho (Bánh trung thu nhân siro nho rừng):** Ảnh mặt cắt nhân siro nho tím mọng ([product-banh.jpg](assets/images/product-banh.jpg)).
 - **Bộ sưu tập đầy đủ:** Banner ảnh thực tế toàn bộ các dòng sản phẩm cùng chùm nho chín mọng ([products-collection.jpg](assets/images/products-collection.jpg)) đặt nổi bật ngay trên mục Sản phẩm.
 
 ### C10. TikTok và Facebook — kiểm tra lại link

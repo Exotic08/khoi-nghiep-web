@@ -997,17 +997,6 @@
         desc: "Hỗ trợ tiêu hoá, giảm đầy hơi, hỗ trợ đường huyết, giảm cholesterol. Dùng làm nước sốt salad, gia vị tẩm ướp.",
         img: "assets/images/product-giam.jpg",
         badge: "Lên men tự nhiên"
-      },
-      {
-        id: "banh",
-        title: "Bánh nho (Sản phẩm phụ)",
-        subtitle: "Vỏ mềm truyền thống – Nhân siro độc bản",
-        price: "7.000đ/cái",
-        unitPrice: 7000,
-        unit: "Lẻ 7.000đ · Lố 30 cái: 210.000đ",
-        desc: "Sản phẩm phụ đặc sản: nhân siro nho rừng chua thanh tự nhiên hòa cùng nhân đậu thơm bùi, vỏ mềm vàng ruộm. Rất hợp thưởng trà và làm quà biếu.",
-        img: "assets/images/product-banh.jpg",
-        badge: "Sản phẩm phụ"
       }
     ];
 
