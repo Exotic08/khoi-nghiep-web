@@ -31,9 +31,9 @@
   <meta property="og:url" content="https://nhorungdinhlap.vercel.app/" />
   <meta property="og:image" content="https://nhorungdinhlap.vercel.app/assets/images/cover-hero.jpg" />
   <meta property="og:image:secure_url" content="https://nhorungdinhlap.vercel.app/assets/images/cover-hero.jpg" />
-  <meta property="og:image:width" content="1440" />
-  <meta property="og:image:height" content="855" />
-  <meta property="og:image:alt" content="Nho rừng mọc hoang dã giữa rừng tại Đình Lập, Lạng Sơn" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="896" />
+  <meta property="og:image:alt" content="Trọn bộ sản phẩm từ nho rừng Đình Lập: siro, giấm, nho ngâm mật ong, đường phèn và nước cốt nho lên men tự nhiên" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
@@ -106,7 +106,7 @@
 <!-- Preload ảnh bìa (ảnh LCP) để tải song song với CSS/JS.
      Dùng imagesrcset khớp với <picture> bên dưới, nếu không trình duyệt sẽ tải 2 lần. -->
 <link rel="preload" as="image" type="image/webp"
-      imagesrcset="assets/images/cover-hero-640.webp 640w, assets/images/cover-hero-960.webp 960w, assets/images/cover-hero-1440.webp 1440w"
+      imagesrcset="assets/images/cover-hero-640.webp 640w, assets/images/cover-hero-960.webp 960w, assets/images/cover-hero-1200.webp 1200w"
       imagesizes="100vw" fetchpriority="high" />
 <!-- Preload file CSS gốc để tránh nhấp nháy khi dựng trang -->
 <link rel="preload" as="style" href="assets/css/style.css" />
@@ -361,18 +361,18 @@
            - --lqip: ảnh xíu 20px làm nền trong lúc ảnh lớn tải (blur-up),
              chèn inline để không tốn thêm 1 request mạng.
            Bọc trong .hero-media để chạy hiệu ứng parallax nhẹ khi cuộn. -->
-      <div class="hero-lqip" style="--lqip:url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAMABQDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDPFwGuT5swWMJgLnnJqYgokbBid+SOO1Ylx/rz74rQiY7RznHFc7jZGikXFlOBljRUJ7UVlYrmZ//Z)"></div>
+      <div class="hero-lqip" style="--lqip:url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAPABQDASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAMEAgX/xAAiEAACAgICAgIDAAAAAAAAAAABAgMRAAQSIQUTFDFhkaH/xAAWAQEBAQAAAAAAAAAAAAAAAAABAgT/xAAaEQACAgMAAAAAAAAAAAAAAAAAARIhAhET/9oADAMBAAIRAxEAPwCrx+/H4yD0LPyjZeRDKSe+/vOadrWmmkchKJU0iE1muew9FfmVS0q7fBf0BXeN9m/yUmOZQT9rt0f4uY+eLVsuLIZlgkmeQyS2xB43XHodYY2TXM5EkgcuR2zSBi35usMLVbCLP//Z)"></div>
       <div class="hero-media">
         <picture>
           <source type="image/webp"
                   srcset="assets/images/cover-hero-640.webp 640w,
                           assets/images/cover-hero-960.webp 960w,
-                          assets/images/cover-hero-1440.webp 1440w"
+                          assets/images/cover-hero-1200.webp 1200w"
                   sizes="100vw" />
           <img src="assets/images/cover-hero.jpg"
-               alt="Người thu hái nho rừng giữa vườn nho tại nguồn"
+               alt="Trọn bộ sản phẩm từ nho rừng Đình Lập gồm siro, giấm, nho ngâm mật ong, đường phèn và nước cốt nho lên men tự nhiên"
                class="hero-image"
-               width="1440" height="855"
+               width="1200" height="896"
                fetchpriority="high"
                decoding="async"
                data-fade />

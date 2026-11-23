@@ -501,6 +501,7 @@ textarea:focus-visible {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 56%;
   transform: scale3d(1.06, 1.06, 1); /* chừa chỗ cho parallax để không lộ viền */
   animation: heroZoom 16s ease-out forwards;
 }
@@ -519,10 +520,10 @@ textarea:focus-visible {
   inset: 0;
   background: linear-gradient(
     118deg,
-    rgba(74, 25, 66, 0.78) 0%,
-    rgba(74, 25, 66, 0.52) 38%,
-    rgba(58, 42, 62, 0.34) 62%,
-    rgba(47, 74, 58, 0.44) 100%
+    rgba(74, 25, 66, 0.72) 0%,
+    rgba(74, 25, 66, 0.44) 38%,
+    rgba(58, 42, 62, 0.22) 62%,
+    rgba(47, 74, 58, 0.26) 100%
   );
 }
 
