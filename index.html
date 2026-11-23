@@ -355,14 +355,11 @@
     <!-- ============================================================
          2) HERO - ảnh bìa toàn màn hình
          ============================================================ -->
-    <section id="hero" class="relative flex min-h-screen items-center overflow-hidden">
-      <!-- Ảnh bìa (KHÔNG lazy vì đây là ảnh LCP nằm trên màn hình đầu).
-           - <picture>: trình duyệt chọn bản WebP + đúng kích thước màn hình
-           - --lqip: ảnh xíu 20px làm nền trong lúc ảnh lớn tải (blur-up),
-             chèn inline để không tốn thêm 1 request mạng.
-           Bọc trong .hero-media để chạy hiệu ứng parallax nhẹ khi cuộn. -->
-      <div class="hero-lqip" style="--lqip:url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAPABQDASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAMEAgX/xAAiEAACAgICAgIDAAAAAAAAAAABAgMRAAQSIQUTFDFhkaH/xAAWAQEBAQAAAAAAAAAAAAAAAAABAgT/xAAaEQACAgMAAAAAAAAAAAAAAAAAARIhAhET/9oADAMBAAIRAxEAPwCrx+/H4yD0LPyjZeRDKSe+/vOadrWmmkchKJU0iE1muew9FfmVS0q7fBf0BXeN9m/yUmOZQT9rt0f4uY+eLVsuLIZlgkmeQyS2xB43XHodYY2TXM5EkgcuR2zSBi35usMLVbCLP//Z)"></div>
-      <div class="hero-media">
+    <section id="hero" class="relative flex min-h-0 md:min-h-screen items-center overflow-hidden bg-gradient-to-br from-grape-900 via-grape to-forest-900">
+      <!-- Ảnh bìa nền toàn màn hình trên tablet/desktop (md trở lên).
+           Trên điện thoại (< md), ảnh bộ sản phẩm được hiển thị nguyên khung 100% không cắt cúp bên trong .hero-content. -->
+      <div class="hero-lqip hidden md:block" style="--lqip:url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAPABQDASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAMEAgX/xAAiEAACAgICAgIDAAAAAAAAAAABAgMRAAQSIQUTFDFhkaH/xAAWAQEBAQAAAAAAAAAAAAAAAAABAgT/xAAaEQACAgMAAAAAAAAAAAAAAAAAARIhAhET/9oADAMBAAIRAxEAPwCrx+/H4yD0LPyjZeRDKSe+/vOadrWmmkchKJU0iE1muew9FfmVS0q7fBf0BXeN9m/yUmOZQT9rt0f4uY+eLVsuLIZlgkmeQyS2xB43XHodYY2TXM5EkgcuR2zSBi35usMLVbCLP//Z)"></div>
+      <div class="hero-media hidden md:block">
         <picture>
           <source type="image/webp"
                   srcset="assets/images/cover-hero-640.webp 640w,
@@ -401,14 +398,31 @@
       <svg class="decor-leaf decor-leaf--light hidden h-24 w-48 left-1/3 bottom-20 animate-spin-slow xl:block" aria-hidden="true"><use href="#ico-vine"></use></svg>
 
       <!-- Nội dung hero -->
-      <div class="hero-content relative z-10 mx-auto w-full max-w-7xl px-4 py-24 sm:py-28 sm:px-6 lg:px-8">
+      <div class="hero-content relative z-10 mx-auto w-full max-w-7xl px-4 pt-24 pb-16 sm:pt-28 sm:pb-20 sm:px-6 md:py-28 lg:px-8">
+        <!-- Ảnh bộ sản phẩm hiển thị ĐẦY ĐỦ 100% không cắt cúp trên điện thoại -->
+        <div class="mb-6 overflow-hidden rounded-2xl border border-gold/45 bg-grape-900/40 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.65)] md:hidden">
+          <picture>
+            <source type="image/webp"
+                    srcset="assets/images/cover-hero-640.webp 640w,
+                            assets/images/cover-hero-960.webp 960w,
+                            assets/images/cover-hero-1200.webp 1200w"
+                    sizes="(max-width: 767px) 100vw, 0px" />
+            <img src="assets/images/cover-hero.jpg"
+                 alt="Trọn bộ sản phẩm từ nho rừng Đình Lập gồm siro, giấm, nho ngâm mật ong, đường phèn và nước cốt nho lên men tự nhiên"
+                 class="block w-full h-auto"
+                 width="1200" height="896"
+                 fetchpriority="high"
+                 decoding="async" />
+          </picture>
+        </div>
+
         <div class="max-w-3xl">
           <h1 class="hero-title text-balance font-display text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-semibold leading-[1.14] animate-fade-up">
             Nạp năng lượng xanh cùng Nho rừng Đình Lập.
           </h1>
 
           <!-- 2 nút CTA -->
-          <div class="mt-8 flex flex-col gap-2.5 sm:mt-9 sm:flex-row sm:gap-4 sm:items-center sm:gap-4">
+          <div class="mt-6 flex flex-col gap-2.5 sm:mt-9 sm:flex-row sm:gap-4 sm:items-center">
             <a href="#san-pham"
                 class="btn-primary btn-shine group inline-flex items-center justify-center gap-2 rounded-full bg-gold px-6 py-3 text-sm font-semibold text-ink shadow-lg hover:bg-gold-400 sm:px-7 sm:py-3.5 animate-fade-right"
                style="animation-delay: 0.2s;">
@@ -426,7 +440,7 @@
       </div>
 
       <!-- Lớp chuyển mềm xuống section kế tiếp -->
-      <div class="hero-fade-bottom pointer-events-none absolute inset-x-0 bottom-0"></div>
+      <div class="hero-fade-bottom pointer-events-none absolute inset-x-0 bottom-0 hidden md:block"></div>
       <div class="vine-marquee pointer-events-none absolute inset-x-0 bottom-0 h-3"></div>
     </section>
 
@@ -466,11 +480,12 @@
           <!-- Cột trái: Ảnh đứng yên khi cuộn (B3) -->
           <div class="lg:sticky lg:top-28 lg:self-start">
             <div class="relative animate-fade-left" style="animation-delay: 0.2s;">
-              <div class="relative aspect-[16/11] overflow-hidden radius-organic-a sm:aspect-[4/5] border border-gold/45 shadow-[0_30px_60px_-35px_rgba(74,25,66,0.5)]">
+              <div class="relative aspect-[720/614] overflow-hidden radius-organic-a border border-gold/45 bg-cream-50 shadow-[0_30px_60px_-35px_rgba(74,25,66,0.5)]">
                 <img src="assets/images/story-harvest.jpg"
                      alt="Những chùm nho rừng Đình Lập chín mọng trĩu cành hoang dã giữa đại ngàn Lạng Sơn"
+                     width="720" height="614"
                      loading="lazy"
-                     class="h-full w-full object-cover transition-transform duration-700 hover:scale-105" />
+                     class="block h-full w-full object-cover transition-transform duration-700 hover:scale-105" />
               </div>
 
               <!-- Badge nổi -->
@@ -597,21 +612,22 @@
         </div>
 
         <!-- Khung ảnh thực tế trọn bộ sản phẩm Nho Rừng Đình Lập -->
-        <div class="reveal mt-8 sm:mt-10 mx-auto max-w-4xl overflow-hidden rounded-3xl border border-gold/45 bg-gradient-to-r from-grape via-grape-800 to-forest p-1 shadow-xl" style="animation-delay: 0.32s;">
-          <div class="group relative aspect-[16/9] sm:aspect-[21/9] w-full overflow-hidden rounded-2xl bg-cream">
+        <div class="reveal mt-8 sm:mt-10 mx-auto max-w-3xl overflow-hidden rounded-3xl border border-gold/45 bg-gradient-to-r from-grape via-grape-800 to-forest p-1.5 shadow-xl" style="animation-delay: 0.32s;">
+          <div class="group overflow-hidden rounded-2xl bg-cream">
             <img src="assets/images/products-collection.jpg"
                  alt="Trọn bộ sản phẩm Nho Rừng Đình Lập thực tế cùng chùm nho rừng tươi chín mọng"
+                 width="1024" height="767"
                  loading="lazy"
-                 class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105" />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent flex flex-col justify-end p-4 sm:p-6 text-left">
-              <span class="inline-flex w-fit items-center gap-1.5 rounded-full border border-gold/40 bg-grape/80 backdrop-blur-xs px-3 py-1 text-[11px] font-semibold text-gold-200">
-                <svg class="h-3 w-3 text-gold-300" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
-                Hình ảnh thực tế từ xưởng sản xuất
-              </span>
-              <p class="font-display mt-2 text-base sm:text-xl font-semibold text-cream">
-                Các dòng sản phẩm nguyên bản Nho Rừng Đình Lập – Đậm đà phong vị núi rừng
-              </p>
-            </div>
+                 class="block w-full h-auto transition-transform duration-700 group-hover:scale-[1.03]" />
+          </div>
+          <div class="px-4 py-3.5 sm:px-6 sm:py-4 text-left">
+            <span class="inline-flex w-fit items-center gap-1.5 rounded-full border border-gold/40 bg-black/25 px-3 py-1 text-[11px] font-semibold text-gold-200">
+              <svg class="h-3 w-3 text-gold-300" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+              Hình ảnh thực tế từ xưởng sản xuất
+            </span>
+            <p class="font-display mt-2 text-base sm:text-xl font-semibold text-cream">
+              Các dòng sản phẩm nguyên bản Nho Rừng Đình Lập – Đậm đà phong vị núi rừng
+            </p>
           </div>
         </div>
 
@@ -731,11 +747,12 @@
                 </g>
               </svg>
             </div>
-            <div class="card-media relative aspect-[16/10] overflow-hidden border-b border-gold/30 sm:aspect-[4/3] bg-grape-50">
+            <div class="card-media relative overflow-hidden border-b border-gold/30 bg-cream-50">
               <img src="assets/images/product-ruou-v2.jpg?v=20261123"
                    alt="Nước cốt nho lên men tự nhiên Đình Lập chai 200ml"
+                   width="1024" height="764"
                    loading="lazy"
-                   class="h-full w-full object-cover transition-transform duration-500 hover:scale-105" />
+                   class="block w-full h-auto sm:aspect-[4/3] sm:object-contain bg-cream-50 transition-transform duration-500 hover:scale-105" />
               <!-- Nút "Xem nhanh" mở cửa sổ chi tiết (C4); bấm ảnh để phóng to (C5) -->
               <button type="button" data-quickview
                       class="quickview-open absolute inset-x-4 bottom-4 z-20 inline-flex items-center justify-center gap-1.5 rounded-full border border-gold/50 bg-cream/95 px-4 py-2.5 text-xs font-semibold text-grape shadow-sm hover:bg-cream">
@@ -879,11 +896,12 @@
                 </g>
               </svg>
             </div>
-            <div class="card-media relative aspect-[16/10] overflow-hidden border-b border-gold/30 sm:aspect-[4/3] bg-grape-50">
+            <div class="card-media relative overflow-hidden border-b border-gold/30 bg-cream-50">
               <img src="assets/images/product-mat-ong-v2.jpg?v=20261123"
                    alt="Nho rừng ngâm mật ong Đình Lập lọ 300ml"
+                   width="1024" height="768"
                    loading="lazy"
-                   class="h-full w-full object-cover transition-transform duration-500 hover:scale-105" />
+                   class="block w-full h-auto sm:aspect-[4/3] sm:object-contain bg-cream-50 transition-transform duration-500 hover:scale-105" />
               <!-- Nút "Xem nhanh" mở cửa sổ chi tiết (C4); bấm ảnh để phóng to (C5) -->
               <button type="button" data-quickview
                       class="quickview-open absolute inset-x-4 bottom-4 z-20 inline-flex items-center justify-center gap-1.5 rounded-full border border-gold/50 bg-cream/95 px-4 py-2.5 text-xs font-semibold text-grape shadow-sm hover:bg-cream">
@@ -1024,11 +1042,12 @@
                 </g>
               </svg>
             </div>
-            <div class="card-media relative aspect-[16/10] overflow-hidden border-b border-gold/30 sm:aspect-[4/3] bg-grape-50">
+            <div class="card-media relative overflow-hidden border-b border-gold/30 bg-cream-50">
               <img src="assets/images/product-duong-phen-v2.jpg?v=20261123"
                    alt="Nho rừng ngâm đường phèn Đình Lập lọ 300ml"
+                   width="1024" height="767"
                    loading="lazy"
-                   class="h-full w-full object-cover transition-transform duration-500 hover:scale-105" />
+                   class="block w-full h-auto sm:aspect-[4/3] sm:object-contain bg-cream-50 transition-transform duration-500 hover:scale-105" />
               <!-- Nút "Xem nhanh" mở cửa sổ chi tiết (C4); bấm ảnh để phóng to (C5) -->
               <button type="button" data-quickview
                       class="quickview-open absolute inset-x-4 bottom-4 z-20 inline-flex items-center justify-center gap-1.5 rounded-full border border-gold/50 bg-cream/95 px-4 py-2.5 text-xs font-semibold text-grape shadow-sm hover:bg-cream">
@@ -1168,11 +1187,12 @@
                 </g>
               </svg>
             </div>
-            <div class="card-media relative aspect-[16/10] overflow-hidden border-b border-gold/30 sm:aspect-[4/3] bg-grape-50">
+            <div class="card-media relative overflow-hidden border-b border-gold/30 bg-cream-50">
               <img src="assets/images/product-siro-v2.jpg?v=20261123"
                    alt="Siro nho rừng Đình Lập chai 300ml"
+                   width="1024" height="571"
                    loading="lazy"
-                   class="h-full w-full object-cover transition-transform duration-500 hover:scale-105" />
+                   class="block w-full h-auto sm:aspect-[4/3] sm:object-contain bg-cream-50 transition-transform duration-500 hover:scale-105" />
               <!-- Nút "Xem nhanh" mở cửa sổ chi tiết (C4); bấm ảnh để phóng to (C5) -->
               <button type="button" data-quickview
                       class="quickview-open absolute inset-x-4 bottom-4 z-20 inline-flex items-center justify-center gap-1.5 rounded-full border border-gold/50 bg-cream/95 px-4 py-2.5 text-xs font-semibold text-grape shadow-sm hover:bg-cream">
@@ -1267,11 +1287,12 @@
                 </g>
               </svg>
             </div>
-            <div class="card-media relative aspect-[16/10] overflow-hidden border-b border-gold/30 sm:aspect-[4/3] bg-grape-50">
+            <div class="card-media relative overflow-hidden border-b border-gold/30 bg-cream-50">
               <img src="assets/images/product-giam-v2.jpg?v=20261123"
                    alt="Giấm nho rừng Đình Lập chai 300ml"
+                   width="1024" height="767"
                    loading="lazy"
-                   class="h-full w-full object-cover transition-transform duration-500 hover:scale-105" />
+                   class="block w-full h-auto sm:aspect-[4/3] sm:object-contain bg-cream-50 transition-transform duration-500 hover:scale-105" />
               <!-- Nút "Xem nhanh" mở cửa sổ chi tiết (C4); bấm ảnh để phóng to (C5) -->
               <button type="button" data-quickview
                       class="quickview-open absolute inset-x-4 bottom-4 z-20 inline-flex items-center justify-center gap-1.5 rounded-full border border-gold/50 bg-cream/95 px-4 py-2.5 text-xs font-semibold text-grape shadow-sm hover:bg-cream">
@@ -1943,15 +1964,11 @@
       <div class="grid gap-0 sm:grid-cols-2">
         <!-- Ảnh: bấm vào để phóng to (C5) -->
         <button type="button" id="quickview-media"
-                class="card-media relative aspect-[4/3] w-full overflow-hidden bg-forest/10 text-left sm:aspect-auto sm:min-h-[22rem]"
+                class="card-media relative flex w-full items-center justify-center overflow-hidden bg-cream-100 text-left sm:min-h-[22rem]"
                 aria-label="Xem ảnh lớn">
-          <span class="absolute inset-0 flex flex-col items-center justify-center gap-2">
+          <span class="flex aspect-[4/3] w-full flex-col items-center justify-center gap-2">
             <svg class="h-10 w-10 text-forest/45" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
             <span class="text-[10px] uppercase tracking-[0.2em] text-forest/60">Ảnh sản phẩm</span>
-            <span class="mt-1 inline-flex items-center gap-1.5 rounded-full border border-gold/50 px-3 py-1 text-[10px] uppercase tracking-wider text-forest/70">
-              <svg class="h-3 w-3" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg>
-              Bấm để phóng to
-            </span>
           </span>
         </button>
 
@@ -1989,15 +2006,8 @@
         <svg class="h-5 w-5" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
       </button>
       <figure class="flex max-h-full flex-col items-center gap-4">
-        <!-- Khi có ảnh thật, thay khối này bằng <img> trong <picture> -->
-        <div class="flex h-full min-h-[16rem] w-full flex-col items-center justify-center gap-3 rounded-2xl border border-gold/40 bg-forest/10">
-          <svg class="h-14 w-14 text-cream/40" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-          <p class="text-xs uppercase tracking-[0.2em] text-cream/50">Ảnh sản phẩm</p>
-          <p class="max-w-xs text-center text-[11px] leading-relaxed text-cream/40">
-            Thay khối này bằng thẻ &lt;img&gt; thật, khung ảnh sẽ tự co giãn theo
-          </p>
-        </div>
-        <figcaption id="lightbox-caption" class="text-center text-sm text-cream/80">Ảnh sản phẩm</figcaption>
+        <img id="lightbox-img" src="" alt="Ảnh sản phẩm" class="max-h-[82vh] max-w-full w-auto rounded-2xl object-contain shadow-2xl mx-auto" />
+        <figcaption id="lightbox-caption" class="text-center text-sm text-cream/85">Ảnh sản phẩm</figcaption>
       </figure>
     </div>
   </div>
@@ -2103,8 +2113,8 @@
 
         <!-- Khối chứa Tên sản phẩm, Ảnh sản phẩm, Giá, Mô tả sản phẩm -->
         <div class="order-confirm-card flex flex-col sm:flex-row gap-4 items-center rounded-2xl border border-gold/40 bg-gradient-to-r from-grape-50/50 via-cream to-gold-50/30 p-4">
-          <div id="order-confirm-media" class="h-20 w-20 sm:h-24 sm:w-24 shrink-0 rounded-xl overflow-hidden border border-gold/40 bg-cream">
-            <img id="order-confirm-img" src="assets/images/product-ruou-v2.jpg?v=20261123" alt="Ảnh sản phẩm" class="h-full w-full object-cover">
+          <div id="order-confirm-media" class="w-32 aspect-[4/3] sm:w-36 shrink-0 rounded-xl overflow-hidden border border-gold/40 bg-cream-50">
+            <img id="order-confirm-img" src="assets/images/product-ruou-v2.jpg?v=20261123" alt="Ảnh sản phẩm" class="h-full w-full object-contain">
           </div>
           <div class="flex-1 text-center sm:text-left w-full">
             <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">

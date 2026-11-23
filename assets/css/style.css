@@ -1230,8 +1230,9 @@ textarea:focus-visible {
   }
 }
 
-/* Nút "Xem nhanh" trên thẻ sản phẩm: hiện khi rê chuột.
-   Trên máy cảm ứng không có rê chuột nên phải hiện luôn. */
+/* Nút "Xem nhanh" trên thẻ sản phẩm: hiện khi rê chuột trên máy tính.
+   Trên màn hình cảm ứng / điện thoại, chuyển thành thanh gọn ngay dưới ảnh
+   để KHÔNG che mất phần dưới của ảnh sản phẩm. */
 .quickview-open {
   opacity: 0;
   transform: translate3d(0, 6px, 0) scale(0.95);
@@ -1244,8 +1245,22 @@ textarea:focus-visible {
   opacity: 1;
   transform: translate3d(0, 0, 0) scale(1);
 }
-@media (hover: none) {
-  .quickview-open {
+@media (hover: none), (max-width: 639px) {
+  .product-card .card-media .quickview-open {
+    position: static;
+    inset: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    width: 100%;
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-top: 1px solid rgba(184, 146, 90, 0.28);
+    background-color: #fdfbf6;
+    box-shadow: none;
+    padding: 0.625rem 1rem;
     opacity: 1;
     transform: none;
   }
@@ -1442,10 +1457,10 @@ body.modal-open {
 }
 .order-item-media {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 3;
   border-radius: 0.75rem;
   overflow: hidden;
-  background-color: rgba(74, 25, 66, 0.05);
+  background-color: #fdfbf6;
   border: 1px solid rgba(184, 146, 90, 0.25);
   display: flex;
   align-items: center;
@@ -1454,7 +1469,7 @@ body.modal-open {
 .order-item-media img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 .order-item-title {
   font-family: "Playfair Display", Georgia, serif;
@@ -2333,9 +2348,9 @@ body.modal-open {
     box-shadow: 0 4px 12px -4px rgba(74, 25, 66, 0.45);
   }
 
-  /* The san pham: phan anh nho hon, chu gon hon */
+  /* Giữ ảnh sản phẩm hiển thị trọn vẹn theo đúng tỉ lệ gốc, không cắt cúp */
   .product-card .card-media {
-    max-height: 15rem;
+    max-height: none;
   }
 
   /* Nut dong cuoi man hinh: sat day hon */

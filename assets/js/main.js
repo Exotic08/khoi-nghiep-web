@@ -825,9 +825,9 @@
 
         if (mediaEl) {
           if (cardImg) {
-            mediaEl.innerHTML = '<img src="' + cardImg.src + '" alt="' + (cardImg.alt || '') + '" class="h-full w-full object-cover" />';
+            mediaEl.innerHTML = '<img src="' + cardImg.src + '" alt="' + (cardImg.alt || '') + '" class="block w-full h-auto sm:h-full object-contain bg-cream-50" />';
           } else {
-            mediaEl.innerHTML = '<span class="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-gradient-to-br from-grape-50 via-cream to-gold-50 p-6 text-center"><svg class="h-16 w-16 text-grape/70"><use href="#ico-grape"></use></svg><span class="font-display text-lg font-semibold text-grape">' + (name ? name.textContent.trim() : '') + '</span><span class="text-xs text-forest/70">Sản phẩm đặc sản Đình Lập</span></span>';
+            mediaEl.innerHTML = '<span class="flex aspect-[4/3] w-full flex-col items-center justify-center gap-3 bg-gradient-to-br from-grape-50 via-cream to-gold-50 p-6 text-center"><svg class="h-16 w-16 text-grape/70"><use href="#ico-grape"></use></svg><span class="font-display text-lg font-semibold text-grape">' + (name ? name.textContent.trim() : '') + '</span><span class="text-xs text-forest/70">Sản phẩm đặc sản Đình Lập</span></span>';
           }
         }
 
@@ -842,6 +842,16 @@
       });
     });
 
+    // --- Chạm trực tiếp vào ảnh sản phẩm cũng mở Xem nhanh ---
+    document.querySelectorAll(".product-card .card-media img").forEach(function (imgEl) {
+      imgEl.style.cursor = "pointer";
+      imgEl.addEventListener("click", function () {
+        var card = imgEl.closest(".product-card");
+        var qvBtn = card ? card.querySelector("[data-quickview]") : null;
+        if (qvBtn) qvBtn.click();
+      });
+    });
+
     // --- Mở phóng to ảnh từ trong cửa sổ xem nhanh ---
     var media = document.getElementById("quickview-media");
     if (media && box) {
@@ -849,17 +859,11 @@
         var title = document.getElementById("quickview-title");
         var caption = document.getElementById("lightbox-caption");
         var img = media.querySelector("img");
-        var boxPanel = box.querySelector(".lightbox-panel");
+        var boxImg = document.getElementById("lightbox-img");
         if (caption && title) caption.textContent = title.textContent;
-        if (boxPanel && img) {
-          var existingImg = boxPanel.querySelector("img");
-          if (!existingImg) {
-            existingImg = document.createElement("img");
-            existingImg.className = "max-h-[80vh] w-auto rounded-2xl object-contain shadow-2xl mx-auto my-4";
-            boxPanel.insertBefore(existingImg, caption);
-          }
-          existingImg.src = img.src;
-          existingImg.alt = img.alt || '';
+        if (boxImg && img) {
+          boxImg.src = img.src;
+          boxImg.alt = img.alt || '';
         }
         lastFocused = media;
         open(box);
