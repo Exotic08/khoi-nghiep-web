@@ -951,7 +951,7 @@
         unitPrice: 75000,
         unit: "1 lọ · 200ml",
         desc: "Lên men tự nhiên từ dịch quả nho rừng già và đường phèn nguyên chất. Hương vị thanh nồng êm dịu, kích thích tiêu hóa và hỗ trợ tuần hoàn máu.",
-        img: "assets/images/product-ruou.jpg",
+        img: "assets/images/product-ruou-v2.jpg?v=20261123",
         badge: "Lên men tự nhiên"
       },
       {
@@ -962,7 +962,7 @@
         unitPrice: 90000,
         unit: "1 lọ · 300ml",
         desc: "Tăng cường đề kháng, hỗ trợ bảo vệ da, bổ sung đường tự nhiên. Có thể ăn trực tiếp cùng quả nho đã ngâm.",
-        img: "assets/images/product-mat-ong.jpg",
+        img: "assets/images/product-mat-ong-v2.jpg?v=20261123",
         badge: "Mật ong rừng"
       },
       {
@@ -973,7 +973,7 @@
         unitPrice: 60000,
         unit: "1 lọ · 300ml",
         desc: "Giải khát, thanh nhiệt. Giàu vitamin C, A, E và chất chống oxy hoá tự nhiên, hỗ trợ tiêu hoá và tuần hoàn.",
-        img: "assets/images/product-duong-phen.jpg",
+        img: "assets/images/product-duong-phen-v2.jpg?v=20261123",
         badge: "Thanh nhiệt mát lành"
       },
       {
@@ -984,7 +984,7 @@
         unitPrice: 70000,
         unit: "1 lọ · 300ml",
         desc: "Chống lão hoá, làm đẹp da nhờ chất chống oxy hoá tự nhiên. Hỗ trợ tim mạch, kích thích tiêu hoá, thanh nhiệt.",
-        img: "assets/images/product-siro.jpg",
+        img: "assets/images/product-siro-v2.jpg?v=20261123",
         badge: "Bán chạy nhất"
       },
       {
@@ -995,7 +995,7 @@
         unitPrice: 50000,
         unit: "1 lọ · 300ml",
         desc: "Hỗ trợ tiêu hoá, giảm đầy hơi, hỗ trợ đường huyết, giảm cholesterol. Dùng làm nước sốt salad, gia vị tẩm ướp.",
-        img: "assets/images/product-giam.jpg",
+        img: "assets/images/product-giam-v2.jpg?v=20261123",
         badge: "Lên men tự nhiên"
       }
     ];
